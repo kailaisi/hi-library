@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import com.kailaisi.hiapp.R
 import com.kailaisi.library.log.HiLog
+import com.kailaisi.library.log.HiLogConfig
+import com.kailaisi.library.log.HiLogType
 
 class HiLogDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +18,15 @@ class HiLogDemoActivity : AppCompatActivity() {
     }
 
     private fun printlog() {
-        HiLog.a(9900)
+        HiLog.log(object : HiLogConfig() {
+            override fun includeThread(): Boolean {
+                return true
+            }
+
+            override fun stackTraceDepth(): Int {
+                return 0
+            }
+        }, HiLogType.E, "---", "5556")
+        HiLog.a("9900")
     }
 }

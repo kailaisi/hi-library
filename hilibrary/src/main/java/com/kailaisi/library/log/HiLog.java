@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 描述：
  * 1.打印堆栈信息
@@ -77,12 +80,30 @@ public class HiLog {
             return;
         }
         StringBuilder sb = new StringBuilder();
-        String body=parseBody(contents);
+        if (config.includeThread()){
+            String threadInfo = HiLogConfig.hiThreadFormatter.format(Thread.currentThread());
+            sb.append(threadInfo).append("\n");
+        }
+        if (config.stackTraceDepth()>0){
+            String stackTrace = HiLogConfig.hiStackTraceFormatter.format(new Throwable().getStackTrace());
+            sb.append(stackTrace).append("\n");
+        }
+        String body=parseBody(contents,config);
         sb.append(body);
-        Log.println(type,tag,body);
+        List<HiLogPrinter> printers = config.printers() != null ? Arrays.asList(config.printers()) : HiLogManager.getInstance().getPrinters();
+        if (printers==null){
+            return;
+        }
+        //用各个打印器去打印log
+        for (HiLogPrinter printer : printers) {
+            printer.print(config,type,tag,sb.toString());
+        }
     }
 
-    private static String parseBody(@NonNull Object[] contents) {
+    private static String parseBody(@NonNull Object[] contents, HiLogConfig config) {
+        if (config.injectParser()!=null){
+            return config.injectParser().toJson(contents);
+        }
         StringBuilder sb = new StringBuilder();
         for (Object o : contents) {
             sb.append(o.toString()).append(";");
