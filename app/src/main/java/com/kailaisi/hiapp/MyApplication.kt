@@ -1,6 +1,7 @@
 package com.kailaisi.hiapp
 
 import android.app.Application
+import com.google.gson.Gson
 import com.kailaisi.library.log.HiConsolePrinter
 import com.kailaisi.library.log.HiLogConfig
 import com.kailaisi.library.log.HiLogManager

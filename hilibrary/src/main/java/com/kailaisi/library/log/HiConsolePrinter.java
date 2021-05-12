@@ -27,6 +27,8 @@ public class HiConsolePrinter implements HiLogPrinter {
             if (index != len) {
                 Log.println(level, tag, msg.substring(index));
             }
+        }else{
+            Log.println(level,tag,msg);
         }
     }
 }

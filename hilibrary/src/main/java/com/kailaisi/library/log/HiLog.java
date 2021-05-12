@@ -1,7 +1,5 @@
 package com.kailaisi.library.log;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +16,14 @@ import java.util.List;
  * <br/>创建时间：2021-05-10:22:21
  */
 public class HiLog {
+    public static final String HI_LOG_PACKAGE;
+
+    static {
+        String name = HiLog.class.getName();
+        //截取包名
+        HI_LOG_PACKAGE = name.substring(0, name.lastIndexOf('.') + 1);
+    }
+
     public static void v(Object... contents) {
         log(HiLogType.V, contents);
     }
@@ -68,11 +74,11 @@ public class HiLog {
 
 
     public static void log(@HiLogType.TYPE int type, Object... contents) {
-        log(type,HiLogManager.getInstance().getConfig().getGlobalTag(),contents);
+        log(type, HiLogManager.getInstance().getConfig().getGlobalTag(), contents);
     }
 
-    public static void log(@HiLogType.TYPE int type,@NonNull String tag,Object... contents){
-        log(HiLogManager.getInstance().getConfig(),type,tag,contents);
+    public static void log(@HiLogType.TYPE int type, @NonNull String tag, Object... contents) {
+        log(HiLogManager.getInstance().getConfig(), type, tag, contents);
     }
 
     public static void log(@NonNull HiLogConfig config, @HiLogType.TYPE int type, @NotNull String tag, Object... contents) {
@@ -80,28 +86,28 @@ public class HiLog {
             return;
         }
         StringBuilder sb = new StringBuilder();
-        if (config.includeThread()){
+        if (config.includeThread()) {
             String threadInfo = HiLogConfig.hiThreadFormatter.format(Thread.currentThread());
             sb.append(threadInfo).append("\n");
         }
-        if (config.stackTraceDepth()>0){
-            String stackTrace = HiLogConfig.hiStackTraceFormatter.format(new Throwable().getStackTrace());
+        if (config.stackTraceDepth() > 0) {
+            String stackTrace = HiLogConfig.hiStackTraceFormatter.format(HiStackTraceUtil.getCopedRealStackTrack(new Throwable().getStackTrace(), HI_LOG_PACKAGE, config.stackTraceDepth()));
             sb.append(stackTrace).append("\n");
         }
-        String body=parseBody(contents,config);
+        String body = parseBody(contents, config);
         sb.append(body);
         List<HiLogPrinter> printers = config.printers() != null ? Arrays.asList(config.printers()) : HiLogManager.getInstance().getPrinters();
-        if (printers==null){
+        if (printers == null) {
             return;
         }
         //用各个打印器去打印log
         for (HiLogPrinter printer : printers) {
-            printer.print(config,type,tag,sb.toString());
+            printer.print(config, type, tag, sb.toString());
         }
     }
 
     private static String parseBody(@NonNull Object[] contents, HiLogConfig config) {
-        if (config.injectParser()!=null){
+        if (config.injectParser() != null) {
             return config.injectParser().toJson(contents);
         }
         StringBuilder sb = new StringBuilder();
