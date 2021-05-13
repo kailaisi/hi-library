@@ -1,6 +1,8 @@
 package com.kailaisi.library.log;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +10,15 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kailaisi.library.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.kailaisi.library.log.HiLogConfig.MAX_LEN;
 
 /**
  * 描述：在应用中的打印信息，跟踪trace
@@ -24,15 +29,31 @@ public class HiViewPrinter implements HiLogPrinter {
     private RecyclerView recyclerView;
     private LogAdapter adapter;
 
+    private HiViewPrinterProvider printerProvider;
+
     public HiViewPrinter(Activity activity) {
         FrameLayout rootView = activity.findViewById(android.R.id.content);
-        // TODO: 2021-05-12
-        this.recyclerView = new RecyclerView(rootView.getContext());
+        recyclerView = new RecyclerView(rootView.getContext());
+        adapter = new LogAdapter();
+        LinearLayoutManager manager = new LinearLayoutManager(recyclerView.getContext(),RecyclerView.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+
+        printerProvider = new HiViewPrinterProvider(rootView, recyclerView);
     }
 
     @Override
     public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String msg) {
+        adapter.addItem(new HiLogMo(System.currentTimeMillis(),level,tag,msg));
+        recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
+    }
 
+    /**
+     * 获取控制面板
+     */
+    @NonNull
+    public HiViewPrinterProvider getPrinterProvider() {
+        return printerProvider;
     }
 
     private static class LogAdapter extends RecyclerView.Adapter<LogViewHolder> {
@@ -41,7 +62,7 @@ public class HiViewPrinter implements HiLogPrinter {
 
         void addItem(HiLogMo item) {
             logs.add(item);
-            notifyItemInserted(logs.size() - 1);
+            notifyDataSetChanged();
         }
 
         @NonNull
@@ -55,7 +76,7 @@ public class HiViewPrinter implements HiLogPrinter {
         @Override
         public void onBindViewHolder(@NonNull LogViewHolder holder, int position) {
             HiLogMo item = logs.get(position);
-            int color=getHighLightColor(item.level);
+            int color = getHighLightColor(item.level);
             holder.tagView.setTextColor(color);
             holder.messageView.setTextColor(color);
 
@@ -66,23 +87,23 @@ public class HiViewPrinter implements HiLogPrinter {
         private int getHighLightColor(int level) {
             switch (level) {
                 case HiLogType.V:
-                    return 0xbbbbbb;
+                    return 0xffbbbbbb;
                 case HiLogType.D:
-                    return 0xffffff;
+                    return Color.WHITE;
                 case HiLogType.I:
-                    return 0x6a8759;
+                    return 0xff6a8759;
                 case HiLogType.W:
-                    return 0xbbb529;
+                    return 0xffbbb529;
                 case HiLogType.E:
-                    return 0xff6b68;
+                    return 0xffff6b68;
                 default:
-                    return 0xffff00;
+                    return 0xffffff00;
             }
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return logs.size();
         }
     }
 

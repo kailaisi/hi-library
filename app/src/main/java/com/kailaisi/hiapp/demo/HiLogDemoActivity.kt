@@ -4,20 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.kailaisi.hiapp.R
-import com.kailaisi.library.log.HiLog
-import com.kailaisi.library.log.HiLogConfig
-import com.kailaisi.library.log.HiLogType
+import com.kailaisi.library.log.*
 
 class HiLogDemoActivity : AppCompatActivity() {
+    val viewPrinter by lazy { HiViewPrinter(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hi_log_demo)
         findViewById<Button>(R.id.button).setOnClickListener {
             printlog();
         }
+        viewPrinter.printerProvider.showFloatingView()
     }
 
     private fun printlog() {
+        HiLogManager.getInstance().addPrinter(viewPrinter)
         HiLog.log(object : HiLogConfig() {
             override fun includeThread(): Boolean {
                 return true
