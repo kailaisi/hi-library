@@ -1,4 +1,4 @@
-package com.tcsl.hi_ui
+package com.kailaisi.hi_ui
 
 import org.junit.Test
 

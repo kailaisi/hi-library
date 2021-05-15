@@ -1,4 +1,4 @@
-package com.tcsl.hi_ui.tab.common;
+package com.kailaisi.hi_ui.tab.common;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Px;

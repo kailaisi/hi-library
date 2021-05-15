@@ -1,4 +1,4 @@
-package com.tcsl.hi_ui.tab.common;
+package com.kailaisi.hi_ui.tab.common;
 
 import android.view.ViewGroup;
 
