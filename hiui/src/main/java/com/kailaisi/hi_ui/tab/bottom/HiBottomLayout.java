@@ -1,7 +1,5 @@
 package com.kailaisi.hi_ui.tab.bottom;
 
-import android.annotation.SuppressLint;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -23,17 +21,19 @@ import com.kailaisi.hi_ui.tab.common.IHiTabLayout;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * 描述：
+ * 描述：含有一个底部导航栏的布局。
  * <p/>作者：wu
  * <br/>创建时间：2021-05-15:13:14
  */
 public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBottom, HiTabBottomInfo<?>> {
     private static final String TAG_TAG_BOTTOM = "TAG_TAG_BOTTOM";
+    /**
+     * 切换监听
+     */
     private List<OnTabSelectedListener<HiTabBottomInfo<?>>> tabSelectedListeners = new ArrayList<>();
     /**
      * 当前选中的
@@ -115,6 +115,7 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
             LayoutParams params = new LayoutParams(width, height);
             params.gravity = Gravity.BOTTOM;
             params.leftMargin = i * width;
+            //每个底部的按钮其实都实现了监听的处理
             HiTabBottom tabBottom = new HiTabBottom(getContext());
             tabSelectedListeners.add(tabBottom);
             tabBottom.setHiTabInfo(info);
@@ -172,12 +173,12 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
         ViewGroup target = HiViewUtil.findTypeView(root, RecyclerView.class);
         if (target == null) {
             target = HiViewUtil.findTypeView(root, ScrollView.class);
-            if (target==null){
-                target=HiViewUtil.findTypeView(root, AbsListView.class);
+            if (target == null) {
+                target = HiViewUtil.findTypeView(root, AbsListView.class);
             }
         }
-        if (target!=null){
-            target.setPadding(0,0,0,HiDisplayUtils.dip2px(getContext(),tabBottomHeight));
+        if (target != null) {
+            target.setPadding(0, 0, 0, HiDisplayUtils.dip2px(getContext(), tabBottomHeight));
             target.setClipToPadding(false);
         }
     }

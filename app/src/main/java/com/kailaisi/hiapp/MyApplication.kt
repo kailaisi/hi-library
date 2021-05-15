@@ -1,9 +1,10 @@
 package com.kailaisi.hiapp
 
-import android.app.Application
 import com.google.gson.Gson
+import com.kailaisi.common.ui.component.HiBaseApplication
 import com.kailaisi.library.log.HiConsolePrinter
 import com.kailaisi.library.log.HiLogConfig
+import com.kailaisi.library.log.HiLogConfig.JsonParser
 import com.kailaisi.library.log.HiLogManager
 
 /**
@@ -12,7 +13,7 @@ import com.kailaisi.library.log.HiLogManager
  * 作者：wu
  * <br></br>创建时间：2021-05-10:22:58
  */
-class MyApplication : Application() {
+public class HIApplication : HiBaseApplication() {
     override fun onCreate() {
         super.onCreate()
         HiLogManager.init(object : HiLogConfig() {

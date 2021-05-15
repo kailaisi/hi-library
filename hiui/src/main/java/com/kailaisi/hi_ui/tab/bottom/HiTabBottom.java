@@ -131,6 +131,7 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
         if (preInfo != tabInfo && nextInfo != tabInfo || preInfo == nextInfo) {
             return;
         }
+        //将绘制工作交给没给tab去处理
         if (preInfo == tabInfo) {
             inflateView(false, false);
         } else if (nextInfo == tabInfo) {
@@ -138,6 +139,4 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
         }
 
     }
-
-
 }

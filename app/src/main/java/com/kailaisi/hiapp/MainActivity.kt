@@ -1,23 +1,24 @@
 package com.kailaisi.hiapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kailaisi.hi_ui.tab.bottom.HiTabBottom
-import com.kailaisi.hi_ui.tab.bottom.HiTabBottomInfo
+import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
+import com.kailaisi.hiapp.logic.MainActivityLogic
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
+    lateinit var logic: MainActivityLogic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        val data=HiTabBottomInfo("首页",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_home),
-            null,
-            "#ff656667",
-            "#ffd44949"
-                 )
-        mBinding.tabBottom.setHiTabInfo(data)
+        logic = MainActivityLogic(this,savedInstanceState)
+    }
+
+    /**
+     * 防止压后台之后，再回来导致的fragment重叠
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        logic.onSaveInstanceState(outState)
     }
 }
