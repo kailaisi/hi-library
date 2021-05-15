@@ -1,4 +1,4 @@
-package com.kailaisi.hi_ui.tab.bottom;
+package com.kailaisi.library.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

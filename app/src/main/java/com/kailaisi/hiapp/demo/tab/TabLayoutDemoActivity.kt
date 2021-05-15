@@ -3,13 +3,11 @@ package com.kailaisi.hiapp.demo.tab
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import com.kailaisi.hi_ui.tab.bottom.HiDisplayUtils
 import com.kailaisi.hi_ui.tab.bottom.HiTabBottomInfo
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.ActivityTabLayoutDemoBinding
+import com.kailaisi.library.util.HiDisplayUtils
 
 class TabLayoutDemoActivity : AppCompatActivity() {
 
@@ -18,7 +16,6 @@ class TabLayoutDemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initTabBottom()
-
     }
 
     private fun initTabBottom() {
@@ -34,7 +31,7 @@ class TabLayoutDemoActivity : AppCompatActivity() {
         var bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher, null)
         val cal = HiTabBottomInfo<String>(
             "收藏",
-            bitmap,bitmap
+            bitmap, bitmap
         )
         val set = HiTabBottomInfo(
             "设置",
@@ -57,6 +54,6 @@ class TabLayoutDemoActivity : AppCompatActivity() {
             defaultSelected(home)
         }
         var findTab = layout.findTab(cal)
-        findTab?.resetHeight(HiDisplayUtils.dip2px(this,66f))
+        findTab?.resetHeight(HiDisplayUtils.dip2px(this, 66f))
     }
 }

@@ -88,6 +88,7 @@ public class MainActivityLogic {
         hiBottomLayout.addTabSelectedChangedListener(new IHiTabLayout.OnTabSelectedListener<HiTabBottomInfo<?>>() {
             @Override
             public void onTabSelectedListener(int index, @Nullable HiTabBottomInfo<?> preInfo, @NonNull HiTabBottomInfo<?> nextInfo) {
+                //tab的切换，引起fragment的切换。其实二者是完全解耦合的
                 fragmentTabView.setCurrentItem(index);
                 currentItemIndex = index;
             }

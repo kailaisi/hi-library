@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="tabBottomDefaultColor">#FD3021</color>
     <color name="tabBottomTintColor">#03A9F4</color>
+    <color name="tabTopDefaultColor">#1F0503</color>
+    <color name="tabTopTintColor">#8B1007</color>
 </resources>

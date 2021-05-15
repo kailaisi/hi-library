@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kailaisi.hi_ui.R;
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout;
+import com.kailaisi.library.util.HiDisplayUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -105,7 +106,7 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
         selectedInfo = null;
         //设置背景色
         addBackground();
-        //添加tab。这里不使用LL。
+        //添加tab。这里不使用LL,因为有的会单独设置高度，可能会导致LL扩大。
         FrameLayout frameLayout = new FrameLayout(getContext());
         frameLayout.setTag(TAG_TAG_BOTTOM);
         int width = HiDisplayUtils.getScreenWidth(getContext()) / infoList.size();

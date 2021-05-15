@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.kailaisi.library.util.HiDisplayUtils;
 
 /**
  * 描述：打印面板生成器
@@ -32,7 +32,7 @@ public class HiViewPrinterProvider {
     }
 
     /**
-     *显示悬浮按钮
+     * 显示悬浮按钮
      */
     public void showFloatingView() {
         if (rootView.findViewWithTag(TAG_FLOATING_VIEW) != null) {
@@ -45,11 +45,11 @@ public class HiViewPrinterProvider {
         floatingView.setBackgroundColor(Color.BLACK);
         floatingView.setAlpha(0.8f);
         //距离底部位置s
-        params.bottomMargin=HiDisplayUtils.dip2px(recyclerView.getContext(),100);
-        rootView.addView(genFloatingView(),params);
+        params.bottomMargin = HiDisplayUtils.dip2px(recyclerView.getContext(), 100);
+        rootView.addView(genFloatingView(), params);
     }
 
-    public void closeFloatingView(){
+    public void closeFloatingView() {
         rootView.removeView(genFloatingView());
     }
 
@@ -79,10 +79,10 @@ public class HiViewPrinterProvider {
         }
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(rootView.getContext(), 160));
         View logView = genLogView();
-        params.gravity=Gravity.BOTTOM;
+        params.gravity = Gravity.BOTTOM;
         logView.setTag(TAG_LOG_VIEW);
-        rootView.addView(logView,params);
-        isOpen=true;
+        rootView.addView(logView, params);
+        isOpen = true;
     }
 
     private View genLogView() {
