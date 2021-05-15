@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.demo
+package com.kailaisi.hiapp.demo.log
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

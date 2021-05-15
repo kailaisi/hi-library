@@ -86,10 +86,8 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
             }
             if (selected) {
                 tabImageView.setImageBitmap(null == tabInfo.selectedBitmap ? tabInfo.defaultBitmap : tabInfo.selectedBitmap);
-                tabNameView.setTextColor(getTextColor(tabInfo.tintColor));
             } else {
                 tabImageView.setImageBitmap(tabInfo.defaultBitmap);
-                tabNameView.setTextColor(getTextColor(tabInfo.defaultColor));
             }
 
         }
@@ -114,6 +112,10 @@ public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInf
 
     public TextView getTabNameView() {
         return tabNameView;
+    }
+
+    public HiTabBottomInfo<?> getHiTabInfo() {
+        return tabInfo;
     }
 
     @Override

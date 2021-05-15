@@ -3,6 +3,7 @@ package com.kailaisi.hi_ui.tab.common;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ public interface IHiTabLayout<Tab extends ViewGroup, D> {
     void inflateInfo(@NonNull List<D> infoList);
 
     interface OnTabSelectedListener<D> {
-        void onTabSelectedListener(int index, @NonNull D preInfo, @NonNull D nextInfo);
+        void onTabSelectedListener(int index, @Nullable D preInfo, @NonNull D nextInfo);
     }
 }
