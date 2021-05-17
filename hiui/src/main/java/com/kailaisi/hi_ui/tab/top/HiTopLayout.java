@@ -1,6 +1,7 @@
 package com.kailaisi.hi_ui.tab.top;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout;
+import com.kailaisi.library.util.HiDisplayUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +39,8 @@ public class HiTopLayout extends HorizontalScrollView implements IHiTabLayout<Hi
      * Top信息
      */
     private List<HiTabTopInfo<?>> infoList;
+    private int tabwidth;
+
 
     public HiTopLayout(@NonNull Context context) {
         this(context, null);
@@ -94,7 +98,6 @@ public class HiTopLayout extends HorizontalScrollView implements IHiTabLayout<Hi
             }
         }
         selectedInfo = null;
-        //添加tab。这里不使用LL。
         LinearLayout linearLayout = getRootLayout(true);
         for (int i = 0; i < infoList.size(); i++) {
             HiTabTopInfo<?> info = infoList.get(i);
@@ -109,6 +112,87 @@ public class HiTopLayout extends HorizontalScrollView implements IHiTabLayout<Hi
                 }
             });
             linearLayout.addView(tabTop);
+        }
+    }
+
+    private int scrollWidth;
+
+    /**
+     * @param nextInfo
+     */
+    private void autoScroll(HiTabTopInfo<?> nextInfo) {
+        HiTabTop tab = findTab(nextInfo);
+        if (tab == null) {
+            return;
+        }
+        int index = infoList.indexOf(nextInfo);
+        int[] loc = new int[2];
+        //获取在屏幕中的位置
+        tab.getLocationInWindow(loc);
+        if (tabwidth == 0) {
+            tabwidth = tab.getWidth();
+        }
+        int scrollWidth=0;
+        //点击的tab中心点在屏幕的左侧还是右侧
+        if ((loc[0] + tabwidth / 2) > HiDisplayUtils.getScreenWidth(getContext()) / 2) {
+            //显示右侧两个按钮的滑动距离
+            scrollWidth = rangeScrollWidth(index, 2);
+        } else {
+            scrollWidth = rangeScrollWidth(index, -2);
+        }
+        scrollTo(getScrollX() + scrollWidth, 0);
+    }
+
+    /**
+     * 获取可滚动的范围
+     *
+     * @param index 从第几个开始
+     * @param range 向前向后的范围
+     * @return 可滚动的范围
+     */
+    private int rangeScrollWidth(int index, int range) {
+        int scrollWidth=0;
+        for (int i = 0; i < Math.abs(range); i++) {
+            int next;
+            if (range < 0) {
+                next = range + i + index;
+            } else {
+                next = range - i + index;
+            }
+            //这里其实是过滤，防止超过范围
+            if (next >= 0 && next < infoList.size()) {
+                if (range < 0) {
+                    scrollWidth -= ScrollWidth(next, false);
+                } else {
+                    scrollWidth += ScrollWidth(next, true);
+                }
+            }
+        }
+        return scrollWidth;
+    }
+
+
+    private int ScrollWidth(int index, boolean toRight) {
+        HiTabTop tab = findTab(infoList.get(index));
+        if (tab == null) {
+            return 0;
+        }
+        //获取在屏幕中显示的view所对应的位置，以左上角为起点
+        Rect rect = new Rect();
+        tab.getLocalVisibleRect(rect);
+        if (toRight) {
+            if (rect.right > tabwidth) {//right坐标大于控件的宽度，说明完全没有显示
+                return tabwidth;
+            } else {//显示了一部分，要减去已显示的宽度
+                return tabwidth - rect.right;
+            }
+        } else {
+            if (rect.left <= -tabwidth) {//完全未显示
+                return tabwidth;
+            } else if (rect.left > 0) {//显示部分
+                return rect.left;
+            }
+            return 0;
         }
     }
 
@@ -131,6 +215,7 @@ public class HiTopLayout extends HorizontalScrollView implements IHiTabLayout<Hi
             tabSelectedListener.onTabSelectedListener(infoList.indexOf(nextInfo), selectedInfo, nextInfo);
         }
         this.selectedInfo = nextInfo;
+        autoScroll(nextInfo);
     }
 
 }
