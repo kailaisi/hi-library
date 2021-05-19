@@ -7,6 +7,8 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.kailaisi.library.util.HiDisplayUtils;
+
 /**
  * 描述：下拉刷新的头部视图，可以重载这个类来定义
  * <p/>作者：wu
@@ -16,7 +18,8 @@ public abstract class HiOverView extends FrameLayout {
     public enum HiRefreshState {
         STATE_INIT,//初始态
         STATE_VISIBLE,//Header展示状态
-        STATE_REFRESH,//超出可刷新距离状态
+        STATE_REFRESH,//刷新状态
+        STATE_OVER,//超出可刷新距离状态
         STATE_OVER_RELEASE//超出刷新位置松手后的状态
     }
 
@@ -36,14 +39,22 @@ public abstract class HiOverView extends FrameLayout {
 
     public HiOverView(@NonNull Context context) {
         super(context);
+        preInit();
     }
 
     public HiOverView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        preInit();
     }
 
     public HiOverView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        preInit();
+    }
+
+    protected void preInit() {
+        mPullRefreshHeight = HiDisplayUtils.dip2px(getContext(), 66);
+        init();
     }
 
 
