@@ -16,7 +16,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ic_baseline_refresh_24"
+            android:src="@drawable/rotate_daisy"
             android:layout_marginBottom="10dp" />
 
         <TextView

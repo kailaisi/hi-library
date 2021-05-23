@@ -30,8 +30,9 @@ public interface HiRefresh {
     void setRefreshOverView(HiOverView view);
 
     interface HiRefreshListener {
+        //触发下拉刷新
         void onRefresh();
-
+        //启动下拉刷新
         boolean enableRefresh();
     }
 }

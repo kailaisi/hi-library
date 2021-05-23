@@ -3,7 +3,9 @@ package com.kailaisi.hi_ui.refresh;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,10 +61,14 @@ public class HiTextView extends HiOverView {
     @Override
     public void onRefresh() {
         text.setText("正在刷新");
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate);
+        animation.setInterpolator(new LinearInterpolator());
+        rote.startAnimation(animation);
     }
 
     @Override
     public void onFinish() {
-
+        //取消动画
+        rote.clearAnimation();
     }
 }

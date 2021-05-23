@@ -12,6 +12,8 @@ import android.widget.Scroller;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.kailaisi.library.log.HiLog;
+
 import java.lang.invoke.MethodHandleInfo;
 
 /**
@@ -20,12 +22,13 @@ import java.lang.invoke.MethodHandleInfo;
  * <br/>创建时间：2021-05-17:21:47
  */
 public class HiRefreshLayout extends FrameLayout implements HiRefresh {
-
+    private static final String TAG = "HiRefreshLayout";
     private HiOverView.HiRefreshState mState;
     private GestureDetector mDetector;
     private HiRefreshListener mHiRefreshListener;
     private HiOverView mHiOverView;
     private int mLastY;
+    //刷新时是否禁止滚动
     private boolean disableRefreshScroll;
     private AutoScroller mAutoScroller;
 
@@ -49,7 +52,7 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
 
     @Override
     public void setDisableRefreshScroll(boolean disable) {
-        disableRefreshScroll=disable;
+        disableRefreshScroll = disable;
     }
 
     @Override
@@ -94,7 +97,7 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
             View child = HiScrollUtil.findScrollableChild(HiRefreshLayout.this);
             if (HiScrollUtil.childScrolled(child)) {
                 //如果列表发生了滚动则不处理
-                return true;
+                return false;
             }
             //没有刷新或者没有达到可以刷新的距离，并且头部已经划出或者下拉
             if ((mState != HiOverView.HiRefreshState.STATE_REFRESH || head.getBottom() <= mHiOverView.mPullRefreshHeight) &&
@@ -128,10 +131,13 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
      * @param nonAuto 是否非自动滚动触发
      */
     private boolean moveDown(int offsetY, boolean nonAuto) {
+        HiLog.i("111", "changeState:" + nonAuto);
         View head = getChildAt(0);
         View child = getChildAt(1);
         int childTop = child.getTop() + offsetY;
+        HiLog.i("-----", "moveDown head-bottom:" + head.getBottom() + ",child.getTop():" + child.getTop() + ",offsetY:" + offsetY);
         if (childTop <= 0) {
+            HiLog.i(TAG, "childTop<=0,mState" + mState);
             offsetY = -childTop;//异常情况的补充
             //回到原始位置
             head.offsetTopAndBottom(offsetY);
@@ -152,6 +158,7 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
             child.offsetTopAndBottom(offsetY);
             if (childTop == mHiOverView.mPullRefreshHeight && mState == HiOverView.HiRefreshState.STATE_OVER_RELEASE) {
                 //下拉刷新完成
+                HiLog.i(TAG, "refresh，childTop：" + childTop);
                 refresh();
             }
         } else {
@@ -159,9 +166,9 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
                 //超出刷新位置
                 mHiOverView.onOver();
                 mHiOverView.setState(HiOverView.HiRefreshState.STATE_OVER);
-                head.offsetTopAndBottom(offsetY);
-                child.offsetTopAndBottom(offsetY);
             }
+            head.offsetTopAndBottom(offsetY);
+            child.offsetTopAndBottom(offsetY);
         }
         if (mHiOverView != null) {
             mHiOverView.onScroll(head.getBottom(), mHiOverView.mPullRefreshHeight);
@@ -175,6 +182,7 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
     private void refresh() {
         if (mHiRefreshListener != null) {
             mState = HiOverView.HiRefreshState.STATE_REFRESH;
+            mHiOverView.onRefresh();
             mHiOverView.setState(HiOverView.HiRefreshState.STATE_REFRESH);
             mHiRefreshListener.onRefresh();
         }
@@ -182,9 +190,13 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!mAutoScroller.isIsFinished()) {
+            return false;
+        }
         //获取到下拉头
         View head = getChildAt(0);
-        if (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_CANCEL || ev.getAction() == MotionEvent.ACTION_POINTER_INDEX_MASK) {
+        if (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_CANCEL
+                || ev.getAction() == MotionEvent.ACTION_POINTER_INDEX_MASK) {
             //松开手，底部露出来了，需要恢复
             if (head.getBottom() > 0) {
                 if (mState != HiOverView.HiRefreshState.STATE_REFRESH) {//非正在刷新
@@ -232,22 +244,25 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
         }
         //重新定义一下排版
         View head = getChildAt(0);
+        HiLog.i(TAG, "onLayout head-height:" + head.getMeasuredHeight());
         View child = getChildAt(1);
         int childTop = child.getTop();
         if (mState == HiOverView.HiRefreshState.STATE_REFRESH) {
             head.layout(0, mHiOverView.mPullRefreshHeight - head.getMeasuredHeight(),
                     right, mHiOverView.mPullRefreshHeight);
-            child.layout(0, mHiOverView.mPullRefreshHeight, right, mHiOverView.mPullRefreshHeight + child.getMeasuredHeight());
-        }else{
-            head.layout(0, childTop - head.getMeasuredHeight(),
-                    right, childTop);
-            child.layout(0,childTop, right, childTop + child.getMeasuredHeight());
+            child.layout(0, mHiOverView.mPullRefreshHeight,
+                    right, mHiOverView.mPullRefreshHeight + child.getMeasuredHeight());
+        } else {
+            head.layout(0, childTop - head.getMeasuredHeight(), right, childTop);
+            child.layout(0, childTop, right, childTop + child.getMeasuredHeight());
         }
         View other;
-        for (int i=2;i<getChildCount();i++){
-            other=getChildAt(i);
-            other.layout(0,top,right,bottom);
+        //让HiRefreshLayout节点下两个以上的child能够不跟随手势移动以实现一些特殊效果，如悬浮的效果
+        for (int i = 2; i < getChildCount(); i++) {
+            other = getChildAt(i);
+            other.layout(0, top, right, bottom);
         }
+        HiLog.i(TAG, "onLayout head-bottom:" + head.getBottom());
     }
 
     /**
@@ -268,7 +283,7 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
         public void run() {
             if (mScroller.computeScrollOffset()) {
                 //还未滚动完成
-                moveDown(mLastY - mScroller.getCurrX(), false);
+                moveDown(mLastY - mScroller.getCurrY(), false);
                 mLastY = mScroller.getCurrY();
                 post(this);
             } else {

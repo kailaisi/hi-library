@@ -48,7 +48,7 @@ public class HiScrollUtil {
                     && ((AdapterView) child).getChildAt(0).getTop() < 0) {
                 return true;
             }
-        } else if (child.getScaleY() > 0) {
+        } else if (child.getScrollY() > 0) {
             return true;
         }
         if (child instanceof RecyclerView) {
