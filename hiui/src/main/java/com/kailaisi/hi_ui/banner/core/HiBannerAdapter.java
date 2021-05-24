@@ -154,9 +154,29 @@ public class HiBannerAdapter extends PagerAdapter {
 
     public static class HiBannerViewHolder {
         View rootView;
+        private SparseArray<View> viewSparseArray;
 
         public HiBannerViewHolder(View rootView) {
             this.rootView = rootView;
+        }
+
+        public View getRootView() {
+            return rootView;
+        }
+
+        public <V extends View> V findViewById(int id){
+            if (!(rootView instanceof ViewGroup)){
+                return (V) rootView;
+            }
+            if (this.viewSparseArray==null){
+                viewSparseArray=new SparseArray<>(1);
+            }
+            V child= (V) viewSparseArray.get(id);
+            if (child==null){
+                child=rootView.findViewById(id);
+                viewSparseArray.put(id,child);
+            }
+            return child;
         }
     }
 }
