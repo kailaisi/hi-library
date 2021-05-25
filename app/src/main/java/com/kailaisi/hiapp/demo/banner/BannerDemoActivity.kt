@@ -3,6 +3,7 @@ package com.kailaisi.hiapp.demo.banner
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.kailaisi.hi_ui.banner.HiCircleIndicator
+import com.kailaisi.hi_ui.banner.HiNumberIndicator
 import com.kailaisi.hiapp.BaseBindingActivity
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.ActivityBannerDemoBinding
@@ -31,6 +32,7 @@ class BannerDemoActivity : BaseBindingActivity<ActivityBannerDemoBinding>() {
             setAutoPlay(auto)
             setIntervalTime(5000)
             setScrollDuration(3000)
+            setHaIndicator(HiNumberIndicator(context))
             setBannerData(R.layout.item_banner_item, molist)
             setBindAdapter { holder, mo, _ ->
                 val image = holder.findViewById<ImageView>(R.id.iv_image)
