@@ -7,10 +7,12 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.kailaisi.hi_ui.banner.core.HiIndicator;
+
 /**
  * 默认的圆形指示器
  */
-public class HiCircleIndicator extends FrameLayout implements com.kailaisi.hi_ui.banner.core.HiIndicator<FrameLayout> {
+public class HiCircleIndicator extends FrameLayout implements HiIndicator<FrameLayout> {
 
     public HiCircleIndicator(@NonNull Context context) {
         super(context);
@@ -26,7 +28,7 @@ public class HiCircleIndicator extends FrameLayout implements com.kailaisi.hi_ui
 
     @Override
     public FrameLayout get() {
-        return null;
+        return this;
     }
 
     @Override

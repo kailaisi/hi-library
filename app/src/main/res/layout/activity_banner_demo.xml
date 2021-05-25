@@ -9,6 +9,7 @@
     tools:ignore="MissingDefaultResource">
 
     <com.kailaisi.hi_ui.banner.HiBanner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         app:autoPlay="true"
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="切换指示器" />
     <Switch
+        android:id="@+id/sw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

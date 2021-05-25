@@ -9,8 +9,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hilibrary">
-        <activity android:name=".demo.banner.BannerDemoActivity"></activity>
-        <activity android:name=".demo.refresh.RefreshActivity">
+        <activity android:name=".demo.banner.BannerDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

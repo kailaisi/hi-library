@@ -1,7 +1,5 @@
 package com.kailaisi.hi_ui.banner.core;
 
-import androidx.annotation.StringRes;
-
 /**
  * 描述：
  * <p/>作者：wu
