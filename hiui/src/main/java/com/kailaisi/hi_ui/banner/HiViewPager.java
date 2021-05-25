@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import com.kailaisi.hi_ui.banner.core.HiBannerAdapter;
+
 import java.lang.reflect.Field;
 
 /**
@@ -121,7 +123,7 @@ class HiViewPager extends ViewPager {
         next=getCurrentItem()+1;
         if (next>=getAdapter().getCount()){
             //获取第一个item的索引
-
+            next=((HiBannerAdapter)getAdapter()).getFirstItem();
         }
         setCurrentItem(next,true);
         return next;

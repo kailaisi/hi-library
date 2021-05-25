@@ -12,12 +12,14 @@ import java.util.List;
  * <p/>作者：wu
  * <br/>创建时间：2021-05-24:21:46
  */
-interface IHiBanner {
+public interface IHiBanner {
     void setBannerData(@LayoutRes int layoutId, @NotNull List<? extends HiBannerMo> models);
 
     void setBannerData(@NotNull List<? extends HiBannerMo> models);
 
     void setHaIndicator(HiIndicator<?> haIndicator);
+
+    void setAutoPlay(boolean autoPlay);
 
     void setLoop(boolean loop);
 

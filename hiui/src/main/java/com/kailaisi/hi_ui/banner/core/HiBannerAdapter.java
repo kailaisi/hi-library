@@ -113,7 +113,7 @@ public class HiBannerAdapter extends PagerAdapter {
         return (mAutoPlay || mLoop) ? Integer.MAX_VALUE : getRealSize();
     }
 
-    private int getRealSize() {
+    public int getRealSize() {
         return models == null ? 0 : models.size();
     }
 
