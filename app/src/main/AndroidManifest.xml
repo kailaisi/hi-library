@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kailaisi.hiapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".HIApplication"
         android:allowBackup="true"

@@ -1,9 +1,7 @@
 package com.kailaisi.hi_ui.banner;
 
 import android.content.Context;
-import android.util.SparseArray;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.FrameLayout;
 
 import androidx.viewpager.widget.ViewPager;
@@ -14,11 +12,9 @@ import com.kailaisi.hi_ui.banner.core.HiBannerMo;
 import com.kailaisi.hi_ui.banner.core.HiIndicator;
 import com.kailaisi.hi_ui.banner.core.IBindAdapter;
 import com.kailaisi.hi_ui.banner.core.IHiBanner;
-import com.kailaisi.library.log.HiViewPrinter;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileFilter;
 import java.util.List;
 
 /**
@@ -26,8 +22,8 @@ import java.util.List;
  * 将HiBanner的内部逻辑抽取在这个类中，保证HiBanner类的整洁
  */
 public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListener {
-    private Context mContext;
-    private HiBanner mHiBanner;
+    private final Context mContext;
+    private final HiBanner mHiBanner;
     private IHiBanner.OnBannerClickListener mBannerClickListener;
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
     private HiBannerAdapter mAdapter;
@@ -41,6 +37,8 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
     private boolean mAutoPlay = true;
     //在非自动轮播状态下是否可以循环切换
     private boolean mLoop = false;
+    //viewpager滚动时间
+    private int scrollDuration = -1;
 
     public HiBannerDelegate(Context context, HiBanner hiBanner) {
         this.mContext = context;
@@ -85,6 +83,14 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
     }
 
     @Override
+    public void setScrollDuration(int duration) {
+        this.scrollDuration = duration;
+        if (mHiViewPager != null && duration > 0) {
+            mHiViewPager.setScrollDuration(duration);
+        }
+    }
+
+    @Override
     public void setBindAdapter(IBindAdapter bindAdapter) {
         mAdapter.setBindAdapter(bindAdapter);
     }
@@ -107,7 +113,7 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
         if (mHiIndicator == null) {
             mHiIndicator = new HiCircleIndicator(mContext);
         }
-        mHiIndicator.onInflate(layoutId);
+        mHiIndicator.onInflate(models.size());
         mAdapter.setLayoutResId(layoutId);
         mAdapter.setBannerData(models);
         mAdapter.setAutoPlay(mAutoPlay);
@@ -118,7 +124,9 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
         mHiViewPager.addOnPageChangeListener(this);
         mHiViewPager.setAutoPlay(mAutoPlay);
         mHiViewPager.setAdapter(mAdapter);
-
+        if (scrollDuration > 0) {
+            mHiViewPager.setScrollDuration(scrollDuration);
+        }
         if ((mLoop || mAutoPlay) && mAdapter.getRealSize() != 0) {
             int firstItem = mAdapter.getFirstItem();
             mHiViewPager.setCurrentItem(firstItem, false);

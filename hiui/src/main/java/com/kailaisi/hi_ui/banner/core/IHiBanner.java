@@ -25,6 +25,8 @@ public interface IHiBanner {
 
     void setIntervalTime(int intervalTime);
 
+    void setScrollDuration(int duration);
+
     void setBindAdapter(IBindAdapter bindAdapter);
 
     void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener);
@@ -32,6 +34,6 @@ public interface IHiBanner {
     void setOnBannerClickListener(OnBannerClickListener onBannerClickListener);
 
     interface OnBannerClickListener {
-        void onBannerClick(@NotNull HiBannerAdapter.HiBannerViewHolder viewHolder,@NotNull HiBannerMo bannerMo,int pos);
+        void onBannerClick(@NotNull HiBannerAdapter.HiBannerViewHolder viewHolder, @NotNull HiBannerMo bannerMo, int pos);
     }
 }

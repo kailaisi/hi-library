@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.kailaisi.hi_ui.banner.core.HiBannerAdapter;
+import com.kailaisi.hi_ui.banner.core.HiBannerScroller;
 
 import java.lang.reflect.Field;
 
@@ -56,6 +57,17 @@ class HiViewPager extends ViewPager {
 
     public void setIntervalTime(int intervalTime) {
         this.mIntervalTime = intervalTime;
+    }
+
+    public void setScrollDuration(int duration){
+        try {
+            //黑科技，由于ViewPager的滚动时间是通过mScroller来控制的，所有这里通过反射，将其替代为我们自己的scroller
+            Field field=ViewPager.class.getDeclaredField("mScroller");
+            field.setAccessible(true);
+            field.set(this,new HiBannerScroller(getContext(),duration));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

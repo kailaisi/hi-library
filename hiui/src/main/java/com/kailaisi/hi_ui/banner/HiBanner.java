@@ -82,6 +82,11 @@ public class HiBanner extends FrameLayout implements IHiBanner {
     }
 
     @Override
+    public void setScrollDuration(int duration) {
+        delegate.setScrollDuration(duration);
+    }
+
+    @Override
     public void setBindAdapter(IBindAdapter bindAdapter) {
         delegate.setBindAdapter(bindAdapter);
     }

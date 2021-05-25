@@ -15,7 +15,7 @@ import java.io.PipedReader;
 import java.util.List;
 
 /**
- * 描述：
+ * 描述：ViewPager使用的Adapter
  * <p/>作者：wu
  * <br/>创建时间：2021-05-24:22:04
  */
@@ -123,6 +123,7 @@ public class HiBannerAdapter extends PagerAdapter {
     }
 
     protected void onBind(@NotNull final HiBannerViewHolder viewHolder, @NotNull final HiBannerMo mo, int pos) {
+        //设置点击事件
         viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +132,7 @@ public class HiBannerAdapter extends PagerAdapter {
                 }
             }
         });
+        //设置数据和视图的绑定，交给外层处理
         if (mBindAdapter != null) {
             mBindAdapter.onBind(viewHolder, mo, pos);
         }
@@ -164,17 +166,17 @@ public class HiBannerAdapter extends PagerAdapter {
             return rootView;
         }
 
-        public <V extends View> V findViewById(int id){
-            if (!(rootView instanceof ViewGroup)){
+        public <V extends View> V findViewById(int id) {
+            if (!(rootView instanceof ViewGroup)) {
                 return (V) rootView;
             }
-            if (this.viewSparseArray==null){
-                viewSparseArray=new SparseArray<>(1);
+            if (this.viewSparseArray == null) {
+                viewSparseArray = new SparseArray<>(1);
             }
-            V child= (V) viewSparseArray.get(id);
-            if (child==null){
-                child=rootView.findViewById(id);
-                viewSparseArray.put(id,child);
+            V child = (V) viewSparseArray.get(id);
+            if (child == null) {
+                child = rootView.findViewById(id);
+                viewSparseArray.put(id, child);
             }
             return child;
         }

@@ -17,6 +17,7 @@ class BannerDemoActivity : BaseBindingActivity<ActivityBannerDemoBinding>() {
 
     override fun initView() {
         init(true)
+        Glide.with(this@BannerDemoActivity).load(list[0]).into(mBinding.ivImage)
         mBinding.sw.setOnCheckedChangeListener { buttonView, isChecked ->
             init(isChecked)
         }
@@ -28,8 +29,8 @@ class BannerDemoActivity : BaseBindingActivity<ActivityBannerDemoBinding>() {
         }
         mBinding.banner.apply {
             setAutoPlay(auto)
-            setIntervalTime(2000)
-            setHaIndicator(HiCircleIndicator(this@BannerDemoActivity))
+            setIntervalTime(5000)
+            setScrollDuration(3000)
             setBannerData(R.layout.item_banner_item, molist)
             setBindAdapter { holder, mo, _ ->
                 val image = holder.findViewById<ImageView>(R.id.iv_image)
