@@ -1,13 +1,13 @@
-package com.kailaisi.hi_ui.banner;
+package com.kailaisi.hi_ui.banner.indicator;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -20,26 +20,21 @@ import com.kailaisi.library.util.HiDisplayUtils;
 /**
  * 默认的圆形指示器
  */
-public class HiCircleIndicator extends FrameLayout implements HiIndicator<FrameLayout> {
+public class HiNumberIndicator extends FrameLayout implements HiIndicator<FrameLayout> {
 
     public static final int VWC = ViewGroup.LayoutParams.WRAP_CONTENT;
     private int leftRightPadding;
     private int topBottomPadding;
 
-    private @DrawableRes
-    int pointNormal = R.drawable.shap_point_normal;
-    private @DrawableRes
-    int pointSelected = R.drawable.shap_point_selected;
-
-    public HiCircleIndicator(@NonNull Context context) {
+    public HiNumberIndicator(@NonNull Context context) {
         this(context, null);
     }
 
-    public HiCircleIndicator(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public HiNumberIndicator(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public HiCircleIndicator(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public HiNumberIndicator(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -64,33 +59,19 @@ public class HiCircleIndicator extends FrameLayout implements HiIndicator<FrameL
         group.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(VWC, VWC);
         params.gravity = Gravity.CENTER_VERTICAL;
-        params.setMargins(leftRightPadding, topBottomPadding, leftRightPadding, topBottomPadding);
-        for (int i = 0; i < count; i++) {
-            ImageView imageView = new ImageView(getContext());
-            imageView.setLayoutParams(params);
-            if (i == 0) {
-                imageView.setImageResource(pointSelected);
-            } else {
-                imageView.setImageResource(pointNormal);
-            }
-            group.addView(imageView);
-        }
+        params.setMargins(leftRightPadding, leftRightPadding, leftRightPadding, leftRightPadding);
+        TextView view = new TextView(getContext());
+        view.setText("0/" + count);
+        group.addView(view, params);
         LayoutParams groupParam = new LayoutParams(VWC, VWC);
-        groupParam.gravity = Gravity.CENTER | Gravity.BOTTOM;
+        groupParam.gravity = Gravity.END | Gravity.BOTTOM;
         addView(group, groupParam);
     }
 
     @Override
     public void onPointChange(int current, int count) {
         ViewGroup viewGroup = (ViewGroup) getChildAt(0);
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            ImageView child = (ImageView) viewGroup.getChildAt(i);
-            if (i == current) {
-                child.setImageResource(pointSelected);
-            } else {
-                child.setImageResource(pointNormal);
-            }
-            child.requestLayout();
-        }
+        TextView child = (TextView) viewGroup.getChildAt(0);
+        child.setText(current + "/" + count);
     }
 }

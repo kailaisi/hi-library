@@ -12,6 +12,7 @@ import com.kailaisi.hi_ui.banner.core.HiBannerMo;
 import com.kailaisi.hi_ui.banner.core.HiIndicator;
 import com.kailaisi.hi_ui.banner.core.IBindAdapter;
 import com.kailaisi.hi_ui.banner.core.IHiBanner;
+import com.kailaisi.hi_ui.banner.indicator.HiCircleIndicator;
 
 import org.jetbrains.annotations.NotNull;
 
