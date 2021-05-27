@@ -27,14 +27,14 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA) {
     /**
      * 返回Item的对应的布局资源
      */
-    fun getItemLayoutRes(): Int {
+    open fun getItemLayoutRes(): Int {
         return -1
     }
 
     /**
      * 返回该Item的视图View
      */
-    fun getItemView(parent: ViewGroup): View? {
+    open   fun getItemView(parent: ViewGroup): View? {
         return null
     }
 
@@ -59,7 +59,7 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA) {
     /**
      * 该Item占据几列
      */
-    fun getSpanSize(): Int {
+    open  fun getSpanSize(): Int {
         return 0
     }
 }
