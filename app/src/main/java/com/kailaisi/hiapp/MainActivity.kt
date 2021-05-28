@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
 import com.kailaisi.hiapp.logic.MainActivityLogic
+import com.kailaisi.library.util.HiDataBus
 
 class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     lateinit var logic: MainActivityLogic
@@ -12,6 +13,7 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         logic = MainActivityLogic(this,savedInstanceState)
+        HiDataBus.with<String>("stickdata").setStickyData("stickydata from main")
     }
 
     /**
