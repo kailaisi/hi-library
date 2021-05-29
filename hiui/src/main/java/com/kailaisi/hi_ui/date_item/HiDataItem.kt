@@ -62,4 +62,10 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA) {
     open  fun getSpanSize(): Int {
         return 0
     }
+
+    fun onViewAttachedToWindow(holder: VH) {
+    }
+
+    fun onViewDetachedFromWindow(holder: VH) {
+    }
 }
