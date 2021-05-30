@@ -18,9 +18,9 @@ import com.kailaisi.hi_ui.refresh.HiRefreshLayout
 import com.kailaisi.hi_ui.refresh.HiTextView
 
 /**
- * 描述：
+ * 描述：通用的下拉刷新页面
  *
- * 作者：wu
+ * 作者：kailaisi
  * <br></br>创建时间：2021-05-30:17:19
  */
 class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
@@ -61,10 +61,11 @@ class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
         emptyView?.visibility = View.GONE
         emptyView?.setIcon(R.string.list_empty)
         emptyView?.setDesc(getString(R.string.list_empty_desc))
-        emptyView?.setButton(getString(R.string.list_empty_action), {
+        emptyView?.setButton(getString(R.string.list_empty_action)) {
             onRefresh()
-        })
+        }
         loadingView?.visibility = View.VISIBLE
+        pageIndex = 1
     }
 
     fun finishRefresh(dataitem: List<HiDataItem<*, RecyclerView.ViewHolder>>?) {
@@ -74,6 +75,7 @@ class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
         val refresh = pageIndex == 1
         if (refresh) {
             loadingView?.visibility = View.GONE
+            refreshLayout?.refreshFinished()
             if (success) {//刷新成功
                 emptyView?.visibility = View.GONE
                 hiAdapter.clearItems()
@@ -115,7 +117,9 @@ class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
     override fun onRefresh() {
         if (recyclerView?.isLoadingMore() == true) {
             //如果当前正在加载更多，则不允许进行下拉刷新
-            refreshLayout?.refreshFinished()
+            refreshLayout?.post {
+                refreshLayout?.refreshFinished()
+            }
             return
         }
         pageIndex = 1

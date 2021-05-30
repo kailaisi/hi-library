@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView
 
 /**
  * 描述：用于支持全局iconfont资源的引用，可以在布局中直接设置text
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-30:17:24
  */
 class IconFontTextView @JvmOverloads constructor(
