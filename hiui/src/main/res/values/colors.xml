@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="hi_tab_top_selected_color">#C0342A</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_9b9">#9b9b9b</color>
+    <color name="color_565">#565656</color>
+    <color name="color_298">#298298</color>
+    <color name="color_dd2">#dd2dd2</color>
 </resources>

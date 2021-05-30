@@ -267,4 +267,9 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         val indexOf = dataSet.indexOf(hiDataItem)
         notifyItemChanged(indexOf)
     }
+
+    fun clearItems() {
+        dataSet.clear()
+        notifyDataSetChanged()
+    }
 }

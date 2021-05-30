@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_empty_desc">暂无信息</string>
+    <string name="if_detail"><![CDATA[&#xeb93;]]></string>
+</resources>

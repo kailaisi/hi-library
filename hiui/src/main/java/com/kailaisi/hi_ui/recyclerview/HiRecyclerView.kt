@@ -23,7 +23,7 @@ class HiRecyclerView @JvmOverloads constructor(
 ) : RecyclerView(context, attributes, defstyle) {
     private var isLoadingMore: Boolean = false
     private var loadMoreListener: LoadMoreListener? = null
-    private var footerView: View?=null
+    private var footerView: View? = null
 
     inner class LoadMoreListener(val prefetchSize: Int, val callback: () -> Unit) :
         OnScrollListener() {
@@ -70,8 +70,9 @@ class HiRecyclerView @JvmOverloads constructor(
          */
         private fun addFooterView() {
             //为了防止重复添加，每次都remove。但是remove从recyclerview移除之后，需要等下一个绘制才可以,直接执行add，会导致数据错误
-            if (footerView==null) {
-                footerView=LayoutInflater.from(context).inflate(R.layout.layout_footer_loading, this@HiRecyclerView, false)
+            if (footerView == null) {
+                footerView = LayoutInflater.from(context)
+                    .inflate(R.layout.layout_footer_loading, this@HiRecyclerView, false)
             }
             val parent = footerView!!.parent
             if (parent != null) {
@@ -112,24 +113,38 @@ class HiRecyclerView @JvmOverloads constructor(
             return
         }
         val hiAdapter = adapter as HiAdapter
-        footerView.let {
-            if (footerView!!.parent != null) {
-                hiAdapter.removeFooter(it!!)
+        footerView?.let {
+            if (it.parent != null) {
+                hiAdapter.removeFooter(it)
             }
         }
         loadMoreListener?.let {
             removeOnScrollListener(it)
-            loadMoreListener=null
-            footerView=null
-            isLoadingMore=false
+            loadMoreListener = null
+            footerView = null
+            isLoadingMore = false
         }
     }
 
-    fun isLoading(): Boolean {
+    fun isLoadingMore(): Boolean {
         return isLoadingMore
     }
 
-    fun loadFinished(){
-        // TODO: 2021-05-29  
+    fun loadFinished(success:Boolean) {
+        if (adapter !is HiAdapter) {
+            HiLog.e("enableLoadMore must use hidapter")
+            return
+        }
+        isLoadingMore = false
+        val hiAdapter = adapter as HiAdapter
+        if (!success) {
+            footerView?.let {
+                if (it.parent != null) {
+                    hiAdapter.removeFooter(it)
+                }
+            }
+        } else {
+            //分页成功， 不需要处理
+        }
     }
 }
