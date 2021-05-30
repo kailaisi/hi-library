@@ -7,7 +7,7 @@ import com.kailaisi.hiapp.R
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-27:22:54
  */
 class TopBanner(data:ItemData):HiDataItem<ItemData,RecyclerView.ViewHolder>(data) {

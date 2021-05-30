@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 /**
  * 描述：基于LiveData的事件总线
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-28:21:53
  */
 object HiDataBus {

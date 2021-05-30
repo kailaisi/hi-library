@@ -22,7 +22,7 @@ import static com.kailaisi.library.log.HiLogConfig.MAX_LEN;
 
 /**
  * 描述：在应用中的打印信息，跟踪trace
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-12:20:40
  */
 public class HiViewPrinter implements HiLogPrinter {

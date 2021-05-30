@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 /**
  * 描述：管理器，Fragment的管理
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-15:17:35
  */
 public class HiFragmentTabView extends FrameLayout {

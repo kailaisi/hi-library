@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 
 /**
  * 描述：自动翻页的ViewPager
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-24:21:13
  */
 class HiViewPager extends ViewPager {

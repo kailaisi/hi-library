@@ -2,7 +2,7 @@ package com.kailaisi.library.log;
 
 /**
  * 描述：格式化接口
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-11:21:56
  */
 interface HiLogFormatter<T> {

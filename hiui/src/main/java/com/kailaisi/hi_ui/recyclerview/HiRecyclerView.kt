@@ -13,7 +13,7 @@ import com.kailaisi.library.log.HiLog
 
 /**
  * 描述：支持上拉加载更多的RecyclerView
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-29:22:38
  */
 class HiRecyclerView @JvmOverloads constructor(

@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * 描述：抽取MainActivity的逻辑
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-15:20:28
  */
 public class MainActivityLogic {

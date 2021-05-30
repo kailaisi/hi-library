@@ -11,7 +11,7 @@ import com.kailaisi.library.util.HiDisplayUtils;
 
 /**
  * 描述：下拉刷新的头部视图，可以重载这个类来定义
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-17:21:37
  */
 public abstract class HiOverView extends FrameLayout {

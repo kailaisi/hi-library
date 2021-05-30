@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * 描述：管理Fragment
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-15:16:32
  */
 public class HiTabViewAdapter {

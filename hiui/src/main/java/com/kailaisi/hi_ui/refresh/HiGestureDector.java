@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-18:21:36
  */
 class HiGestureDetector implements GestureDetector.OnGestureListener {

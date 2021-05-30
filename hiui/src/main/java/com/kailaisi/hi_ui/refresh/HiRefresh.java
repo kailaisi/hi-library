@@ -2,7 +2,7 @@ package com.kailaisi.hi_ui.refresh;
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-17:21:35
  */
 public interface HiRefresh {

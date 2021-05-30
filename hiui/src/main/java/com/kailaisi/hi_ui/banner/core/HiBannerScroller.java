@@ -5,7 +5,7 @@ import android.widget.Scroller;
 
 /**
  * 描述：可设置滚动时间的Scroller
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-25:22:31
  */
 public class  HiBannerScroller extends Scroller {

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 描述：数据类的抽象类，
  *
- * 作者：wu
+ * 作者：kailaisi
  * <br></br>创建时间：2021-05-27:21:45
  */
 abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA) {

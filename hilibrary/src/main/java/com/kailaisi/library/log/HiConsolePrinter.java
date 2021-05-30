@@ -8,7 +8,7 @@ import static com.kailaisi.library.log.HiLogConfig.MAX_LEN;
 
 /**
  * 描述：控制台打印器
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-11:22:17
  */
 public class HiConsolePrinter implements HiLogPrinter {

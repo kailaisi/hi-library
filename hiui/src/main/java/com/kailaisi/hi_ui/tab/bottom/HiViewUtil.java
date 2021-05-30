@@ -9,7 +9,7 @@ import java.util.ArrayDeque;
 
 /**
  * 描述：从ViewGroup中找到指定类型的View
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-15:15:03
  */
 public class HiViewUtil {

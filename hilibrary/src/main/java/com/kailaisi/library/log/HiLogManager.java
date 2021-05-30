@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 描述：管理类
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-10:22:38
  */
 public class HiLogManager {

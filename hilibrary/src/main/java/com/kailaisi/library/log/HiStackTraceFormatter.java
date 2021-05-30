@@ -4,7 +4,7 @@ import android.os.Trace;
 
 /**
  * 描述：堆栈信息打印
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-11:22:00
  */
 public class HiStackTraceFormatter implements HiLogFormatter<StackTraceElement[]> {

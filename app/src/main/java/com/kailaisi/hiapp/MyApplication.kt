@@ -10,7 +10,7 @@ import com.kailaisi.library.log.HiLogManager
 /**
  * 描述：
  *
- * 作者：wu
+ * 作者：kailaisi
  * <br></br>创建时间：2021-05-10:22:58
  */
 public class HIApplication : HiBaseApplication() {

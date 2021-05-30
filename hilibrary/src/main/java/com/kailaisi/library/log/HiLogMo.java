@@ -7,7 +7,7 @@ import java.util.Locale;
 
 /**
  * 描述：打印的log信息
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-12:20:49
  */
 public class HiLogMo {

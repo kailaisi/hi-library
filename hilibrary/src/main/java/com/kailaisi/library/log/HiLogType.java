@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-10:22:22
  */
 public class HiLogType {

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 描述：通用接口
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-24:21:46
  */
 public interface IHiBanner {

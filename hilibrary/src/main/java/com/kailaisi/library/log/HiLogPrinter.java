@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 /**
  * 描述：打印器
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-11:21:54
  */
 public interface HiLogPrinter {

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-18:22:20
  */
 public class HiScrollUtil {

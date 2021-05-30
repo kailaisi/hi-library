@@ -13,7 +13,7 @@ import com.kailaisi.library.util.HiDisplayUtils;
 
 /**
  * 描述：打印面板生成器
- * 作者：wujinxiang
+ * 作者：kailaisijinxiang
  * 创建时间：2021/5/13 2:52 PM
  */
 public class HiViewPrinterProvider {

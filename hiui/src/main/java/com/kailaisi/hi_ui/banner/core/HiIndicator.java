@@ -4,7 +4,7 @@ import android.view.View;
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-24:21:50
  */
 public interface HiIndicator<T extends View> {

@@ -18,7 +18,7 @@ import java.lang.invoke.MethodHandleInfo;
 
 /**
  * 描述：下拉刷新的布局
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-17:21:47
  */
 public class HiRefreshLayout extends FrameLayout implements HiRefresh {

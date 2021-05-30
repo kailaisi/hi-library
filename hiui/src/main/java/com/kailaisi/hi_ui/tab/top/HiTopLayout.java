@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * 描述：含有一个顶部导航栏的布局。
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-15:13:14
  */
 public class HiTopLayout extends HorizontalScrollView implements IHiTabLayout<HiTabTop, HiTabTopInfo<?>> {

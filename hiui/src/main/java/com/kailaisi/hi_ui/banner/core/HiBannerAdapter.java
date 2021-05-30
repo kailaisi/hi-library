@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * 描述：ViewPager使用的Adapter
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-24:22:04
  */
 public class HiBannerAdapter extends PagerAdapter {
