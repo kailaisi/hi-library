@@ -1,5 +1,11 @@
 package com.kailaisi.hiapp.fragment;
 
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.kailaisi.common.ui.component.HiBaseFragment;
 import com.kailaisi.hiapp.R;
 
@@ -12,5 +18,11 @@ public class ProfileFragment extends HiBaseFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_profile;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }
