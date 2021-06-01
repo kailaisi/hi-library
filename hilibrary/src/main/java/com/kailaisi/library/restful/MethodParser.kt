@@ -8,7 +8,7 @@ import java.lang.reflect.Type
 
 class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
     private var httpMethod: Int? = null
-    private var parameters = mutableMapOf<String, Any>()
+    private var parameters = mutableMapOf<String, String>()
     private var domainUrl: String? = null
     private val heads = mutableMapOf<String, String>()
     private var formPost: Boolean = false
@@ -25,7 +25,7 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
     }
 
     private fun parseMethodReturnType(method: Method) {
-        if (method.returnType != HiCall::class) {
+        if (method.returnType != HiCall::class.java) {
             throw  IllegalArgumentException("method ${method.name} must be type of HiCall.class")
         }
         //范型返回参数
@@ -58,7 +58,7 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
             }
             val annotation = annotations[0]
             if (annotation is Field) {
-                parameters[annotation.value] = args[index]
+                parameters[annotation.value] = args[index].toString()
             } else if (annotation is Path) {
                 //需要动态替换
                 val replacement = value.toString()
@@ -130,6 +130,7 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
         request.headers = heads
         request.httpMethod = httpMethod
         request.parameters = parameters
+        request.formPost = formPost
         return request
     }
 
