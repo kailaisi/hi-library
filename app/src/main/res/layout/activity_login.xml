@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_main"
+    android:orientation="vertical"
+    tools:context=".ui.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <com.kailaisi.hi_ui.icfont.IconFontTextView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/if_category" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/login" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/register"
+            android:textColor="@color/color_298"
+            android:textSize="@dimen/sp_16" />
+    </RelativeLayout>
+
+    <View style="@style/divider" />
+
+    <com.kailaisi.hiapp.view.InputItemLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:paddingStart="@dimen/dp_16"
+        app:bottomLineAppearance="@style/leftMarginLine"
+        app:hint="请输入用户名"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="用户名"
+        app:titleTextAppearance="@style/titleTextAppearance"
+        app:topLineAppearance="@style/lineAppearance" />
+
+    <com.kailaisi.hiapp.view.InputItemLayout
+        android:id="@+id/pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:paddingStart="@dimen/dp_16"
+        app:bottomLineAppearance="@style/lineAppearance"
+        app:hint="请输入密码"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="密码"
+        app:titleTextAppearance="@style/titleTextAppearance" />
+</LinearLayout>

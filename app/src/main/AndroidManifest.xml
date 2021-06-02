@@ -3,6 +3,7 @@
     package="com.kailaisi.hiapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".HIApplication"
         android:allowBackup="true"
@@ -10,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hilibrary">
+        <activity android:name=".ui.LoginActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -12,4 +12,8 @@
     <color name="tabTopDefaultColor">#1F0503</color>
     <color name="tabTopTintColor">#8B1007</color>
     <color name="color_d1d2">#D1D2D1</color>
+
+
+    <color name="color_C1B">#C1BC1B</color>
+    <color name="color_bg_main">#EDEDED</color>
 </resources>
