@@ -10,7 +10,7 @@ import java.lang.reflect.Type
 class HiRequest {
 
 
-    var formPost: Boolean=false
+    var formPost: Boolean = false
 
     @METHOD
     var httpMethod: Int? = null
@@ -29,13 +29,20 @@ class HiRequest {
      */
     fun domainUrl(): String {
         if (relativeUrl == null) {
-            throw IllegalArgumentException("relative urm must not be null")
+            throw IllegalArgumentException("relative url must not be null")
         }
         if (!relativeUrl!!.startsWith("/")) {
             return baseUrl + relativeUrl
         }
         val indexOf = baseUrl!!.indexOf("/")
         return baseUrl!!.substring(0, indexOf) + relativeUrl
+    }
+
+    fun addHeader(key: String, value: String) {
+        if (headers == null) {
+            headers = mutableMapOf()
+        }
+        headers!![key] = value
     }
 
     @IntDef(value = [METHOD.GET, METHOD.POST])

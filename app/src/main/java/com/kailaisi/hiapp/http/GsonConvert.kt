@@ -34,6 +34,7 @@ class GsonConvert : HiConvert {
             response.code = 1
             response.msg = e.message
         }
+        response.rawData=rawData
         return response
     }
 }

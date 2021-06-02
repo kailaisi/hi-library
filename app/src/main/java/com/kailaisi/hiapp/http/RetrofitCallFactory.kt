@@ -1,6 +1,5 @@
 package com.kailaisi.hiapp.http
 
-import android.speech.RecognitionService
 import com.kailaisi.library.restful.HiCall
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiRequest
@@ -15,7 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.*
-import java.lang.IllegalArgumentException
 
 class RetrofitCallFactory(baseUrl: String) : HiCall.Factory {
     private var gsonConvert: GsonConvert
@@ -47,12 +45,12 @@ class RetrofitCallFactory(baseUrl: String) : HiCall.Factory {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
-                    rawData = body.toString()
+                    rawData = body.string()
                 }
             } else {
                 val errorBody = response.errorBody()
                 if (errorBody != null) {
-                    rawData = errorBody.toString()
+                    rawData = errorBody.string()
                 }
             }
             return gsonConvert.convert(rawData!!, request.returnType!!)

@@ -74,7 +74,7 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
     }
 
     private fun isPrimitive(value: Any): Boolean {
-        if (value.javaClass == String.javaClass) {
+        if (value.javaClass == String::class.java) {
             return true
         }
         kotlin.runCatching {
@@ -127,6 +127,7 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
         val request = HiRequest()
         request.baseUrl = domainUrl
         request.returnType = returnType
+        request.relativeUrl=relativeUrl
         request.headers = heads
         request.httpMethod = httpMethod
         request.parameters = parameters

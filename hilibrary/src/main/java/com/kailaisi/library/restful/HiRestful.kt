@@ -18,8 +18,8 @@ open class HiRestful constructor(val baseUrl: String, val callFactory: HiCall.Fa
         scheduler = Scheduler(callFactory, interceptors)
     }
 
-    fun <T> create(service: Class<T>) {
-        Proxy.newProxyInstance(service.classLoader,
+    fun <T> create(service: Class<T>):T {
+       return Proxy.newProxyInstance(service.classLoader,
             arrayOf(service)
         ) { proxy, method, args ->
             var get = methodService.get(method)
