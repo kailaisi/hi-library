@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hilibrary">
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".ui.registor.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
