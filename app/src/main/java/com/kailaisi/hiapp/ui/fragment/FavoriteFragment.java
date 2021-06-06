@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.fragment;
+package com.kailaisi.hiapp.ui.fragment;
 
 import com.kailaisi.common.ui.component.HiBaseFragment;
 import com.kailaisi.hiapp.R;
@@ -8,9 +8,9 @@ import com.kailaisi.hiapp.R;
  * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-15:17:50
  */
-public class CategoryFragment extends HiBaseFragment {
+public class FavoriteFragment extends HiBaseFragment {
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_category;
+        return R.layout.fragment_favorite;
     }
 }

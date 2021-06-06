@@ -6,7 +6,7 @@ import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
 import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.AccountApi
-import com.kailaisi.hiapp.logic.MainActivityLogic
+import com.kailaisi.hiapp.ui.login.MainActivityLogic
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiDataBus
@@ -17,7 +17,8 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
         super.onCreate(savedInstanceState)
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        logic = MainActivityLogic(this,savedInstanceState)
+        logic = MainActivityLogic(this,
+            savedInstanceState)
         HiDataBus.with<String>("stickdata").setStickyData("stickydata from main")
         ApiFactory.create(AccountApi::class.java).getArchCode("imooc").enqueue(object:HiCallback<JsonObject>{
             override fun onSuccess(response: HiResponse<JsonObject>) {

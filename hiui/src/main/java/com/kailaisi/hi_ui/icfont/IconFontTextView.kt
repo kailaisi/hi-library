@@ -3,6 +3,7 @@ package com.kailaisi.hi_ui.icfont
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
 
 /**
@@ -16,6 +17,7 @@ class IconFontTextView @JvmOverloads constructor(
     defStyle: Int = 1,
 ) : AppCompatTextView(context, attributeSet, defStyle) {
     init {
+        gravity=Gravity.CENTER
         val createFromAsset = Typeface.createFromAsset(context.assets, "fonts/iconfont.ttf")
         typeface = createFromAsset
     }

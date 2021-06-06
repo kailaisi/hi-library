@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.ui
+package com.kailaisi.hiapp.ui.login
 
 import android.os.Bundle
 import com.kailaisi.common.ui.component.HiBaseActivity

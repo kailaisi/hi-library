@@ -14,4 +14,5 @@
     <string name="login">登陆</string>
     <string name="refresh">刷新</string>
     <string name="degrade_tips">页面跑远了，开发小哥正在努力加班修复~</string>
+    <string name="action_submit">提交</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.logic;
+package com.kailaisi.hiapp.ui.login;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -16,11 +16,11 @@ import com.kailaisi.hi_ui.tab.bottom.HiBottomLayout;
 import com.kailaisi.hi_ui.tab.bottom.HiTabBottomInfo;
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout;
 import com.kailaisi.hiapp.R;
-import com.kailaisi.hiapp.fragment.CategoryFragment;
-import com.kailaisi.hiapp.fragment.FavoriteFragment;
-import com.kailaisi.hiapp.fragment.HomePageFragment;
-import com.kailaisi.hiapp.fragment.ProfileFragment;
-import com.kailaisi.hiapp.fragment.RecommandFragment;
+import com.kailaisi.hiapp.ui.fragment.CategoryFragment;
+import com.kailaisi.hiapp.ui.fragment.FavoriteFragment;
+import com.kailaisi.hiapp.ui.fragment.HomePageFragment;
+import com.kailaisi.hiapp.ui.fragment.ProfileFragment;
+import com.kailaisi.hiapp.ui.fragment.RecommandFragment;
 
 import org.jetbrains.annotations.NotNull;
 

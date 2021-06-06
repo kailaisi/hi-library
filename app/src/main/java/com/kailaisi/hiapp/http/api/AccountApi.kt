@@ -1,13 +1,22 @@
 package com.kailaisi.hiapp.http.api
 
-import com.google.gson.JsonObject
 import com.kailaisi.library.restful.HiCall
 import com.kailaisi.library.restful.annotion.Field
-import com.kailaisi.library.restful.annotion.GET
 import com.kailaisi.library.restful.annotion.POST
 
 interface AccountApi {
 
     @POST("user/login")
-    open fun getArchCode(@Field("name") name: String): HiCall<JsonObject>
+    fun login(
+        @Field("userName") name: String,
+        @Field("password") password: String,
+    ): HiCall<String>
+
+    @POST("user/registtration")
+    fun register(
+        @Field("userName") name: String,
+        @Field("password") password: String,
+        @Field("imoocId") imoocId: String,
+        @Field("orderId") orderId: String,
+    ): HiCall<String>
 }

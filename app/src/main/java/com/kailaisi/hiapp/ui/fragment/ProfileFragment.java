@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.fragment;
+package com.kailaisi.hiapp.ui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
