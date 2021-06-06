@@ -12,9 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hilibrary">
         <activity android:name=".ui.ProfileDetailActivity"></activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".ui.LoginActivity"/>
-        <activity android:name=".ui.registor.RegisterActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.AuthenticationActivity" />
+        <activity android:name=".route.DegradeGlobalActivity" />
     </application>
 
 </manifest>

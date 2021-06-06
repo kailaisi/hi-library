@@ -11,13 +11,13 @@ import com.kailaisi.hiapp.R
  * <p/>作者：wu
  * <br/>创建时间：2021-06-06:14:05
  */
-@Route(path = "degrade/global/activity")
+@Route(path = "/degrade/global/activity")
 class DegradeGlobalActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_global_error)
         val emptyView = findViewById<EmptyView>(R.id.empty_layout)
-        emptyView.setIcon(R.string.if_recommend)
-
+        emptyView.setIcon(R.string.if_unexpected1)
+        emptyView.setTitle(getString(R.string.degrade_tips))
     }
 }

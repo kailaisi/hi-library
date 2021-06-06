@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.alibaba.arouter'
 }
 
 android {
@@ -59,5 +61,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     api 'com.alibaba:arouter-api:1.5.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
 }

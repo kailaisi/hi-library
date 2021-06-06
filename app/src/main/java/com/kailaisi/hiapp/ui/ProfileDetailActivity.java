@@ -10,12 +10,12 @@ import com.kailaisi.hiapp.R;
 import com.kailaisi.hiapp.route.RouterFlag;
 
 /**
- * 描述：
+ * 描述：用户详情页
  * <p/>作者：wu
  * <br/>创建时间：2021-06-06:13:42
  */
 @Route(path = "/profile/detail", extras = RouterFlag.FLAG_LOGIN)
-class ProfileDetailActivity extends AppCompatActivity {
+public class ProfileDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

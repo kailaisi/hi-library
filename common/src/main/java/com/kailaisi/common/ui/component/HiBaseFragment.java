@@ -1,6 +1,5 @@
 package com.kailaisi.common.ui.component;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ public abstract class HiBaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         layoutView = inflater.inflate(getLayoutId(), container, false);
         return layoutView;
     }

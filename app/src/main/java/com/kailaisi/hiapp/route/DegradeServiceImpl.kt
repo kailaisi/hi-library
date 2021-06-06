@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 @Route(path = "/degrade/global/service")
 class DegradeServiceImpl : DegradeService {
     override fun init(context: Context?) {
-        ARouter.getInstance().build("degrade/global/activity").greenChannel().navigation()
+        ARouter.getInstance().build("/degrade/global/activity").greenChannel().navigation()
     }
 
     override fun onLost(context: Context?, postcard: Postcard?) {
