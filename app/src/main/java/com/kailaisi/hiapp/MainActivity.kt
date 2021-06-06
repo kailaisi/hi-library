@@ -1,6 +1,7 @@
 package com.kailaisi.hiapp
 
 import android.os.Bundle
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.gson.JsonObject
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
@@ -11,6 +12,7 @@ import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiDataBus
 
+@Route(path = "/account/main")
 class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     lateinit var logic: MainActivityLogic
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +22,8 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
         logic = MainActivityLogic(this,
             savedInstanceState)
         HiDataBus.with<String>("stickdata").setStickyData("stickydata from main")
-        ApiFactory.create(AccountApi::class.java).getArchCode("imooc").enqueue(object:HiCallback<JsonObject>{
-            override fun onSuccess(response: HiResponse<JsonObject>) {
+        ApiFactory.create(AccountApi::class.java).login("imooc","123456").enqueue(object:HiCallback<String>{
+            override fun onSuccess(response: HiResponse<String>) {
 
             }
 

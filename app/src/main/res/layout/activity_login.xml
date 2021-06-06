@@ -67,16 +67,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
-        android:backgroundTint="@color/color_dd2"
+        style="@style/BtnNormal"
         android:text="@string/login"
-        app:cornerRadius="6dp"
-        app:strokeColor="@color/black"
-        app:strokeWidth="2dp" />
+        app:cornerRadius="6dp"/>
 
     <TextView
         android:layout_width="wrap_content"

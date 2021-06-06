@@ -9,13 +9,10 @@ open class HiRestful constructor(val baseUrl: String, val callFactory: HiCall.Fa
     private var interceptors = mutableListOf<HiInterceptor>()
 
     private var methodService = ConcurrentHashMap<Method, MethodParser>()
-    private var scheduler: Scheduler
-    fun addInterceptor(interceptor: HiInterceptor) {
+    private var scheduler: Scheduler = Scheduler(callFactory, interceptors)
+    fun addInterceptor(interceptor: HiInterceptor): HiRestful {
         interceptors.add(interceptor)
-    }
-
-    init {
-        scheduler = Scheduler(callFactory, interceptors)
+        return this
     }
 
     fun <T> create(service: Class<T>):T {

@@ -4,11 +4,11 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import com.alibaba.android.arouter.core.InterceptorServiceImpl
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
+import com.alibaba.android.arouter.launcher.ARouter
 import java.lang.RuntimeException
 
 /**
@@ -26,17 +26,27 @@ open class BizGlobalInterceptor : IInterceptor {
 
     override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
         val extra = postcard!!.extra
-        postcard.timeout=2
+        postcard.timeout = 2
         if (extra and (RouterFlag.FLAG_LOGIN) != 0) {
             //判断是否已经登陆了，如果未登录，则拦截
             callback?.onInterrupt(RuntimeException("need login"))
-            showToast("请先登录")
-        } else if ((extra and RouterFlag.FLAG_AUTHENTICATION) != 0) {
+            loginIntercept()
+        }/* else if ((extra and RouterFlag.FLAG_AUTHENTICATION) != 0) {
             showToast("请先认证")
         } else if ((extra and RouterFlag.FLAG_VIP) != 0) {
             showToast("请先开通VIP")
-        }else{
+        }*/ else {
             callback?.onContinue(postcard)
+        }
+    }
+
+    /**
+     * 登录拦截器
+     */
+    private fun loginIntercept() {
+        Handler(Looper.getMainLooper()).post {
+            Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
+            ARouter.getInstance().build("/account/login").navigation()
         }
     }
 

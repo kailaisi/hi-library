@@ -19,11 +19,12 @@ import com.kailaisi.hiapp.R
 class InputItemLayout : LinearLayout {
     private var bottomLine: Line
 
-    private var topLine: Line
-
-    private var editText: EditText
-
-    private var textView: TextView
+    var topLine: Line
+        private set
+    var editText: EditText
+        private set
+    var textView: TextView
+        private set
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
@@ -62,7 +63,6 @@ class InputItemLayout : LinearLayout {
 
         array.recycle()
     }
-
 
 
     /**
@@ -169,4 +169,6 @@ class InputItemLayout : LinearLayout {
         array.recycle()
         return textView
     }
+
+
 }

@@ -54,4 +54,16 @@
         <item name="android:background">@color/white</item>
         <item name="android:paddingStart">@dimen/dp_16</item>
     </style>
+
+    <style name="BtnNormal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:layout_marginStart">@dimen/dp_10</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:layout_marginEnd">@dimen/dp_10</item>
+        <item name="android:backgroundTint">@color/color_dd2</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
 </resources>
