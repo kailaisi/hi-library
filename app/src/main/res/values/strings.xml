@@ -19,4 +19,5 @@
     <string name="home_search_hint">&#xe987;搜索你想要的商品</string>
     <string name="register">注册</string>
     <string name="login">登陆</string>
+    <string name="refresh">刷新</string>
 </resources>

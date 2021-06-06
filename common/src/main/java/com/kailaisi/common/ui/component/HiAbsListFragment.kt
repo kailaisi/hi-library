@@ -10,7 +10,7 @@ import com.kailaisi.common.R
 import com.kailaisi.common.databinding.FragmentListBinding
 import com.kailaisi.hi_ui.date_item.HiAdapter
 import com.kailaisi.hi_ui.date_item.HiDataItem
-import com.kailaisi.hi_ui.empty.EmptyView
+import com.kailaisi.common.ui.view.EmptyView
 import com.kailaisi.hi_ui.recyclerview.HiRecyclerView
 import com.kailaisi.hi_ui.refresh.HiOverView
 import com.kailaisi.hi_ui.refresh.HiRefresh

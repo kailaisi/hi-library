@@ -1,5 +1,6 @@
 package com.kailaisi.hiapp
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
 import com.kailaisi.common.ui.component.HiBaseApplication
 import com.kailaisi.library.log.HiConsolePrinter
@@ -13,7 +14,7 @@ import com.kailaisi.library.log.HiLogManager
  * 作者：kailaisi
  * <br></br>创建时间：2021-05-10:22:58
  */
-public class HIApplication : HiBaseApplication() {
+class HIApplication : HiBaseApplication() {
     override fun onCreate() {
         super.onCreate()
         HiLogManager.init(object : HiLogConfig() {
@@ -29,5 +30,10 @@ public class HIApplication : HiBaseApplication() {
                 return JsonParser { Gson().toJson(it) }
             }
         }, HiConsolePrinter())
+        if (BuildConfig.DEBUG){
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 }
