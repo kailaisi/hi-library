@@ -38,7 +38,7 @@
 -->
     <style name="lineAppearance">
         <item name="color">@color/color_C1B</item>
-        <item name="height">0.5dp</item>
+        <item name="height">1px</item>
         <item name="leftMargin">0dp</item>
         <item name="rightMargin">0dp</item>
         <item name="enable">true</item>
@@ -46,5 +46,12 @@
 
     <style name="leftMarginLine" parent="lineAppearance">
         <item name="leftMargin">10dp</item>
+    </style>
+
+    <style name="style_left_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_50</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingStart">@dimen/dp_16</item>
     </style>
 </resources>
