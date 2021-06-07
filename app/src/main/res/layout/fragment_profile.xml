@@ -1,36 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.ProfileDetailActivity">
 
-    <TextView
-        android:id="@+id/tv_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="个人中心"
-        tools:layout_editor_absoluteY="154dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_vip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="会员中心"
-        tools:layout_editor_absoluteY="154dp" />
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/tv_authentication"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="用户充值"
-        tools:layout_editor_absoluteY="154dp" />
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:textColor="@color/color_000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_user"
+            app:layout_constraintTop_toTopOf="@id/iv_user"
+            tools:text="Kai" />
 
-    <TextView
-        android:id="@+id/tv_unknow"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="全局降级处理"
-        tools:layout_editor_absoluteY="154dp" />
+        <TextView
+            android:id="@+id/tv_login_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/color_999"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tv_login"
+            app:layout_constraintTop_toBottomOf="@id/tv_login"
+            tools:text="@string/profile_login_des_welcom_back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        app:divider="@color/color_333"
+        app:layout_constraintTop_toBottomOf="@id/iv_user">
+
+
+        <TextView
+            android:id="@+id/tab_item_collection"
+            style="@style/tv_profile_tab"
+            tools:text="40\n收藏" />
+
+        <TextView
+            android:id="@+id/tab_item_history"
+            style="@style/tv_profile_tab"
+            tools:text="200\n历史浏览" />
+
+        <TextView
+            android:id="@+id/tab_item_learn"
+            style="@style/tv_profile_tab"
+            tools:text="40\n学习时长" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.kailaisi.hi_ui.banner.HiBanner
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="25dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical">
+
+        <com.kailaisi.hi_ui.icfont.IconFontTextView
+            android:id="@+id/notify_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_444"
+            android:textSize="14sp"
+            tools:text="@string/item_notify" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/notify_num"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/shape_red_circle"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="gone"
+            tools:text="10" />
+    </LinearLayout>
+
+    <View style="@style/divider" />
+
+
+    <com.kailaisi.hi_ui.icfont.IconFontTextView
+        android:id="@+id/notify_collection"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_444"
+        android:textSize="14sp"
+        tools:text="@string/item_collection" />
+
+
+    <View style="@style/divider" />
+
+    <com.kailaisi.hi_ui.icfont.IconFontTextView
+        android:id="@+id/notify_location"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_444"
+        android:textSize="14sp"
+        tools:text="@string/item_location" />
+
+    <View style="@style/divider" />
+
+    <com.kailaisi.hi_ui.icfont.IconFontTextView
+        android:id="@+id/notify_history"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_444"
+        android:textSize="14sp"
+        tools:text="@string/item_history" />
+
+    <View style="@style/divider" />
 </LinearLayout>

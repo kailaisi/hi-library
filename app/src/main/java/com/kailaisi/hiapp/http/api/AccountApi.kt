@@ -1,7 +1,9 @@
 package com.kailaisi.hiapp.http.api
 
+import com.kailaisi.hiapp.model.UserProfile
 import com.kailaisi.library.restful.HiCall
 import com.kailaisi.library.restful.annotion.Field
+import com.kailaisi.library.restful.annotion.GET
 import com.kailaisi.library.restful.annotion.POST
 
 interface AccountApi {
@@ -19,4 +21,8 @@ interface AccountApi {
         @Field("imoocId") imoocId: String,
         @Field("orderId") orderId: String,
     ): HiCall<String>
+
+    @GET("user/profile")
+    fun profile(): HiCall<UserProfile>
+
 }
