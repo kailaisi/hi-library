@@ -31,13 +31,13 @@ open class BizGlobalInterceptor : IInterceptor {
             //判断是否已经登陆了，如果未登录，则拦截
             callback?.onInterrupt(RuntimeException("need login"))
             loginIntercept()
+        } else {
+            callback?.onContinue(postcard)
         }/* else if ((extra and RouterFlag.FLAG_AUTHENTICATION) != 0) {
             showToast("请先认证")
         } else if ((extra and RouterFlag.FLAG_VIP) != 0) {
             showToast("请先开通VIP")
-        }*/ else {
-            callback?.onContinue(postcard)
-        }
+        }*/
     }
 
     /**
@@ -47,12 +47,6 @@ open class BizGlobalInterceptor : IInterceptor {
         Handler(Looper.getMainLooper()).post {
             Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
             ARouter.getInstance().build("/account/login").navigation()
-        }
-    }
-
-    private fun showToast(msg: String) {
-        Handler(Looper.getMainLooper()).post {
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
     }
 }

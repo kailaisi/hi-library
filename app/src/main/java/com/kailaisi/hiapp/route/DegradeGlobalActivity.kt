@@ -20,13 +20,13 @@ import com.kailaisi.hiapp.R
 class DegradeGlobalActivity : AppCompatActivity() {
     @JvmField
     @Autowired
-    var degrade_title: String? = null
+    var degrade_title: String? = ""
     @JvmField
     @Autowired
-    var degrade_des: String? = null
+    var degrade_des: String? = ""
     @JvmField
     @Autowired
-    var degrade_action: String? = null
+    var degrade_action: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

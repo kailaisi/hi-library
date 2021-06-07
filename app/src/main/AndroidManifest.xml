@@ -24,6 +24,7 @@
         <activity android:name=".ui.ProfileDetailActivity" />
         <activity android:name=".ui.registor.RegisterActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ui.VipActivity" />
     </application>
 
 </manifest>

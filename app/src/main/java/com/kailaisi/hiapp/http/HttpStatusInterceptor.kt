@@ -17,7 +17,7 @@ class HttpStatusInterceptor : HiInterceptor {
             when (code) {
                 HiResponse.RC_NEED_LOGIN -> ARouter.getInstance().build("/account/login")
                     .navigation()
-                HiResponse.RC_AUTH_TOKEN_EXPIRED or HiResponse.RC_AUTH_TOKEN_INVALID or HiResponse.RC_USER_FORBID -> {
+                HiResponse.RC_AUTH_TOKEN_EXPIRED , HiResponse.RC_AUTH_TOKEN_INVALID , HiResponse.RC_USER_FORBID -> {
                     val url=res.errorData?.let {
                         it.get("helpUrl")
                     }
