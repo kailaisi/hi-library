@@ -137,8 +137,8 @@ class MethodParser(val baseUrl: String, method: Method) {
 
 
     companion object {
-        fun parse(baseUrl: String, method: Method, array: Array<Any>): MethodParser {
-            return MethodParser(baseUrl, method, array)
+        fun parse(baseUrl: String, method: Method): MethodParser {
+            return MethodParser(baseUrl, method)
         }
     }
 }
