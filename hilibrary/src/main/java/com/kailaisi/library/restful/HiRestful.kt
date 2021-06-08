@@ -1,5 +1,6 @@
 package com.kailaisi.library.restful
 
+import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.ConcurrentHashMap
@@ -15,19 +16,20 @@ open class HiRestful constructor(val baseUrl: String, val callFactory: HiCall.Fa
         return this
     }
 
-    fun <T> create(service: Class<T>):T {
-       return Proxy.newProxyInstance(service.classLoader,
-            arrayOf(service)
-        ) { proxy, method, args ->
-            var get = methodService.get(method)
-            if (get == null) {
-                get = MethodParser(baseUrl, method, args)
-                methodService.put(method, get)
-            }
-            //具体的请求信息
-            val request = get.newRequest()
-            //callFactory.newCall(request)
-            scheduler.newCall(request)
-        } as T
+    fun <T> create(service: Class<T>): T {
+        return Proxy.newProxyInstance(service.classLoader,
+            arrayOf(service), object : InvocationHandler {
+                override fun invoke(proxy: Any, method: Method, args: Array<out Any>?): Any {
+                    var methodParser = methodService.get(method)
+                    if (methodParser == null) {
+                        methodParser = MethodParser(baseUrl, method)
+                        methodService[method] = methodParser
+                    }
+                    //具体的请求信息
+                    val request = methodParser.newRequest(method, args)
+                    //callFactory.newCall(request)
+                    return scheduler.newCall(request)
+                }
+            }) as T
     }
 }

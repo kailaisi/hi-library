@@ -6,7 +6,7 @@ import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
+class MethodParser(val baseUrl: String, method: Method) {
     private var httpMethod: Int? = null
     private var parameters = mutableMapOf<String, String>()
     private var domainUrl: String? = null
@@ -18,8 +18,6 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
     init {
         //进行注解
         parseMethodAnnotation(method)
-        //解析参数
-        parseMethodParameters(method, args)
         //解析返回值
         parseMethodReturnType(method)
     }
@@ -123,7 +121,9 @@ class MethodParser(val baseUrl: String, method: Method, args: Array<Any>) {
         }
     }
 
-    fun newRequest(): HiRequest {
+    fun newRequest(method: Method, args: Array<out Any>?): HiRequest {
+        val arguments=args as Array<Any>??: arrayOf()
+        parseMethodParameters(method,arguments)
         val request = HiRequest()
         request.baseUrl = domainUrl
         request.returnType = returnType

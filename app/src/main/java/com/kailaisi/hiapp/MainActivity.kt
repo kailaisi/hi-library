@@ -1,5 +1,6 @@
 package com.kailaisi.hiapp
 
+import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.gson.JsonObject
@@ -22,15 +23,16 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
         logic = MainActivityLogic(this,
             savedInstanceState)
         HiDataBus.with<String>("stickdata").setStickyData("stickydata from main")
-        ApiFactory.create(AccountApi::class.java).login("imooc","123456").enqueue(object:HiCallback<String>{
-            override fun onSuccess(response: HiResponse<String>) {
+        ApiFactory.create(AccountApi::class.java).login("imooc", "123456")
+            .enqueue(object : HiCallback<String> {
+                override fun onSuccess(response: HiResponse<String>) {
 
-            }
+                }
 
-            override fun onFailed(throwable: Throwable) {
-            }
+                override fun onFailed(throwable: Throwable) {
+                }
 
-        })
+            })
     }
 
     /**
@@ -39,5 +41,13 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         logic.onSaveInstanceState(outState)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        supportFragmentManager.fragments.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }

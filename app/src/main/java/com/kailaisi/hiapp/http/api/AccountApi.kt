@@ -1,5 +1,6 @@
 package com.kailaisi.hiapp.http.api
 
+import com.kailaisi.hiapp.model.CourseNotice
 import com.kailaisi.hiapp.model.UserProfile
 import com.kailaisi.library.restful.HiCall
 import com.kailaisi.library.restful.annotion.Field
@@ -24,5 +25,8 @@ interface AccountApi {
 
     @GET("user/profile")
     fun profile(): HiCall<UserProfile>
+
+    @GET("notice")
+    fun notice(): HiCall<CourseNotice>
 
 }

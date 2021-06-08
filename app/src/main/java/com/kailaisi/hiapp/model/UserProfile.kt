@@ -7,7 +7,7 @@ data class UserProfile(
     val learnMinutes: Int,
     val userName: String,
     val avatar: String,
-    val bannerNoticeList: List<NoticeInfo>,
+    val bannerNoticeList: List<NoticeInfo>?,
 )
 
 data class NoticeInfo(
