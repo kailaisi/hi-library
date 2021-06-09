@@ -48,17 +48,13 @@ class ProfileFragment : HiBaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.notifyTitle.setText(R.string.if_notify)
-        mBinding.notifyTitle.append(ITEM_SPACE_HOLDER + getString(R.string.item_notify))
+        mBinding.notifyTitle.text = getString(R.string.item_notify)
 
-        mBinding.notifyCollection.setText(R.string.if_collection)
-        mBinding.notifyCollection.append(ITEM_SPACE_HOLDER + getString(R.string.item_collection))
+        mBinding.notifyCollection.text = getString(R.string.item_collection)
 
-        mBinding.notifyHistory.setText(R.string.if_history)
-        mBinding.notifyHistory.append(ITEM_SPACE_HOLDER + getString(R.string.item_history))
+        mBinding.notifyHistory.text = getString(R.string.item_history)
 
-        mBinding.notifyLocation.setText(R.string.if_address)
-        mBinding.notifyLocation.append(ITEM_SPACE_HOLDER + getString(R.string.item_location))
+        mBinding.notifyLocation.text = getString(R.string.item_location)
 
         queryCourseNotice()
 

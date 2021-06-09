@@ -16,7 +16,6 @@ public class HiTabTopInfo<Color> {
     }
 
     //底部导航，持有的外部的fragment的类
-    public Class<? extends Fragment> fragment;
     public String name;
     public Bitmap defaultBitmap;
     public Bitmap selectedBitmap;

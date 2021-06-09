@@ -23,7 +23,7 @@ import com.kailaisi.hi_ui.refresh.HiTextView
  * 作者：kailaisi
  * <br></br>创建时间：2021-05-30:17:19
  */
-class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
+open class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
     companion object {
         private val PREFETCH_SIZE: Int = 5
     }

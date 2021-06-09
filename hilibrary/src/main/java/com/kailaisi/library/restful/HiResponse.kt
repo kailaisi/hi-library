@@ -29,4 +29,8 @@ open class HiResponse<T> {
     var data: T? = null//业务数据
     var errorData: Map<String, String>? = null//错误状态下的数据
     var msg: String? = null//错误信息
+
+    fun sucessful(): Boolean {
+        return code == SUCCESS
+    }
 }

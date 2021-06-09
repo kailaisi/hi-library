@@ -8,6 +8,7 @@ object ApiFactory {
 
     init {
         hiRestful.addInterceptor(BizInterceptor())
+            .addInterceptor(LoggerInterceptor())
             .addInterceptor(HttpStatusInterceptor())
     }
 

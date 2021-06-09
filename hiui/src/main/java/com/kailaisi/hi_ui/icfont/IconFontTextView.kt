@@ -17,7 +17,6 @@ class IconFontTextView @JvmOverloads constructor(
     defStyle: Int = 1,
 ) : AppCompatTextView(context, attributeSet, defStyle) {
     init {
-        gravity=Gravity.CENTER
         val createFromAsset = Typeface.createFromAsset(context.assets, "fonts/iconfont.ttf")
         typeface = createFromAsset
     }

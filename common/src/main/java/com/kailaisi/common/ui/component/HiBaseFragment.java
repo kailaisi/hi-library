@@ -25,4 +25,11 @@ public abstract class HiBaseFragment extends Fragment {
     }
 
     protected abstract int getLayoutId();
+
+    public boolean isAlive(){
+        if (isRemoving() || isDetached()||getActivity()==null){
+            return false;
+        }
+        return true;
+    }
 }
