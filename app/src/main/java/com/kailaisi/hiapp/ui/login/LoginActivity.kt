@@ -1,6 +1,7 @@
 package com.kailaisi.hiapp.ui.login
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -11,6 +12,7 @@ import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.AccountApi
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
+import com.kailaisi.library.util.HiStatusBar
 import com.kailaisi.library.util.inflate
 
 @Route(path = "/account/login")
@@ -39,6 +41,7 @@ class LoginActivity : HiBaseActivity() {
                     }
                 })
         }
+        HiStatusBar.setStatusBar(this,true, Color.WHITE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

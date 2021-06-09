@@ -1,9 +1,9 @@
-package com.kailaisi.hiapp
+package com.kailaisi.hiapp.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.gson.JsonObject
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
 import com.kailaisi.hiapp.http.ApiFactory
@@ -12,6 +12,7 @@ import com.kailaisi.hiapp.ui.login.MainActivityLogic
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiDataBus
+import com.kailaisi.library.util.HiStatusBar
 
 @Route(path = "/account/main")
 class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
@@ -20,19 +21,8 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
         super.onCreate(savedInstanceState)
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        logic = MainActivityLogic(this,
-            savedInstanceState)
-        HiDataBus.with<String>("stickdata").setStickyData("stickydata from main")
-        ApiFactory.create(AccountApi::class.java).login("imooc", "123456")
-            .enqueue(object : HiCallback<String> {
-                override fun onSuccess(response: HiResponse<String>) {
-
-                }
-
-                override fun onFailed(throwable: Throwable) {
-                }
-
-            })
+        logic = MainActivityLogic(this, savedInstanceState)
+        HiStatusBar.setStatusBar(this, true)
     }
 
     /**
