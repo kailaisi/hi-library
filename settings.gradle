@@ -1,3 +1,4 @@
+include ':hi_debugtool'
 include ':common'
 include ':hiui'
 include ':hilibrary'
