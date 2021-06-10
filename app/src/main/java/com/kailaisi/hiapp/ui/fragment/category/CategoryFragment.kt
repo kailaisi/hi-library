@@ -33,6 +33,7 @@ class CategoryFragment : HiBaseFragment() {
     private val SPAN_COUNT: Int = 3
     val mBinding: FragmentCategoryBinding by bindView()
     var emptyView: EmptyView? = null
+    val subCategoryCache= mutableMapOf<String,List<Subcategory>>()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_category
@@ -71,8 +72,12 @@ class CategoryFragment : HiBaseFragment() {
                     holder.findViewById<TextView>(R.id.menu_item_text)?.text =
                         tabCategory.categoryName
                 }, onItemClick = { holder, position ->
-                    val tabCategory = data[position]
-                    querySubCategoryList(tabCategory.categoryId)
+                    val key = data[position].categoryId
+                    if (subCategoryCache.containsKey(key)){
+                        onQuerySubCategoryListSuccess(subCategoryCache[key]!!)
+                    }else {
+                        querySubCategoryList(key)
+                    }
                 })
             }
 
@@ -85,9 +90,10 @@ class CategoryFragment : HiBaseFragment() {
             .enqueue(object : HiCallback<List<Subcategory>> {
                 override fun onSuccess(response: HiResponse<List<Subcategory>>) {
                     if (response.sucessful() && response.data != null) {
+                        if (!subCategoryCache.containsKey(id)){
+                            subCategoryCache.put(id,response.data!!)
+                        }
                         onQuerySubCategoryListSuccess(response.data!!)
-                    } else {
-                        showEmptyView()
                     }
                 }
 
