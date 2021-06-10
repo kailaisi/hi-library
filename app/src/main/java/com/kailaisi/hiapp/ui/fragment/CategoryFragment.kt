@@ -190,4 +190,3 @@ class CategoryFragment : HiBaseFragment() {
         emptyView?.visibility = View.VISIBLE
     }
 }
-}
