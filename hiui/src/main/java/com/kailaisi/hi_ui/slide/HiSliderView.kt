@@ -59,8 +59,8 @@ class HiSliderView @JvmOverloads constructor(
     fun bindMenuView(
         layoutRes: Int = MENU_TEIM_LAYOUT_RES_ID,
         itemCount: Int,
-        onBindView: (ViewHolder, Int) -> Unit,
-        onItemClick: ((ViewHolder, Int) -> Unit)? = null,
+        onBindView: (HiViewHolder, Int) -> Unit,
+        onItemClick: ((HiViewHolder, Int) -> Unit)? = null,
     ) {
         menuView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         menuView.adapter = MenuAdapter(layoutRes, itemCount, onBindView, onItemClick)

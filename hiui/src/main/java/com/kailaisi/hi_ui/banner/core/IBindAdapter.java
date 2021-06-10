@@ -6,6 +6,5 @@ package com.kailaisi.hi_ui.banner.core;
  * <br/>创建时间：2021-05-24:21:55
  */
 public interface IBindAdapter {
-
     void onBind(HiBannerAdapter.HiBannerViewHolder holder,HiBannerMo mo,int pos);
 }
