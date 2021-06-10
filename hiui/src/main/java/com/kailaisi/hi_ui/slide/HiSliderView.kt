@@ -3,7 +3,6 @@ package com.kailaisi.hi_ui.slide
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -138,15 +137,15 @@ class HiSliderView @JvmOverloads constructor(
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.HiSliderView)
         val width =
             typedArray.getDimensionPixelOffset(R.styleable.HiSliderView_menuItemWidth,
-                HiDisplayUtils.dip2px(context, 100f))
+                HiDisplayUtils.dip2px(100f))
         val height =
             typedArray.getDimensionPixelOffset(R.styleable.HiSliderView_menuItemHeight,
-                HiDisplayUtils.dip2px(context, 45f))
+                HiDisplayUtils.dip2px(45f))
         val textSize = typedArray.getDimensionPixelSize(R.styleable.HiSliderView_menuItemTextSize,
-            HiDisplayUtils.sp2px(context, 14f))
+            HiDisplayUtils.sp2px(14f))
         val selectTextSize =
             typedArray.getDimensionPixelSize(R.styleable.HiSliderView_menuItemTextSize,
-                HiDisplayUtils.sp2px(context, 14f))
+                HiDisplayUtils.sp2px(14f))
 
         val textColor = typedArray.getColorStateList(R.styleable.HiSliderView_menuItemTextColor)
             ?: generateColorState()

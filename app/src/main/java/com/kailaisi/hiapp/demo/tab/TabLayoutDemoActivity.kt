@@ -54,6 +54,6 @@ class TabLayoutDemoActivity : AppCompatActivity() {
             defaultSelected(home)
         }
         var findTab = layout.findTab(cal)
-        findTab?.resetHeight(HiDisplayUtils.dip2px(this, 66f))
+        findTab?.resetHeight(HiDisplayUtils.dip2px(66f))
     }
 }

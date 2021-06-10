@@ -53,7 +53,7 @@ public abstract class HiOverView extends FrameLayout {
     }
 
     protected void preInit() {
-        mPullRefreshHeight = HiDisplayUtils.dip2px(getContext(), 66);
+        mPullRefreshHeight = HiDisplayUtils.dip2px(66);
         init();
     }
 

@@ -5,15 +5,12 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.kailaisi.hi_ui.R;
 import com.kailaisi.hi_ui.banner.core.HiIndicator;
 import com.kailaisi.library.util.HiDisplayUtils;
 
@@ -40,8 +37,8 @@ public class HiNumberIndicator extends FrameLayout implements HiIndicator<FrameL
     }
 
     private void init() {
-        leftRightPadding = HiDisplayUtils.dip2px(getContext(), 5);
-        topBottomPadding = HiDisplayUtils.dip2px(getContext(), 15);
+        leftRightPadding = HiDisplayUtils.dip2px(5);
+        topBottomPadding = HiDisplayUtils.dip2px(15);
     }
 
     @Override

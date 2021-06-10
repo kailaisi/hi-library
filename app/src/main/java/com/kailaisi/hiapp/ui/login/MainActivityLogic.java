@@ -16,7 +16,7 @@ import com.kailaisi.hi_ui.tab.bottom.HiBottomLayout;
 import com.kailaisi.hi_ui.tab.bottom.HiTabBottomInfo;
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout;
 import com.kailaisi.hiapp.R;
-import com.kailaisi.hiapp.ui.fragment.CategoryFragment;
+import com.kailaisi.hiapp.ui.fragment.category.CategoryFragment;
 import com.kailaisi.hiapp.ui.fragment.FavoriteFragment;
 import com.kailaisi.hiapp.ui.fragment.HomePageFragment;
 import com.kailaisi.hiapp.ui.fragment.ProfileFragment;

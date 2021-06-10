@@ -1,8 +1,7 @@
-package com.kailaisi.hiapp.ui.fragment
+package com.kailaisi.hiapp.ui.fragment.category
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.SparseArray
 import android.util.SparseIntArray
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -100,8 +99,10 @@ class CategoryFragment : HiBaseFragment() {
     }
 
 
-    private val layoutManager = GridLayoutManager(requireContext(), SPAN_COUNT)
+    private val layoutManager = GridLayoutManager(context, SPAN_COUNT)
 
+    private val decoration =
+        CategoryItemDecoration({ postion: Int -> subCategoryList[postion].groupName }, SPAN_COUNT)
     private val subCategoryList = mutableListOf<Subcategory>()
     private val groupSpanSizeOffset = SparseIntArray()
     private val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -145,15 +146,17 @@ class CategoryFragment : HiBaseFragment() {
     private fun onQuerySubCategoryListSuccess(data: List<Subcategory>) {
         if (isAlive) {
             groupSpanSizeOffset.clear()
+            decoration.clear()
             subCategoryList.clear()
             subCategoryList.addAll(data)
             if (layoutManager.spanSizeLookup != spanSizeLookup) {
                 layoutManager.spanSizeLookup = spanSizeLookup
             }
+
             mBinding.slideView.apply {
                 visibility = View.VISIBLE
                 bindContentView(
-                    itemDecoration = null,
+                    itemDecoration = decoration,
                     itemCount = data.size,
                     layoutManager = layoutManager,
                     onBindView = { holder, position ->

@@ -45,7 +45,7 @@ public class HiViewPrinterProvider {
         floatingView.setBackgroundColor(Color.BLACK);
         floatingView.setAlpha(0.8f);
         //距离底部位置s
-        params.bottomMargin = HiDisplayUtils.dip2px(recyclerView.getContext(), 100);
+        params.bottomMargin = HiDisplayUtils.dip2px(100);
         rootView.addView(genFloatingView(), params);
     }
 
@@ -77,7 +77,7 @@ public class HiViewPrinterProvider {
         if (rootView.findViewWithTag(TAG_LOG_VIEW) != null) {
             return;
         }
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(rootView.getContext(), 160));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(160));
         View logView = genLogView();
         params.gravity = Gravity.BOTTOM;
         logView.setTag(TAG_LOG_VIEW);

@@ -16,6 +16,7 @@
 
         <com.kailaisi.hi_ui.icfont.IconFontTextView
             android:id="@+id/iv_back"
+            android:gravity="center"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:text="@string/if_category" />

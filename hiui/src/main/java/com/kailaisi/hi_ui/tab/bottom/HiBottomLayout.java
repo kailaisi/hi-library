@@ -110,7 +110,7 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
         FrameLayout frameLayout = new FrameLayout(getContext());
         frameLayout.setTag(TAG_TAG_BOTTOM);
         int width = HiDisplayUtils.getScreenWidth(getContext()) / infoList.size();
-        int height = HiDisplayUtils.dip2px(getContext(), tabBottomHeight);
+        int height = HiDisplayUtils.dip2px(tabBottomHeight);
         for (int i = 0; i < infoList.size(); i++) {
             HiTabBottomInfo<?> info = infoList.get(i);
             LayoutParams params = new LayoutParams(width, height);
@@ -141,9 +141,9 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
     private void addBottomLine() {
         View view = new View(getContext());
         view.setBackgroundColor(Color.parseColor(bottomLineColor));
-        LayoutParams lineParam = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(getContext(), bottomLineHeight));
+        LayoutParams lineParam = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(bottomLineHeight));
         lineParam.gravity = Gravity.BOTTOM;
-        lineParam.bottomMargin = HiDisplayUtils.dip2px(getContext(), tabBottomHeight - bottomLineHeight);
+        lineParam.bottomMargin = HiDisplayUtils.dip2px(tabBottomHeight - bottomLineHeight);
         addView(view, lineParam);
         view.setAlpha(bottomAlpha);
     }
@@ -157,7 +157,7 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
 
     public void addBackground() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.hi_bottom_layout_bg, null);
-        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(getContext(), tabBottomHeight));
+        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, HiDisplayUtils.dip2px(tabBottomHeight));
         params.gravity = Gravity.BOTTOM;
         addView(view, params);
         view.setAlpha(bottomAlpha);
@@ -179,7 +179,7 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
             }
         }
         if (target != null) {
-            target.setPadding(0, 0, 0, HiDisplayUtils.dip2px(getContext(), tabBottomHeight));
+            target.setPadding(0, 0, 0, HiDisplayUtils.dip2px(tabBottomHeight));
             target.setClipToPadding(false);
         }
     }

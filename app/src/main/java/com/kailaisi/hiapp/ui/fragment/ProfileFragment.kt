@@ -15,7 +15,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
-import com.google.gson.TypeAdapterFactory
 import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.common.ui.view.loadCircle
 import com.kailaisi.common.ui.view.loadCorner
@@ -39,7 +38,6 @@ import com.kailaisi.library.util.bindView
  */
 class ProfileFragment : HiBaseFragment() {
     private val REQUEST_LOGIN=1
-    val ITEM_SPACE_HOLDER = "   "
     private val mBinding: FragmentProfileBinding by bindView()
 
     override fun getLayoutId(): Int {
@@ -126,7 +124,7 @@ class ProfileFragment : HiBaseFragment() {
             setBindAdapter { holder, mo, pos ->
                 if (holder == null || mo == null) return@setBindAdapter
                 val view = holder.findViewById<ImageView>(R.id.iv_image)
-                view.loadCorner(mo.url, HiDisplayUtils.dip2px(context, 10f))
+                view.loadCorner(mo.url, HiDisplayUtils.dip2px(10f))
             }
             visibility = View.VISIBLE
             setOnBannerClickListener { viewHolder, bannerMo, pos ->

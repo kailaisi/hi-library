@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
+import java.util.Objects;
+
 public class HiDisplayUtils {
     // 获取屏幕的宽度
     public static int getScreenWidth(Context context) {
@@ -17,8 +19,8 @@ public class HiDisplayUtils {
         return metrics.heightPixels;
     }
 
-    public static int dip2px(Context context, float value) {
-        return unit2px(context, value, TypedValue.COMPLEX_UNIT_DIP);
+    public static int dip2px(float value) {
+        return unit2px(value, TypedValue.COMPLEX_UNIT_DIP);
     }
 
     public static int px2dip(Context context, float pxValue) {
@@ -27,11 +29,11 @@ public class HiDisplayUtils {
     }
 
 
-    public static int sp2px(Context context, float value) {
-        return unit2px(context, value, TypedValue.COMPLEX_UNIT_SP);
+    public static int sp2px( float value) {
+        return unit2px(value, TypedValue.COMPLEX_UNIT_SP);
     }
-    public static int unit2px(Context context, float value, int unit) {
-        return (int) TypedValue.applyDimension(unit, value, context.getResources().getDisplayMetrics());
+    public static int unit2px( float value, int unit) {
+        return (int) TypedValue.applyDimension(unit, value, Objects.requireNonNull(AppGlobals.INSTANCE.get()).getResources().getDisplayMetrics());
     }
 }
 

@@ -29,8 +29,8 @@ class HiCircleIndicator @JvmOverloads constructor(
     @DrawableRes
     private val pointSelected = R.drawable.shap_point_selected
     private fun init() {
-        leftRightPadding = HiDisplayUtils.dip2px(context, 5f)
-        topBottomPadding = HiDisplayUtils.dip2px(context, 15f)
+        leftRightPadding = HiDisplayUtils.dip2px(5f)
+        topBottomPadding = HiDisplayUtils.dip2px(15f)
     }
 
     override fun get(): FrameLayout {

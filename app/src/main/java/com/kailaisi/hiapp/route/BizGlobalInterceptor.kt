@@ -27,13 +27,14 @@ open class BizGlobalInterceptor : IInterceptor {
     override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
         val extra = postcard!!.extra
         postcard.timeout = 2
-        if (extra and (RouterFlag.FLAG_LOGIN) != 0) {
+        callback?.onContinue(postcard)
+        /*if (extra and (RouterFlag.FLAG_LOGIN) != 0) {
             //判断是否已经登陆了，如果未登录，则拦截
             callback?.onInterrupt(RuntimeException("need login"))
             loginIntercept()
         } else {
             callback?.onContinue(postcard)
-        }/* else if ((extra and RouterFlag.FLAG_AUTHENTICATION) != 0) {
+        }*//* else if ((extra and RouterFlag.FLAG_AUTHENTICATION) != 0) {
             showToast("请先认证")
         } else if ((extra and RouterFlag.FLAG_VIP) != 0) {
             showToast("请先开通VIP")

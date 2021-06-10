@@ -44,8 +44,8 @@ public class HiCircleIndicator_java extends FrameLayout implements HiIndicator<F
     }
 
     private void init() {
-        leftRightPadding = HiDisplayUtils.dip2px(getContext(), 5);
-        topBottomPadding = HiDisplayUtils.dip2px(getContext(), 15);
+        leftRightPadding = HiDisplayUtils.dip2px( 5);
+        topBottomPadding = HiDisplayUtils.dip2px(15);
     }
 
     @Override
