@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -21,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BUILD_TIME", "\"" + buildTime() + "\"")
+        }
+        debug {
+            buildConfigField("String", "BUILD_TIME", "\"" + buildTime() + "\"")
         }
     }
     compileOptions {
@@ -32,13 +37,18 @@ android {
     }
 }
 
+def buildTime() {
+    return new Date().format("EE HH:mm:ss", TimeZone.getTimeZone("GMT+08:00"))
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':common')
+    implementation project(path: ':hilibrary')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 }

@@ -2,6 +2,8 @@ package com.kailaisi.library.log;
 
 import androidx.annotation.NonNull;
 
+import com.kailaisi.library.BuildConfig;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
