@@ -10,6 +10,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_sercurity_config"
         android:theme="@style/Theme.Hilibrary"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.goods.GoodsListActivity"></activity>
