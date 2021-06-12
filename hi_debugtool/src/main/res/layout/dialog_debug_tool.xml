@@ -9,6 +9,7 @@
     tools:context=".DebugToolDialogFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
