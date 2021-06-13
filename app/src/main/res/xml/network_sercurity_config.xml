@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
     <base-config cleartextTrafficPermitted="true"/>
+    <!--只有debug模式的时候才信任当前的文件-->
     <debug-overrides><!---->
         <trust-anchors>
             <certificates src="@raw/charles"/>

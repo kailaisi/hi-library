@@ -1,8 +1,6 @@
 package com.tcsl.hi_debugtool
 
 import android.content.Intent
-import android.os.Process.killProcess
-import android.os.Process.myPid
 import com.kailaisi.library.util.AppGlobals
 import com.kailaisi.library.util.SPUtil
 
@@ -30,11 +28,12 @@ class DebugTools {
         SPUtil.putBoolean("degrade_http", true)
         val context = AppGlobals.get()?.applicationContext ?: return
         val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-        intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent?.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
         /*重新启动应用*/
         context.startActivity(intent)
         /*杀掉当前进程*/
-        killProcess(myPid())
+        android.os.Process.killProcess(android.os.Process.myPid());
         return
     }
 }

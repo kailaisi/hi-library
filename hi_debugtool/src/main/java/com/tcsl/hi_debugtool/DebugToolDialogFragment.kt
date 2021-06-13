@@ -25,7 +25,7 @@ class DebugToolDialogFragment : DialogFragment() {
         val parent = dialog?.window?.findViewById(android.R.id.content) ?: container
 
         containerView = inflater.inflate(R.layout.dialog_debug_tool, parent, false)
-        dialog?.window?.setLayout((HiDisplayUtils.getScreenWidth(view?.context) * 0.7f).toInt(),
+        dialog?.window?.setLayout((HiDisplayUtils.getScreenWidth() * 0.7f).toInt(),
             WindowManager.LayoutParams.WRAP_CONTENT)
 
         dialog?.window?.setBackgroundDrawableResource(R.drawable.shape_hi_debug_tool)

@@ -109,7 +109,7 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
         //添加tab。这里不使用LL,因为有的会单独设置高度，可能会导致LL扩大。
         FrameLayout frameLayout = new FrameLayout(getContext());
         frameLayout.setTag(TAG_TAG_BOTTOM);
-        int width = HiDisplayUtils.getScreenWidth(getContext()) / infoList.size();
+        int width = HiDisplayUtils.getScreenWidth() / infoList.size();
         int height = HiDisplayUtils.dip2px(tabBottomHeight);
         for (int i = 0; i < infoList.size(); i++) {
             HiTabBottomInfo<?> info = infoList.get(i);

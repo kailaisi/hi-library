@@ -134,7 +134,7 @@ public class HiTopLayout extends HorizontalScrollView implements IHiTabLayout<Hi
         }
         int scrollWidth=0;
         //点击的tab中心点在屏幕的左侧还是右侧
-        if ((loc[0] + tabwidth / 2) > HiDisplayUtils.getScreenWidth(getContext()) / 2) {
+        if ((loc[0] + tabwidth / 2) > HiDisplayUtils.getScreenWidth() / 2) {
             //显示右侧两个按钮的滑动距离
             scrollWidth = rangeScrollWidth(index, 2);
         } else {
