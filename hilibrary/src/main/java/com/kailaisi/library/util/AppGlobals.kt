@@ -6,7 +6,7 @@ import android.app.Application
  * APP获取类，通过反射获取对应的类信息
  */
 object AppGlobals {
-    var application: Application? = null
+    private var application: Application? = null
 
     fun get(): Application? {
         if (application == null) {
