@@ -31,7 +31,7 @@ open class HiResponse<T> {
     var errorData: Map<String, String>? = null//错误状态下的数据
     var msg: String? = null//错误信息
 
-    fun sucessful(): Boolean {
+    fun successful(): Boolean {
         return code == SUCCESS || code== CACHE_SUCCESS
     }
 }

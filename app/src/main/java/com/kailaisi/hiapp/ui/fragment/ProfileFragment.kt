@@ -1,6 +1,5 @@
 package com.kailaisi.hiapp.ui.fragment
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
@@ -15,20 +14,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.launcher.ARouter
 import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.common.ui.view.loadCircle
 import com.kailaisi.common.ui.view.loadCorner
 import com.kailaisi.hi_ui.banner.core.HiBannerMo
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentProfileBinding
-import com.kailaisi.hiapp.http.ApiFactory
-import com.kailaisi.hiapp.http.api.AccountApi
 import com.kailaisi.hiapp.model.NoticeInfo
 import com.kailaisi.hiapp.model.UserProfile
 import com.kailaisi.hiapp.ui.account.AccountManager
-import com.kailaisi.library.restful.HiCallback
-import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.bindView
 

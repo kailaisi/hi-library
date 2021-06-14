@@ -100,7 +100,7 @@ object AccountManager {
             .enqueue(object : HiCallback<UserProfile> {
                 override fun onSuccess(response: HiResponse<UserProfile>) {
                     userProfile = response.data
-                    if (response.sucessful()) {
+                    if (response.successful()) {
                         /*缓存用户信息信息*/
                         HiExecutor.execute(runnable = {
                             HiStorage.saveCache("user_profile", userProfile)

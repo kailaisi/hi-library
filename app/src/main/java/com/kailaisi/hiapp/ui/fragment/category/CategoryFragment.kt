@@ -48,7 +48,7 @@ class CategoryFragment : HiBaseFragment() {
         ApiFactory.create(CategoryApi::class.java).queryCategoryList()
             .enqueue(object : HiCallback<List<TabCategory>> {
                 override fun onSuccess(response: HiResponse<List<TabCategory>>) {
-                    if (response.sucessful() && response.data != null) {
+                    if (response.successful() && response.data != null) {
                         onQueryCategoryListSuccess(response.data!!)
                     } else {
                         showEmptyView()
@@ -89,7 +89,7 @@ class CategoryFragment : HiBaseFragment() {
         ApiFactory.create(CategoryApi::class.java).querySubCategoryList(id)
             .enqueue(object : HiCallback<List<Subcategory>> {
                 override fun onSuccess(response: HiResponse<List<Subcategory>>) {
-                    if (response.sucessful() && response.data != null) {
+                    if (response.successful() && response.data != null) {
                         if (!subCategoryCache.containsKey(id)){
                             subCategoryCache.put(id,response.data!!)
                         }

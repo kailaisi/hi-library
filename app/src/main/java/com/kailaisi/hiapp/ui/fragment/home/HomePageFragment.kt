@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.ui.fragment
+package com.kailaisi.hiapp.ui.fragment.home
 
 import android.os.Bundle
 import android.util.SparseArray
@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.kailaisi.common.ui.component.HiBaseFragment
@@ -17,6 +18,7 @@ import com.kailaisi.hiapp.databinding.FragmentHomeBinding
 import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.HomeApi
 import com.kailaisi.hiapp.model.TabCategory
+import com.kailaisi.hiapp.ui.fragment.HomeTabFragment
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.bindView
@@ -30,32 +32,22 @@ import com.kailaisi.library.util.bindView
 class HomePageFragment : HiBaseFragment() {
     private var selectTabIndex: Int = 0
     val mBinding by bindView<FragmentHomeBinding>()
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        queryTabList()
+        val viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
+        viewModel.queryTabList().observe(viewLifecycleOwner) {
+            it?.let { updateUI(it) }
+        }
     }
 
-    private fun queryTabList() {
-        ApiFactory.create(HomeApi::class.java).queryTabList()
-            .enqueue(object : HiCallback<List<TabCategory>> {
-                override fun onSuccess(response: HiResponse<List<TabCategory>>) {
-                    val data = response.data
-                    if (response.sucessful() && data != null) {
-                        updateUI(data)
-                    }
-                }
 
-                override fun onFailed(throwable: Throwable) {
-                }
-
-            })
-    }
-
-    private val onTabSelectedListener = IHiTabLayout.OnTabSelectedListener<HiTabTopInfo<*>> { index, _, _ ->
+    private val onTabSelectedListener =
+        IHiTabLayout.OnTabSelectedListener<HiTabTopInfo<*>> { index, _, _ ->
             if (mBinding.viewpager.currentItem != index) {
                 mBinding.viewpager.setCurrentItem(index, false)
             }

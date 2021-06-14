@@ -34,7 +34,7 @@ class LoginActivity : HiBaseActivity() {
             ApiFactory.create(AccountApi::class.java).login(userName, pwd)
                 .enqueue(object : HiCallback<String> {
                     override fun onSuccess(response: HiResponse<String>) {
-                        if (response.sucessful()) {
+                        if (response.successful()) {
                             AccountManager.loginSuccess(response.data!!)
                             setResult(Activity.RESULT_OK, intent)
                             finish()
