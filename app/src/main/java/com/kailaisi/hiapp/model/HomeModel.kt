@@ -11,3 +11,7 @@ data class Subcategory(
     val subcategoryName: String,
     val groupName: String,
 ): Serializable
+
+class HomeModel {
+
+}

@@ -10,7 +10,6 @@ import com.kailaisi.library.util.HiStatusBar
 class RegisterActivity : BaseBindingActivity<ActivityRegisterBinding>() {
     override fun initView() {
         HiStatusBar.setStatusBar(this,true, Color.WHITE)
-
     }
 
     override fun getBinding(): ActivityRegisterBinding {

@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.HomeApi
-import com.kailaisi.hiapp.http.api.HomeModel
+import com.kailaisi.hiapp.model.HomeModel
 import com.kailaisi.hiapp.model.TabCategory
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse

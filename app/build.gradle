@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
     id 'com.alibaba.arouter'
 }
 
@@ -23,7 +24,9 @@ android {
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    androidExtensions {
+        experimental = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -40,6 +43,7 @@ android {
     viewBinding{
         enabled=true
     }
+
 }
 
 dependencies {
