@@ -5,7 +5,7 @@ import com.kailaisi.library.restful.HiInterceptor
 
 /**
  * 描述：日志拦截器
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-06-06:13:44
  */
 open class LoggerInterceptor : HiInterceptor {

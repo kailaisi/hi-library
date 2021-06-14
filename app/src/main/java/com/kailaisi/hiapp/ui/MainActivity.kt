@@ -1,7 +1,6 @@
 package com.kailaisi.hiapp.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
@@ -9,12 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.BuildConfig
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
-import com.kailaisi.hiapp.http.ApiFactory
-import com.kailaisi.hiapp.http.api.AccountApi
 import com.kailaisi.hiapp.ui.login.MainActivityLogic
-import com.kailaisi.library.restful.HiCallback
-import com.kailaisi.library.restful.HiResponse
-import com.kailaisi.library.util.HiDataBus
 import com.kailaisi.library.util.HiStatusBar
 
 @Route(path = "/account/main")
@@ -38,11 +32,11 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
 
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode==KeyEvent.KEYCODE_VOLUME_DOWN){
-            if (BuildConfig.DEBUG){
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            if (BuildConfig.DEBUG) {
                 val clazz = Class.forName("com.tcsl.hi_debugtool.DebugToolDialogFragment")
                 val target = clazz.getConstructor().newInstance() as DialogFragment
-                target.show(supportFragmentManager,"DebugToolDialogFragment")
+                target.show(supportFragmentManager, "DebugToolDialogFragment")
             }
         }
         return super.onKeyDown(keyCode, event)

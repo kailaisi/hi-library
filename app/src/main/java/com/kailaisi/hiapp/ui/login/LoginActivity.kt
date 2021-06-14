@@ -1,5 +1,6 @@
 package com.kailaisi.hiapp.ui.login
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -10,6 +11,7 @@ import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hiapp.databinding.ActivityLoginBinding
 import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.AccountApi
+import com.kailaisi.hiapp.ui.account.AccountManager
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiStatusBar
@@ -24,7 +26,7 @@ class LoginActivity : HiBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         mBinding.tvRegister.setOnClickListener {
-            ARouter.getInstance().build("/account/register").navigation(this,REQUEST_CODE_REGISTER)
+            ARouter.getInstance().build("/account/register").navigation(this, REQUEST_CODE_REGISTER)
         }
         mBinding.btnLogin.setOnClickListener {
             val userName = mBinding.userName.editText.text.toString()
@@ -32,7 +34,13 @@ class LoginActivity : HiBaseActivity() {
             ApiFactory.create(AccountApi::class.java).login(userName, pwd)
                 .enqueue(object : HiCallback<String> {
                     override fun onSuccess(response: HiResponse<String>) {
-                        ARouter.getInstance().build("/account/main").navigation()
+                        if (response.sucessful()) {
+                            AccountManager.loginSuccess(response.data!!)
+                            setResult(Activity.RESULT_OK, intent)
+                            finish()
+                        } else {
+                            Toast.makeText(this@LoginActivity, "登录失败", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     override fun onFailed(throwable: Throwable) {
@@ -41,7 +49,7 @@ class LoginActivity : HiBaseActivity() {
                     }
                 })
         }
-        HiStatusBar.setStatusBar(this,true, Color.WHITE)
+        HiStatusBar.setStatusBar(this, true, Color.WHITE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

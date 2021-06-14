@@ -27,4 +27,5 @@
     <string name="profile_tab_item_history">\n历史浏览</string>
     <string name="profile_tab_item_learn">\n学习时长</string>
     <string name="title_category">分类</string>
+    <string name="fetch_user_profile_failed">获取用户信息失败</string>
 </resources>

@@ -2,7 +2,7 @@ package com.kailaisi.library.restful
 
 /**
  * 描述：响应报文
- * 作者：wujinxiang
+ * 作者：kailaisi
  * 创建时间：2021/6/1 10:30 AM
  */
 open class HiResponse<T> {

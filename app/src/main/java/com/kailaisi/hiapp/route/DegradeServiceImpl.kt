@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 
 /**
  * 描述：全局的降级服务，当路由的时候，如果目标不存在，重定向到统一错误页
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-06-06:14:02
  */
 @Route(path = "/degrade/global/service")

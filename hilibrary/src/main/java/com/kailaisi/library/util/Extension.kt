@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty
 
 /**
  * 描述：
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-06-03:9:55
  */
 inline fun <reified VB : ViewBinding> Activity.inflate() = lazy {

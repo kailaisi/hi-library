@@ -65,13 +65,13 @@ object HiExecutor {
     }
 
     fun execute(@IntRange(from = 0, to = 10) priority: Int=0, runnable: Runnable) {
-        PriorityRunnable(priority, runnable)
-        hiExecutor.execute(runnable)
+        val priorityRunnable = PriorityRunnable(priority, runnable)
+        hiExecutor.execute(priorityRunnable)
     }
 
     fun execute(@IntRange(from = 0, to = 10) priority: Int=0, runnable: Callable<*>) {
-        PriorityRunnable(priority, runnable)
-        hiExecutor.execute(runnable)
+        val priorityRunnable = PriorityRunnable(priority, runnable)
+        hiExecutor.execute(priorityRunnable)
     }
 
     class PriorityRunnable(val priority: Int, val runnable: Runnable) : Runnable,

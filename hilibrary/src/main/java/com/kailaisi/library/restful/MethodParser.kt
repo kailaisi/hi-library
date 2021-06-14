@@ -8,7 +8,7 @@ import java.lang.reflect.Type
 
 class MethodParser(val baseUrl: String, method: Method) {
 
-    private var cacheStrategy: Int? = CacheStrategy.NET_ONLY
+    private var cacheStrategy: Int = CacheStrategy.NET_ONLY
     private var httpMethod: Int? = null
     private var parameters = mutableMapOf<String, String>()
     private var domainUrl: String? = null

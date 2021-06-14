@@ -14,6 +14,7 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.common.ui.view.loadCircle
@@ -25,6 +26,7 @@ import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.AccountApi
 import com.kailaisi.hiapp.model.NoticeInfo
 import com.kailaisi.hiapp.model.UserProfile
+import com.kailaisi.hiapp.ui.account.AccountManager
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiDisplayUtils
@@ -37,7 +39,7 @@ import com.kailaisi.library.util.bindView
  * <br></br>创建时间：2021-05-15:17:50
  */
 class ProfileFragment : HiBaseFragment() {
-    private val REQUEST_LOGIN=1
+    private val REQUEST_LOGIN = 1
     private val mBinding: FragmentProfileBinding by bindView()
 
     override fun getLayoutId(): Int {
@@ -63,22 +65,13 @@ class ProfileFragment : HiBaseFragment() {
     }
 
     private fun queryUserDetail() {
-        ApiFactory.create(AccountApi::class.java).profile()
-            .enqueue(object : HiCallback<UserProfile> {
-                override fun onSuccess(response: HiResponse<UserProfile>) {
-                    val data = response.data
-                    if (response.code == HiResponse.SUCCESS && response.data != null) {
-                        updateUI(data!!)
-                    } else {
-                        showToast(response.msg)
-                    }
-                }
-
-                override fun onFailed(throwable: Throwable) {
-                    showToast(throwable.message)
-                }
-
-            })
+        AccountManager.getUserProfile(this, Observer {
+            if (it != null) {
+                updateUI(it)
+            } else {
+                showToast(getString(R.string.fetch_user_profile_failed))
+            }
+        }, false)
     }
 
     private fun showToast(message: String?) {
@@ -99,15 +92,15 @@ class ProfileFragment : HiBaseFragment() {
         mBinding.tabItemLearn.text =
             spannableItem(data.learnMinutes, getString(R.string.profile_tab_item_history))
 
-        if (data.isLogin){
+        if (data.isLogin) {
             mBinding.ivUser.loadCircle(data.avatar)
-        }else{
+        } else {
             mBinding.ivUser.setImageResource(R.mipmap.ic_launcher)
             mBinding.ivUser.setOnClickListener {
-                ARouter.getInstance().build("/account/login").navigation(activity,REQUEST_LOGIN)
-
+                AccountManager.login(context) {
+                    queryUserDetail()
+                }
             }
-
         }
         updateBanner(data.bannerNoticeList)
     }
@@ -146,12 +139,5 @@ class ProfileFragment : HiBaseFragment() {
         ss.setSpan(StyleSpan(Typeface.BOLD), 0, ss.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         ssb.append(ss).append(bottom)
         return ssb
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode==REQUEST_LOGIN && resultCode==Activity.RESULT_OK && data!=null){
-            queryUserDetail()
-        }
     }
 }

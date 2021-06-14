@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream
 
 /**
  * 描述：高速缓存类，对外暴漏的类
- * <p/>作者：wu
+ * <p/>作者：kailaisi
  * <br/>创建时间：2021-06-13:21:59
  */
 object HiStorage {
