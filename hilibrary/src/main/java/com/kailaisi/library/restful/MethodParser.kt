@@ -7,6 +7,8 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 class MethodParser(val baseUrl: String, method: Method) {
+
+    private var cacheStrategy: Int? = CacheStrategy.NET_ONLY
     private var httpMethod: Int? = null
     private var parameters = mutableMapOf<String, String>()
     private var domainUrl: String? = null
@@ -64,6 +66,8 @@ class MethodParser(val baseUrl: String, method: Method) {
                 if (replaceName != null && replacement != null) {
                     relativeUrl = relativeUrl.replace("{$replaceName}", replacement)
                 }
+            } else if (annotation is CacheStrategy) {
+                cacheStrategy = value as Int
             } else {
                 throw  IllegalArgumentException("cannot handle method annotation ${annotation.javaClass.name}")
             }
@@ -108,6 +112,8 @@ class MethodParser(val baseUrl: String, method: Method) {
                     val value = head.substring(indexOf + 1).trim()
                     heads[key] = value
                 }
+            } else if (annotation is CacheStrategy) {
+                cacheStrategy = annotation.value
             } else {
                 throw  IllegalArgumentException("cannot handle method annotation ${annotation.javaClass.name}")
             }
@@ -122,16 +128,17 @@ class MethodParser(val baseUrl: String, method: Method) {
     }
 
     fun newRequest(method: Method, args: Array<out Any>?): HiRequest {
-        val arguments=args as Array<Any>??: arrayOf()
-        parseMethodParameters(method,arguments)
+        val arguments = args as Array<Any>? ?: arrayOf()
+        parseMethodParameters(method, arguments)
         val request = HiRequest()
         request.baseUrl = domainUrl
         request.returnType = returnType
-        request.relativeUrl=relativeUrl
+        request.relativeUrl = relativeUrl
         request.headers = heads
         request.httpMethod = httpMethod
         request.parameters = parameters
         request.formPost = formPost
+        request.cacheStrategy=cacheStrategy
         return request
     }
 

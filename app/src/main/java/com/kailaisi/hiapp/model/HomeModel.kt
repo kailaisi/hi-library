@@ -1,6 +1,8 @@
 package com.kailaisi.hiapp.model
 
-data class TabCategory(val categoryId: String, val categoryName: String, val goodsCount: String)
+import java.io.Serializable
+
+data class TabCategory(val categoryId: String, val categoryName: String, val goodsCount: String): Serializable
 
 
 data class Subcategory(
@@ -8,4 +10,4 @@ data class Subcategory(
     val subcategoryIcon: String,
     val subcategoryName: String,
     val groupName: String,
-)
+): Serializable

@@ -7,6 +7,7 @@ package com.kailaisi.library.restful
  */
 open class HiResponse<T> {
     companion object {
+        val CACHE_SUCCESS: Int=304
         val SUCCESS = 0
         val RC_HAS_ERROR = 5000
         val RC_ACCOUNT_INVALID = 5001
@@ -31,6 +32,6 @@ open class HiResponse<T> {
     var msg: String? = null//错误信息
 
     fun sucessful(): Boolean {
-        return code == SUCCESS
+        return code == SUCCESS || code== CACHE_SUCCESS
     }
 }

@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream
  * <p/>作者：wu
  * <br/>创建时间：2021-06-13:21:59
  */
-class HiStorage {
+object HiStorage {
     fun <T> saveCache(key: String, body: T) {
         val cache = Cache()
         cache.key = key

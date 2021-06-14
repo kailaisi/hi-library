@@ -1,3 +1,5 @@
 package com.kailaisi.hiapp.model
 
-data class CourseNotice(val total:Int,val list: List<NoticeInfo>?)
+import java.io.Serializable
+
+data class CourseNotice(val total:Int,val list: List<NoticeInfo>?):Serializable

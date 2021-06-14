@@ -1,5 +1,7 @@
 package com.kailaisi.hiapp.model
 
+import java.io.Serializable
+
 data class UserProfile(
     val isLogin: Boolean,
     val favoriteCount: Int,
@@ -8,7 +10,7 @@ data class UserProfile(
     val userName: String,
     val avatar: String,
     val bannerNoticeList: List<NoticeInfo>?,
-)
+) : Serializable
 
 data class NoticeInfo(
     val id: String,
@@ -19,4 +21,4 @@ data class NoticeInfo(
     val url: String,
     val cover: String,
     val createTime: String,
-)
+) : Serializable
