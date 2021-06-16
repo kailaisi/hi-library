@@ -11,12 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
  * 作者：kailaisi
  * <br></br>创建时间：2021-05-27:21:45
  */
-abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA) {
+abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>() {
     private lateinit var adapter: HiAdapter
-    var mData: DATA? = null
 
     init {
-        this.mData = data
     }
 
     /**
