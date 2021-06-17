@@ -12,19 +12,20 @@ import com.kailaisi.common.HiRoute
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.common.ui.view.EmptyView
 import com.kailaisi.hi_ui.date_item.HiAdapter
+import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.ActivityDetailBinding
-import com.kailaisi.hiapp.databinding.ActivityGoodsListBinding
-import com.kailaisi.hiapp.databinding.ActivityProfileDetailBinding
 import com.kailaisi.hiapp.model.DetailModel
 import com.kailaisi.hiapp.model.GoodsModel
+import com.kailaisi.hiapp.model.selectPrice
 import com.kailaisi.library.util.HiStatusBar
 import com.kailaisi.library.util.inflate
 
 @Route(path = "/detail/main")
 class DetailActivity : HiBaseActivity() {
     private var emptyView: EmptyView? = null
-    lateinit var viewModel:DetailViewModel
+    lateinit var viewModel: DetailViewModel
+
     @JvmField
     @Autowired
     var goodsId: String? = null
@@ -40,26 +41,53 @@ class DetailActivity : HiBaseActivity() {
         assert(goodsId.isNullOrBlank()) { "goodsId must be not null" }
         setContentView(mBinding.root)
         initView()
+        preBindData()
         viewModel = DetailViewModel.get(goodsId, this)
         viewModel.queryDetailData().observe(this, Observer {
-            if (it==null){
+            if (it == null) {
                 showEmptyView()
-            }else{
+            } else {
                 bindData(it)
             }
-
         })
     }
 
-    private fun bindData(it: DetailModel) {
+    private fun preBindData() {
+        goodsModel?.also {
+            val hiAdapter = mBinding.rvItem.adapter as HiAdapter
+            hiAdapter.addItemAt(0,HeaderItem(it.sliderImages,
+                selectPrice(it.groupPrice, it.marketPrice),
+                it.completedNumText,
+                it.goodsName),false)
+        }
+
+    }
+
+    private fun bindData(detailModel: DetailModel) {
+        mBinding.rvItem.visibility = View.VISIBLE
+        emptyView?.visibility = View.GONE
+        val hiAdapter = mBinding.rvItem.adapter as HiAdapter
+        val dataItems = mutableListOf<HiDataItem<*, *>>()
+        //头部item
+        dataItems.add(HeaderItem(detailModel.sliderImages,
+            selectPrice(detailModel.groupPrice, detailModel.marketPrice),
+            detailModel.completedNumText,
+            detailModel.goodsName))
+        //评论item
+        //店铺
+        //商品描述
+        //图库
+        //相似商品
+        hiAdapter.clearItems()
+        hiAdapter.addItems(dataItems, true)
     }
 
     private fun showEmptyView() {
-        if (emptyView==null){
-            emptyView=EmptyView(this).apply {
+        if (emptyView == null) {
+            emptyView = EmptyView(this).apply {
                 setIcon(R.string.if_empty3)
                 setDesc(getString(R.string.list_empty_desc))
-                layoutParams=ConstraintLayout.LayoutParams(-1,-1)
+                layoutParams = ConstraintLayout.LayoutParams(-1, -1)
                 setBackgroundColor(Color.WHITE)
                 setButton(getString(R.string.list_empty_action), View.OnClickListener {
                     viewModel.queryDetailData()
@@ -67,8 +95,8 @@ class DetailActivity : HiBaseActivity() {
                 mBinding.root.addView(emptyView)
             }
         }
-        mBinding.rvItem.visibility=View.GONE
-        emptyView?.visibility=View.VISIBLE
+        mBinding.rvItem.visibility = View.GONE
+        emptyView?.visibility = View.VISIBLE
     }
 
     private fun initView() {

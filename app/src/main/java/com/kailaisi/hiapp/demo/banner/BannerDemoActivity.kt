@@ -31,7 +31,7 @@ class BannerDemoActivity : BaseBindingActivity<ActivityBannerDemoBinding>() {
             setAutoPlay(auto)
             setIntervalTime(5000)
             setScrollDuration(3000)
-            setHaIndicator(
+            setHiIndicator(
                 HiNumberIndicator(
                     context
                 )

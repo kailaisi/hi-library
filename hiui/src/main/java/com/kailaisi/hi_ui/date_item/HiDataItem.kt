@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
  * 作者：kailaisi
  * <br></br>创建时间：2021-05-27:21:45
  */
-abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>() {
+abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) {
     private lateinit var adapter: HiAdapter
+    var mData: DATA? = null
 
     init {
+        this.mData = data
     }
+
 
     /**
      * 进行数据绑定
      */
-    abstract fun onBindData(holder: RecyclerView.ViewHolder, position: Int)
+    abstract fun onBindData(holder:VH, position: Int)
 
     /**
      * 返回Item的对应的布局资源

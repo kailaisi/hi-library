@@ -59,8 +59,8 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
     }
 
     @Override
-    public void setHaIndicator(HiIndicator<?> haIndicator) {
-        this.mHiIndicator = haIndicator;
+    public void setHiIndicator(HiIndicator<?> hiIndicator) {
+        this.mHiIndicator = hiIndicator;
     }
 
     @Override

@@ -62,8 +62,8 @@ public class HiBanner extends FrameLayout implements IHiBanner {
     }
 
     @Override
-    public void setHaIndicator(HiIndicator<?> haIndicator) {
-        delegate.setHaIndicator(haIndicator);
+    public void setHiIndicator(HiIndicator<?> hiIndicator) {
+        delegate.setHiIndicator(hiIndicator);
     }
 
     @Override
