@@ -15,7 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import java.security.MessageDigest
 
-fun ImageView.load(url: String) {
+fun ImageView.load(url: String?) {
     Glide.with(this).load(url).into(this)
 }
 

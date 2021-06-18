@@ -18,9 +18,9 @@ interface HomeApi {
 
     @GET("home/{categoryId}")
     fun queryTabCategoryList(
-        @CacheStrategy cacheStrategy: Int,
         @Path("categoryId") categoryId: String,
-        @Field("pageIndex") pageIndex: Int,
-        @Field("pageSize") pageSize: Int,
+        @CacheStrategy cacheStrategy: Int=CacheStrategy.NET_ONLY,
+        @Field("pageIndex") pageIndex: Int=0,
+        @Field("pageSize") pageSize: Int=20,
     ): HiCall<HomeModel>
 }

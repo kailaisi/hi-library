@@ -259,7 +259,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         return dataSets[position] as HiDataItem<*, ViewHolder>
     }
 
-    private fun getAttachRecyclerView(): RecyclerView? {
+    fun getAttachRecyclerView(): RecyclerView? {
         return recyclerViewRef?.get()
     }
 

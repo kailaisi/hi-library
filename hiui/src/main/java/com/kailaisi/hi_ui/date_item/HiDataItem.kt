@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
  * <br></br>创建时间：2021-05-27:21:45
  */
 abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) {
-    private lateinit var adapter: HiAdapter
+    protected var hiAdapter: HiAdapter?=null
     var mData: DATA? = null
 
     init {
@@ -40,21 +40,21 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) 
     }
 
     fun setAdapter(adapter: HiAdapter) {
-        this.adapter = adapter
+        this.hiAdapter = adapter
     }
 
     /**
      * 刷新列表
      */
     fun refreshItem() {
-        adapter.refreshItem(this)
+        hiAdapter?.refreshItem(this)
     }
 
     /**
      * 移除
      */
     fun removeItem() {
-        adapter.remove(this)
+        hiAdapter?.remove(this)
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) 
         return 0
     }
 
-    fun onViewAttachedToWindow(holder: VH) {
+    open fun onViewAttachedToWindow(holder: VH) {
     }
 
     fun onViewDetachedFromWindow(holder: VH) {

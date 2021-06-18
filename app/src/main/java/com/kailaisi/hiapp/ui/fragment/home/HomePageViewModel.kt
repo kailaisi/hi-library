@@ -57,7 +57,7 @@ class HomePageViewModel(private val savedState: SavedStateHandle) : ViewModel() 
             return liveData
         }
         ApiFactory.create(HomeApi::class.java)
-            .queryTabCategoryList(cacheStrategy, categoryId!!, pageIndex, 10)
+            .queryTabCategoryList( categoryId!!,cacheStrategy, pageIndex, 10)
             .enqueue(object : HiCallback<HomeModel> {
                 override fun onSuccess(response: HiResponse<HomeModel>) {
                     val data = response.data;

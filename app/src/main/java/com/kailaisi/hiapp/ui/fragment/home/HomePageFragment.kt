@@ -15,12 +15,7 @@ import com.kailaisi.hi_ui.tab.common.IHiTabLayout
 import com.kailaisi.hi_ui.tab.top.HiTabTopInfo
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentHomeBinding
-import com.kailaisi.hiapp.http.ApiFactory
-import com.kailaisi.hiapp.http.api.HomeApi
 import com.kailaisi.hiapp.model.TabCategory
-import com.kailaisi.hiapp.ui.fragment.HomeTabFragment
-import com.kailaisi.library.restful.HiCallback
-import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.bindView
 
 /**
