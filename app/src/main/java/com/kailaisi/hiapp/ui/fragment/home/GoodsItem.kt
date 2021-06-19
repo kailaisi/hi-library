@@ -83,7 +83,7 @@ open class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean = false) :
             val bundle = Bundle()
             bundle.putString("goodsId", goodsModel.goodsId)
             bundle.putParcelable("goodsModel", goodsModel)
-            HiRoute.startActivity(context, bundle, "/detail/main")
+            HiRoute.startActivity(context, bundle, HiRoute.Destination.GOODS_DETAIL.path)
         }
     }
 

@@ -19,6 +19,10 @@ object HiRoute {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         AppGlobals.get()?.startActivity(intent)
     }
+    enum class Destination(val desc:String,val path:String){
+        GOODS_LIST("商品列表","/goods/list"),
+        GOODS_DETAIL("商品列表","/detail/main"),
+    }
 
     fun startActivity(
         context: Context?,

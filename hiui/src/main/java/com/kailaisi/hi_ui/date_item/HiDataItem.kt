@@ -2,7 +2,6 @@ package com.kailaisi.hi_ui.date_item
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 /**
