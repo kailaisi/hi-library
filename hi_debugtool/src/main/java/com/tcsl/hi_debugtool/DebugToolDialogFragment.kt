@@ -44,7 +44,7 @@ class DebugToolDialogFragment : DialogFragment() {
             val target = clazz.getConstructor().newInstance()
             val declaredMethods = target.javaClass.declaredMethods
             for (method in declaredMethods) {
-                var title = ""
+                var title: String
                 var desc = ""
                 var enable = false
                 val annotation = method.getAnnotation(HiDebug::class.java)
@@ -81,7 +81,7 @@ class DebugToolDialogFragment : DialogFragment() {
             val itemDesc = holder.itemView.findViewById<TextView>(R.id.item_desc)
             val item = list[position]
             itemTitle.text = item.name
-            if (item.desc.isNullOrBlank()){
+            if (item.desc.isBlank()){
                 itemDesc.visibility=View.GONE
             }else {
                 itemDesc.visibility=View.VISIBLE

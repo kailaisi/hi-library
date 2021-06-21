@@ -20,7 +20,7 @@ data class DetailModel(
     val groupPrice: String,
     val hot: Boolean,
     val marketPrice: String,
-    val shop: Shop,
+    val shop: Shop?,
     val similarGoods: List<GoodsModel>?,
     val sliderImage: String,
     val sliderImages: List<SliderImage>?,
@@ -37,7 +37,7 @@ data class CommentModel(
 @Keep
 data class Shop(
     val completedNum: String,
-    val evaluation: String,
+    val evaluation: String?,
     val goodsNum: String,
     val logo: String,
     val name: String

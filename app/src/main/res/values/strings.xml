@@ -29,4 +29,5 @@
     <string name="title_category">分类</string>
     <string name="fetch_user_profile_failed">获取用户信息失败</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="shop_desc_pre">商品数量：%d,已拼：%d</string>
 </resources>

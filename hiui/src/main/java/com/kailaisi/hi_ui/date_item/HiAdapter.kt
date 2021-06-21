@@ -169,7 +169,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
                 }
             }
         }
-        return object : ViewHolder(itemView!!) {}
+        return object : HiViewHolder(itemView!!) {}
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

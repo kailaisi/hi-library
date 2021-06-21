@@ -55,10 +55,10 @@ class DetailActivity : HiBaseActivity() {
     private fun preBindData() {
         goodsModel?.also {
             val hiAdapter = mBinding.rvItem.adapter as HiAdapter
-            hiAdapter.addItemAt(0,HeaderItem(it.sliderImages,
+            hiAdapter.addItemAt(0, HeaderItem(it.sliderImages,
                 selectPrice(it.groupPrice, it.marketPrice),
                 it.completedNumText,
-                it.goodsName),false)
+                it.goodsName), false)
         }
 
     }
@@ -74,7 +74,9 @@ class DetailActivity : HiBaseActivity() {
             detailModel.completedNumText,
             detailModel.goodsName))
         //评论item
+        dataItems.add(CommentItem(detailModel))
         //店铺
+        dataItems.add(ShopItem(detailModel))
         //商品描述
         //图库
         //相似商品

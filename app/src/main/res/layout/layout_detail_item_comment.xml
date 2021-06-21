@@ -18,6 +18,8 @@
         android:textSize="14sp"
         tools:text="商品评价（999）" />
 
+    <View style="@style/divider" />
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group"
         android:layout_width="match_parent"
