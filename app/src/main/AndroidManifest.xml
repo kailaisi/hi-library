@@ -32,6 +32,7 @@
         <activity android:name=".ui.ProfileDetailActivity" />
         <activity android:name=".ui.registor.RegisterActivity" />
         <activity android:name=".ui.VipActivity" />
+        <activity android:name=".ui.notice.NoticeListActivity" />
     </application>
 
 </manifest>

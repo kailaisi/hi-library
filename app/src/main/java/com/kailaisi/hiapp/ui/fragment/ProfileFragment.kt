@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kailaisi.common.HiRoute
 import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.common.ui.view.loadCircle
@@ -51,6 +52,9 @@ class ProfileFragment : HiBaseFragment() {
 
         mBinding.notifyLocation.text = getString(R.string.item_location)
 
+        mBinding.llNotify.setOnClickListener {
+            ARouter.getInstance().build("/notice/list").navigation(context)
+        }
         queryCourseNotice()
 
         queryUserDetail()

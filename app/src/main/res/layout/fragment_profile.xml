@@ -84,6 +84,7 @@
         tools:visibility="visible" />
 
     <LinearLayout
+        android:id="@+id/ll_notify"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center_vertical">
