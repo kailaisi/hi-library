@@ -29,14 +29,17 @@ fun ImageView.loadCircle(url: String) {
 }
 
 /*glide的图片裁剪和imageview的scaletype有冲突，所以需要用centerrCrop先裁剪一下*/
-@BindingAdapter(value = ["url","corner"],requireAll = false)
+@BindingAdapter(value = ["url", "corner"], requireAll = false)
 fun ImageView.loadCorner(url: String, corner: Int) {
     if (HiViewUtil.isActivityDestroyed(context)) return
 
-    Glide.with(this)
+    val transform = Glide.with(this)
         .load(url)
-        .transform(CenterCrop(), RoundedCorners(corner))
-        .into(this)
+        .transform(CenterCrop())
+    if (corner > 0) {
+        transform.transform(RoundedCorners(corner))
+    }
+    transform.into(this)
 }
 
 fun ImageView.loadCircleBorder(

@@ -14,6 +14,8 @@ import com.kailaisi.common.ui.view.load
 import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hiapp.R
+import com.kailaisi.hiapp.databinding.LayoutHomeOpGridItemBinding
+import com.kailaisi.hiapp.databinding.LayoutItemBannerBinding
 import com.kailaisi.hiapp.model.Subcategory
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.HiRes
@@ -40,25 +42,21 @@ class GridItem(val list: List<Subcategory>) :
     }
 
 
-    inner class GridAdapter(val context: Context, val list: List<Subcategory>) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    inner class GridAdapter(val context: Context, val list: List<Subcategory>) : RecyclerView.Adapter<GridAdapter.GridItemViewHolder>() {
         private var inflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val inflate = inflater.inflate(R.layout.layout_home_op_grid_item, parent, false)
-            return object :RecyclerView.ViewHolder(inflate.rootView){}
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):GridItemViewHolder {
+            val binding = LayoutHomeOpGridItemBinding.inflate(inflater)
+            return GridItemViewHolder(binding.root,binding)
         }
 
         override fun getItemCount(): Int {
             return list.size
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: GridItemViewHolder, position: Int) {
             val subcategory = list[position]
-
-            holder.itemView.findViewById<ImageView>(R.id.item_image).load(subcategory.subcategoryIcon)
-            holder.itemView.findViewById<TextView>(R.id.item_title).text = subcategory.subcategoryName
-
+            holder.binding.model=subcategory
             holder.itemView.setOnClickListener {
                 //会跳转到子分类列表上面去，是一个单独的页面
                 val bundle = Bundle()
@@ -67,6 +65,10 @@ class GridItem(val list: List<Subcategory>) :
                 bundle.putString("categoryTitle", subcategory.subcategoryName)
                 HiRoute.startActivity(context, bundle, "/goods/list")
             }
+        }
+
+        inner class  GridItemViewHolder(view:View,var binding:LayoutHomeOpGridItemBinding):HiViewHolder(view){
+
         }
     }
 }

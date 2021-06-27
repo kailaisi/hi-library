@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
  * 作者：kailaisi
  * <br></br>创建时间：2021-05-27:21:45
  */
-abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) {
-    protected var hiAdapter: HiAdapter?=null
+abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA? = null) {
+    protected var hiAdapter: HiAdapter? = null
     var mData: DATA? = null
 
     init {
@@ -22,7 +22,7 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) 
     /**
      * 进行数据绑定
      */
-    abstract fun onBindData(holder:VH, position: Int)
+    abstract fun onBindData(holder: VH, position: Int)
 
     /**
      * 返回Item的对应的布局资源
@@ -34,7 +34,7 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) 
     /**
      * 返回该Item的视图View
      */
-    open   fun getItemView(parent: ViewGroup): View? {
+    open fun getItemView(parent: ViewGroup): View? {
         return null
     }
 
@@ -59,7 +59,7 @@ abstract class HiDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA?=null) 
     /**
      * 该Item占据几列
      */
-    open  fun getSpanSize(): Int {
+    open fun getSpanSize(): Int {
         return 0
     }
 

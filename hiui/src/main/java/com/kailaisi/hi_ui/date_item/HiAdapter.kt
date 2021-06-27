@@ -2,6 +2,7 @@ package com.kailaisi.hi_ui.date_item
 
 import android.content.Context
 import android.util.SparseArray
+import android.util.SparseIntArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,9 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private var mInflater: LayoutInflater? = null
     private var dataSets = ArrayList<HiDataItem<*, out ViewHolder>>()
 
-    private var typeArray = SparseArray<HiDataItem<*, out ViewHolder>>()
-
+    //private var typeArray = SparseArray<HiDataItem<*, out ViewHolder>>()
+    //将位置和type进行关联
+    private var typePosition = SparseIntArray()
     /**
      * 保存header数据，其中key是自增的，并且作为viewType的值，value则是具体的布局
      */
@@ -143,7 +145,9 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
             val view = foots[viewType]
             return object : ViewHolder(view) {}
         }
-        val dataItem = typeArray.get(viewType)
+        val position = typePosition.get(viewType)
+        val dataItem = dataSets[position]
+        /*这里可能getItemView获取的而是不同的布局，所以，如果只是一个的话，可能会存在问题*/
         var itemView = dataItem.getItemView(parent)
         if (itemView == null) {
             val layout = dataItem.getItemLayoutRes()
@@ -192,9 +196,10 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         }
         val itemPos = position - getHeaderSize()
         val type = dataSets[itemPos].javaClass.hashCode()
-        if (typeArray.indexOfKey(type) < 0) {
-            typeArray.put(type, dataSets[itemPos])
-        }
+//        if (typeArray.indexOfKey(type) < 0) {
+//            typeArray.put(type, dataSets[itemPos])
+//        }
+        typePosition.put(type,position)
         return type
     }
 
