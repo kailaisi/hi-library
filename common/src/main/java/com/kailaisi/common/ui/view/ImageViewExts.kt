@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.Resource
@@ -13,6 +14,7 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.kailaisi.hi_ui.tab.bottom.HiViewUtil
 import java.security.MessageDigest
 
 fun ImageView.load(url: String?) {
@@ -27,7 +29,10 @@ fun ImageView.loadCircle(url: String) {
 }
 
 /*glide的图片裁剪和imageview的scaletype有冲突，所以需要用centerrCrop先裁剪一下*/
+@BindingAdapter(value = ["url","corner"],requireAll = false)
 fun ImageView.loadCorner(url: String, corner: Int) {
+    if (HiViewUtil.isActivityDestroyed(context)) return
+
     Glide.with(this)
         .load(url)
         .transform(CenterCrop(), RoundedCorners(corner))

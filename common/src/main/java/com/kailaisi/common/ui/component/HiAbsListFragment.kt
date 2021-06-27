@@ -28,7 +28,7 @@ open class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
         private val PREFETCH_SIZE: Int = 5
     }
 
-    private var pageIndex = 1
+    protected var pageIndex = 1
     private lateinit var hiAdapter: HiAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private var refreshLayout: HiRefreshLayout? = null
