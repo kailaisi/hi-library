@@ -1,3 +1,4 @@
+
 package com.kailaisi.hi_ui.date_item
 
 import android.content.Context
@@ -147,6 +148,10 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         }
         val position = typePosition.get(viewType)
         val dataItem = dataSets[position]
+        val vh=dataItem.onCreateViewHolder(parent)
+        if (vh!=null){
+            return vh
+        }
         /*这里可能getItemView获取的而是不同的布局，所以，如果只是一个的话，可能会存在问题*/
         var itemView = dataItem.getItemView(parent)
         if (itemView == null) {
