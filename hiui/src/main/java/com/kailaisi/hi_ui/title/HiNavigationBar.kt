@@ -306,7 +306,7 @@ class HiNavigationBar @JvmOverloads constructor(
             HiDisplayUtils.sp2px(16f)
         )
         //这里使用colorstate，是为了能够兼容处理按钮有点击和未点击的时候的颜色区别
-        val btnTextColor = attr.getColor(R.styleable.HiNavigationBar_text_btn_text_color, Color.BLACK)
+        val btnTextColor = attr.getColorStateList(R.styleable.HiNavigationBar_text_btn_text_color)
         val titleTextSize = attr.getDimensionPixelSize(
             R.styleable.HiNavigationBar_title_text_size,
             HiDisplayUtils.sp2px(17f)
@@ -352,7 +352,7 @@ class HiNavigationBar @JvmOverloads constructor(
         val navSubtitle: String?,
         val horPadding: Int,
         val btnTextSize: Float,
-        val btnTextColor: Int,
+        val btnTextColor: ColorStateList?,
         val titleTextSize: Float,
         val titleTextSizeWithSubtitle: Float,
         val titleTextColor: Int,
