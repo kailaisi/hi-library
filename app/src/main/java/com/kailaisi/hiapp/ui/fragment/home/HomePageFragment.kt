@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -35,8 +36,13 @@ class HomePageFragment : HiBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
-        viewModel.queryTabList().observe(viewLifecycleOwner) {
+        viewModel.queryTabList().observe(viewLifecycleOwner, Observer {
             it?.let { updateUI(it) }
+        })
+        mBinding.titleBar.apply {
+            setNavListener(View.OnClickListener { activity?.finish() })
+            addRightTextButton("111", View.generateViewId())
+            addRightTextButton("222", View.generateViewId())
         }
     }
 

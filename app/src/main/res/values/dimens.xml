@@ -11,4 +11,5 @@
     <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_3">3dp</dimen>
     <dimen name="sp_30">30sp</dimen>
+    <dimen name="titlebar_height">48dp</dimen>
 </resources>
