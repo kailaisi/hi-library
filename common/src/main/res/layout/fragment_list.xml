@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.kailaisi.hi_ui.refresh.HiRefreshLayout
-        android:id="@+id/refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
 
-        <com.kailaisi.hi_ui.recyclerview.HiRecyclerView
-            android:id="@+id/rv_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.kailaisi.hi_ui.refresh.HiRefreshLayout>
+    </data>
 
-    <com.kailaisi.common.ui.view.EmptyView
-        android:id="@+id/empty_view"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        android:orientation="vertical">
 
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/content_loading"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/color_999" />
-</FrameLayout>
+        <com.kailaisi.hi_ui.refresh.HiRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.kailaisi.hi_ui.recyclerview.HiRecyclerView
+                android:id="@+id/rv_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.kailaisi.hi_ui.refresh.HiRefreshLayout>
+
+        <com.kailaisi.common.ui.view.EmptyView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/content_loading"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/color_999" />
+    </FrameLayout>
+</layout>

@@ -25,7 +25,7 @@
             android:layout_height="@dimen/dp_110"
             android:layout_marginStart="@dimen/dp_10"
             android:background="@color/color_eee"
-            app:url="@{model.sliderImage"
+            app:url="@{model.sliderImage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"

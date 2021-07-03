@@ -1,8 +1,6 @@
 package com.kailaisi.hiapp.ui.fragment
 
-import android.content.Intent
 import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -22,11 +20,11 @@ import com.kailaisi.common.ui.view.loadCorner
 import com.kailaisi.hi_ui.banner.core.HiBannerMo
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentProfileBinding
-import com.kailaisi.hiapp.model.NoticeInfo
-import com.kailaisi.hiapp.model.UserProfile
-import com.kailaisi.hiapp.ui.account.AccountManager
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.bindView
+import com.kailaisi.pub_mod.NoticeInfo
+import com.kailaisi.pub_mod.UserProfile
+import com.kailaisi.service_login.LoginServiceProvider
 
 /**
  * 描述：
@@ -64,7 +62,7 @@ class ProfileFragment : HiBaseFragment() {
     }
 
     private fun queryUserDetail() {
-        AccountManager.getUserProfile(this, Observer {
+        LoginServiceProvider.getUserProfile(this, Observer {
             if (it != null) {
                 updateUI(it)
             } else {
@@ -96,9 +94,9 @@ class ProfileFragment : HiBaseFragment() {
         } else {
             mBinding.ivUser.setImageResource(R.mipmap.ic_launcher)
             mBinding.ivUser.setOnClickListener {
-                AccountManager.login(context) {
+                LoginServiceProvider.login(context, Observer {
                     queryUserDetail()
-                }
+                })
             }
         }
         updateBanner(data.bannerNoticeList)
@@ -130,10 +128,12 @@ class ProfileFragment : HiBaseFragment() {
         val ssb = SpannableStringBuilder()
         val ss = SpannableString(cou)
         /*变色*/
-        ss.setSpan(ForegroundColorSpan(resources.getColor(R.color.color_000)),
+        ss.setSpan(
+            ForegroundColorSpan(resources.getColor(R.color.color_000)),
             0,
             ss.length,
-            Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
         ss.setSpan(AbsoluteSizeSpan(18, true), 0, ss.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         ss.setSpan(StyleSpan(Typeface.BOLD), 0, ss.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         ssb.append(ss).append(bottom)

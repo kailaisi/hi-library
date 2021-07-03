@@ -31,8 +31,8 @@ class DegradeGlobalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
-        setContentView(R.layout.layout_global_error)
-        val emptyView = findViewById<EmptyView>(R.id.empty_layout)
+        setContentView(R.layout.layout_global_degrade)
+        val emptyView = findViewById<EmptyView>(R.id.empty_view)
         degrade_title?.let {
             emptyView.setTitle(it)
         }
@@ -40,10 +40,10 @@ class DegradeGlobalActivity : AppCompatActivity() {
             emptyView.setDesc(it)
         }
         degrade_action?.apply {
-            emptyView.setHelpAction(listener = {
+            emptyView.setHelpAction(listener = View.OnClickListener {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(this)))
             })
         }
-        findViewById<View>(R.id.iv_back).setOnClickListener { onBackPressed() }
+        findViewById<View>(R.id.action_back).setOnClickListener { onBackPressed() }
     }
 }

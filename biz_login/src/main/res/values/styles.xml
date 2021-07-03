@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LoginBtnNormal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:layout_marginStart">@dimen/dp_10</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:layout_marginEnd">@dimen/dp_10</item>
+        <item name="android:backgroundTint">@color/color_dd2</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+    <!-- <declare-styleable name="inputTextAppearance">
+         <attr name="hintColor" format="color" />
+         <attr name="inputColor" format="color" />
+         <attr name="textSize" format="dimension" />
+     </declare-styleable>-->
+
+    <style name="inputTextAppearance">
+        <item name="textSize">15sp</item>
+        <item name="hintColor">@color/color_C1B</item>
+        <item name="inputColor">@color/color_565</item>
+    </style>
+
+    <!--  <declare-styleable name="titleTextAppearance">
+          <attr name="titleColor" format="color" />
+          <attr name="titleSize" format="dimension" />
+          <attr name="minWidth" format="dimension" />
+      </declare-styleable>-->
+    <style name="titleTextAppearance">
+        <item name="textSize">15sp</item>
+        <item name="minWidth">100dp</item>
+        <item name="titleColor">@color/color_565</item>
+    </style>
+    <!--   <declare-styleable name="lineAppearance">
+           <attr name="color" format="color" />
+           <attr name="height" format="dimension" />
+           <attr name="leftMargin" format="dimension" />
+           <attr name="rightMargin" format="dimension" />
+           <attr name="enable" format="boolean" />
+       </declare-styleable>
+   -->
+
+    <style name="lineAppearance">
+        <item name="color">@color/color_C1B</item>
+        <item name="height">1px</item>
+        <item name="leftMargin">0dp</item>
+        <item name="rightMargin">0dp</item>
+        <item name="enable">true</item>
+    </style>
+
+    <style name="leftMarginLine" parent="lineAppearance">
+        <item name="leftMargin">10dp</item>
+    </style>
+
+    <style name="style_left_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_50</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingStart">@dimen/dp_16</item>
+    </style>
+
+</resources>

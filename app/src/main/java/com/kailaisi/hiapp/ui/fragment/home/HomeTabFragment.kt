@@ -9,11 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kailaisi.common.ui.component.HiAbsListFragment
 import com.kailaisi.hi_ui.date_item.HiDataItem
-import com.kailaisi.hiapp.http.ApiFactory
-import com.kailaisi.hiapp.http.api.HomeApi
 import com.kailaisi.hiapp.model.HomeModel
-import com.kailaisi.library.restful.HiCallback
-import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.restful.annotion.CacheStrategy
 
 /**

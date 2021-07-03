@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.kailaisi.hiapp.http.ApiFactory
+import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.hiapp.http.api.HomeApi
 import com.kailaisi.hiapp.model.HomeModel
 import com.kailaisi.hiapp.model.TabCategory

@@ -61,9 +61,9 @@ open class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
         emptyView?.visibility = View.GONE
         emptyView?.setIcon(R.string.list_empty)
         emptyView?.setDesc(getString(R.string.list_empty_desc))
-        emptyView?.setButton(getString(R.string.list_empty_action)) {
+        emptyView?.setButton(getString(R.string.list_empty_action), View.OnClickListener {
             onRefresh()
-        }
+        })
         loadingView?.visibility = View.VISIBLE
         pageIndex = 1
     }

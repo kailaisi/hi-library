@@ -1,5 +1,6 @@
 package com.kailaisi.hiapp.route
 
+import android.accounts.AccountManager
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -7,8 +8,8 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
-import com.kailaisi.hiapp.ui.account.AccountManager
 import com.kailaisi.library.util.MainHandler
+import com.kailaisi.service_login.LoginServiceProvider
 import java.lang.RuntimeException
 
 /**
@@ -46,16 +47,16 @@ open class BizGlobalInterceptor : IInterceptor {
      * 登录拦截器
      */
     private fun loginIntercept(postcard: Postcard, callback: InterceptorCallback?) {
-        MainHandler.post {
+        MainHandler.post(Runnable {
             Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
-            if (AccountManager.isLogin()) {
+            if (LoginServiceProvider.isLogin()) {
                 callback?.onContinue(postcard)
             } else {
                 /*通过这种监听登录成功之后的信息，可以继续原来的业务了，而不会打断了*/
-                AccountManager.login(context) {
+                LoginServiceProvider.login(context, Observer {
                     callback?.onContinue(postcard)
-                }
+                })
             }
-        }
+        })
     }
 }

@@ -1,7 +1,7 @@
 package com.kailaisi.hiapp.ui.fragment.detail
 
 import androidx.lifecycle.*
-import com.kailaisi.hiapp.http.ApiFactory
+import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.hiapp.http.api.DetailApi
 import com.kailaisi.hiapp.model.DetailModel
 import com.kailaisi.library.restful.HiCallback

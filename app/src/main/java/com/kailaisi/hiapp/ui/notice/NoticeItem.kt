@@ -1,16 +1,14 @@
 package com.kailaisi.hiapp.ui.notice
 
-import android.content.Intent
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.kailaisi.common.HiRoute
 import com.kailaisi.common.util.DateUtil
 import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hi_ui.icfont.IconFontTextView
 import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.model.NoticeInfo
 import com.kailaisi.library.util.HiRes
+import com.kailaisi.pub_mod.NoticeInfo
 
 class NoticeItem(val item: NoticeInfo) : HiDataItem<NoticeInfo, HiViewHolder>() {
     override fun onBindData(holder: HiViewHolder, position: Int) {

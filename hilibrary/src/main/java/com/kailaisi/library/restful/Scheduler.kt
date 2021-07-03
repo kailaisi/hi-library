@@ -9,7 +9,10 @@ import com.kailaisi.library.util.MainHandler
 /**
  * 静态代理，通过代理CallFactory创建出来的call对象，实现对应的拦截器功能
  */
-class Scheduler(private val callFactory: HiCall.Factory, val interceptors: MutableList<HiInterceptor>) {
+class Scheduler(
+    private val callFactory: HiCall.Factory,
+    val interceptors: MutableList<HiInterceptor>
+) {
     /**
      * 执行请求信息下
      */
@@ -37,12 +40,12 @@ class Scheduler(private val callFactory: HiCall.Factory, val interceptors: Mutab
         override fun enqueue(callback: HiCallback<T>?) {
             dispatchInterceptor(request, null)
             if (request.cacheStrategy == CacheStrategy.CACHE_FIRST) {
-                HiExecutor.execute(runnable = {
+                HiExecutor.execute(runnable = Runnable {
                     val cacheResponse = readCache()
                     if (cacheResponse.data != null) {
-                        MainHandler.sendAtFrontOfQueue {
+                        MainHandler.sendAtFrontOfQueue(Runnable {
                             callback?.onSuccess(cacheResponse)
-                        }
+                        })
                         HiLog.d("enqueue ,cache:${request.getCacheKey()}")
                     }
                 })
@@ -66,7 +69,7 @@ class Scheduler(private val callFactory: HiCall.Factory, val interceptors: Mutab
         private fun saveCacheIfNeed(response: HiResponse<T>) {
             if (request.cacheStrategy == CacheStrategy.CACHE_FIRST || request.cacheStrategy == CacheStrategy.NET_CACHE) {
                 if (response.data != null) {
-                    HiExecutor.execute(runnable = {
+                    HiExecutor.execute(runnable = Runnable {
                         HiStorage.saveCache(request.getCacheKey(), response.data)
                     })
                 }

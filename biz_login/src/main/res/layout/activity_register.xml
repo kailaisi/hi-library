@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_main"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <com.kailaisi.hi_ui.icfont.IconFontTextView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/if_category" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/register" />
+    </RelativeLayout>
+
+    <View style="@style/divider" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/order_id"
+        style="@style/style_left_right"
+        android:layout_marginTop="20dp"
+        app:bottomLineAppearance="@style/leftMarginLine"
+        app:hint="请输入课程订单号后四位"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="课程订单号"
+        app:titleTextAppearance="@style/titleTextAppearance"
+        app:topLineAppearance="@style/lineAppearance" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/muke_id"
+        style="@style/style_left_right"
+        app:bottomLineAppearance="@style/lineAppearance"
+        app:hint="请输入慕课网ID"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="慕课网ID"
+        app:titleTextAppearance="@style/titleTextAppearance" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/user_name"
+        style="@style/style_left_right"
+        app:bottomLineAppearance="@style/lineAppearance"
+        app:hint="请输入用户名"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="用户名"
+        app:titleTextAppearance="@style/titleTextAppearance" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/pwd"
+        style="@style/style_left_right"
+        app:bottomLineAppearance="@style/lineAppearance"
+        app:hint="请输入密码"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="密码"
+        app:titleTextAppearance="@style/titleTextAppearance" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/pwd_confirm"
+        style="@style/style_left_right"
+        app:bottomLineAppearance="@style/lineAppearance"
+        app:hint="请确认密码"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="密码确认"
+        app:titleTextAppearance="@style/titleTextAppearance" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/LoginBtnNormal"
+        android:text="@string/action_submit"
+        app:cornerRadius="6dp" />
+</LinearLayout>

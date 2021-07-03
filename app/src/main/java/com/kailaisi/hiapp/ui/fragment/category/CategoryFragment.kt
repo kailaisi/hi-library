@@ -10,12 +10,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.common.ui.view.EmptyView
 import com.kailaisi.common.ui.view.load
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentCategoryBinding
-import com.kailaisi.hiapp.http.ApiFactory
 import com.kailaisi.hiapp.http.api.CategoryApi
 import com.kailaisi.hiapp.model.Subcategory
 import com.kailaisi.hiapp.model.TabCategory

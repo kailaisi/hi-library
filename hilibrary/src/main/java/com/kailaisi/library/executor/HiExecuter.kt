@@ -64,13 +64,15 @@ object HiExecutor {
         }
     }
 
+    @JvmOverloads
     fun execute(@IntRange(from = 0, to = 10) priority: Int=0, runnable: Runnable) {
         val priorityRunnable = PriorityRunnable(priority, runnable)
         hiExecutor.execute(priorityRunnable)
     }
 
-    fun execute(@IntRange(from = 0, to = 10) priority: Int=0, runnable: Callable<*>) {
-        val priorityRunnable = PriorityRunnable(priority, runnable)
+    @JvmOverloads
+    fun execute(@IntRange(from = 0, to = 10) priority: Int=0, callable: Callable<*>) {
+        val priorityRunnable = PriorityRunnable(priority, callable)
         hiExecutor.execute(priorityRunnable)
     }
 

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_main"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <com.kailaisi.hi_ui.icfont.IconFontTextView
+            android:id="@+id/iv_back"
+            android:gravity="center"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/if_category" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/login" />
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="@string/register"
+            android:textColor="@color/color_298"
+            android:textSize="@dimen/sp_16" />
+    </RelativeLayout>
+
+    <View style="@style/divider" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:paddingStart="@dimen/dp_16"
+        app:bottomLineAppearance="@style/leftMarginLine"
+        app:hint="请输入用户名"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="用户名"
+        app:titleTextAppearance="@style/titleTextAppearance"
+        app:topLineAppearance="@style/lineAppearance" />
+
+    <com.kailaisi.hi_ui.InputItemLayout
+        android:id="@+id/pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:paddingStart="@dimen/dp_16"
+        app:bottomLineAppearance="@style/lineAppearance"
+        app:hint="请输入密码"
+        app:inputTextAppearance="@style/inputTextAppearance"
+        app:title="密码"
+        app:titleTextAppearance="@style/titleTextAppearance" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        style="@style/LoginBtnNormal"
+        android:text="@string/login"
+        app:cornerRadius="6dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="6dp"
+        android:text="提示：如果你忘记密码，重新注册即可"
+        android:textColor="@color/color_646" />
+</LinearLayout>

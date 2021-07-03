@@ -2,11 +2,11 @@ package com.kailaisi.hiapp.ui.notice
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hi_ui.date_item.HiAdapter
 import com.kailaisi.hiapp.databinding.ActivityNoticeListBinding
-import com.kailaisi.hiapp.http.ApiFactory
-import com.kailaisi.hiapp.http.api.AccountApi
+import com.kailaisi.hiapp.http.api.NoticeApi
 import com.kailaisi.hiapp.model.CourseNotice
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
@@ -29,7 +29,7 @@ class NoticeListActivity : HiBaseActivity() {
     }
 
     private fun queryCourseNotice() {
-        ApiFactory.create(AccountApi::class.java).notice()
+        ApiFactory.create(NoticeApi::class.java).notice()
             .enqueue(object : HiCallback<CourseNotice> {
                 override fun onSuccess(response: HiResponse<CourseNotice>) {
                     response.data?.let {

@@ -3,7 +3,7 @@ package com.kailaisi.hiapp.demo.banner
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.kailaisi.hi_ui.banner.indicator.HiNumberIndicator
-import com.kailaisi.hiapp.BaseBindingActivity
+import com.kailaisi.common.ui.component.BaseBindingActivity
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.ActivityBannerDemoBinding
 
