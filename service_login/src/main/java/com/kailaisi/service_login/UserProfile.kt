@@ -1,4 +1,4 @@
-package com.kailaisi.pub_mod
+package com.kailaisi.service_login
 
 import java.io.Serializable
 

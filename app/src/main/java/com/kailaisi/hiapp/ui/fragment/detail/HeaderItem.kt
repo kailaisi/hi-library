@@ -14,7 +14,7 @@ import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.model.DetailModel
-import com.kailaisi.hiapp.model.SliderImage
+import com.kailaisi.pub_mod.SliderImage
 
 class HeaderItem(
     val sliderImage: List<SliderImage>?,

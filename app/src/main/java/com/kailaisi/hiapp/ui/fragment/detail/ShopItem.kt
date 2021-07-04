@@ -20,10 +20,10 @@ import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.model.DetailModel
-import com.kailaisi.hiapp.model.GoodsModel
 import com.kailaisi.hiapp.model.Shop
-import com.kailaisi.hiapp.ui.fragment.home.GoodsItem
+import com.kailaisi.pub_mod.GoodsItem
 import com.kailaisi.library.util.HiRes
+import com.kailaisi.pub_mod.GoodsModel
 
 /**
  * 描述：店铺信息的展示页

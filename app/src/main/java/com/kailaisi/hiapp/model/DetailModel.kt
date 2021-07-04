@@ -1,6 +1,8 @@
 package com.kailaisi.hiapp.model
 
 import androidx.annotation.Keep
+import com.kailaisi.pub_mod.GoodsModel
+import com.kailaisi.pub_mod.SliderImage
 
 @Keep
 data class DetailModel(

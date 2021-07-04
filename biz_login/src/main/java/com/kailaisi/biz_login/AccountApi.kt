@@ -4,7 +4,7 @@ import com.kailaisi.library.restful.HiCall
 import com.kailaisi.library.restful.annotion.Field
 import com.kailaisi.library.restful.annotion.GET
 import com.kailaisi.library.restful.annotion.POST
-import com.kailaisi.pub_mod.UserProfile
+import com.kailaisi.service_login.UserProfile
 
 interface AccountApi {
 

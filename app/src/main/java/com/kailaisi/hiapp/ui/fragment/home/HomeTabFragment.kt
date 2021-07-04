@@ -11,6 +11,7 @@ import com.kailaisi.common.ui.component.HiAbsListFragment
 import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hiapp.model.HomeModel
 import com.kailaisi.library.restful.annotion.CacheStrategy
+import com.kailaisi.pub_mod.GoodsItem
 
 /**
  * 首页的tab对应的Fragment

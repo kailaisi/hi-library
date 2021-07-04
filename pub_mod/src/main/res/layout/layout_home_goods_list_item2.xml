@@ -5,47 +5,51 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
-            type="com.kailaisi.hiapp.model.GoodsModel" />
-        <import type="com.kailaisi.hiapp.model.GoodsModelKt"/>
-        <import type="android.view.View"/>
-        <import type="android.text.TextUtils"/>
+            type="com.kailaisi.pub_mod.GoodsModel" />
+
+        <import type="com.kailaisi.pub_mod.GoodsModelKt" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_140"
+        android:layout_height="wrap_content"
         android:background="@color/color_white">
 
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="@dimen/dp_110"
-            android:layout_height="@dimen/dp_110"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:background="@color/color_eee"
-            app:url="@{model.sliderImage}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:url="@{model.sliderImage}"
             tools:src="@color/colorAccent" />
 
         <TextView
             android:id="@+id/item_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_6"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="1"
+            android:paddingRight="@dimen/dp_10"
             android:text="@{model.goodsName}"
-            android:paddingEnd="@dimen/dp_10"
             android:textColor="@color/color_000"
             android:textSize="14sp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@+id/item_image"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/item_image"
+            app:layout_constraintTop_toBottomOf="@+id/item_image"
             tools:text="商品的标题商品的标题商品的标题商品的标题商品的标题商品的标题商品的标题商品的标题" />
 
 
@@ -53,11 +57,12 @@
             android:id="@+id/item_label_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_6"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/item_price"
-            app:layout_constraintLeft_toRightOf="@+id/item_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_price"
             tools:background="@color/colorAccent"
             tools:layout_height="@dimen/dp_10"
             tools:layout_width="100dp"
@@ -68,13 +73,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_3"
             android:gravity="center_vertical"
+            android:text="@{GoodsModelKt.selectPrice(model.groupPrice,model.marketPrice)}"
             android:textColor="@color/color_d43"
             android:textSize="14sp"
-            android:text="@{GoodsModelKt.selectPrice(model.groupPrice,model.marketPrice)}"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/item_image"
-            app:layout_constraintLeft_toRightOf="@+id/item_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_title"
             tools:text="$1美元" />
 
 
@@ -82,22 +88,21 @@
             android:id="@+id/item_sale_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="@{model.completedNumText}"
             android:textColor="@color/color_9b9"
             android:textSize="@dimen/sp_12"
-            android:text="@{model.completedNumText}"
             app:layout_constraintBottom_toBottomOf="@id/item_price"
             app:layout_constraintLeft_toRightOf="@+id/item_price"
             app:layout_constraintTop_toTopOf="@+id/item_price"
             tools:text="已售1000件" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="2px"
             android:background="@color/color_eee"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/item_image"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

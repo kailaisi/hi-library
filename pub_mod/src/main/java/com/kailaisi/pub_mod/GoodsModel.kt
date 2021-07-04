@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.model
+package com.kailaisi.pub_mod
 
 import android.os.Parcelable
 import android.text.TextUtils
@@ -32,8 +32,8 @@ import kotlinx.android.parcel.Parcelize
 "createTime": "2020-01-30 16:52:41",
 "sliderImage": "https://o.devio.org/images/as/goods/images/2018-12-21/5c3672e33377b65d5f1bef488686462b.jpeg"
  */
-@Parcelize
 @Keep
+@Parcelize
 data class GoodsModel(
     val categoryId: String?,
     val completedNumText: String?,

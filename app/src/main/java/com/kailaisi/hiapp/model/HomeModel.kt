@@ -1,6 +1,7 @@
 package com.kailaisi.hiapp.model
 
 import androidx.annotation.Keep
+import com.kailaisi.pub_mod.GoodsModel
 import java.io.Serializable
 
 

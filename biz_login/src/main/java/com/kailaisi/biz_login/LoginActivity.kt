@@ -6,9 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.kailaisi.biz_login.databinding.ActivityLoginBinding
-import com.kailaisi.common.HiRoute
 import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.library.restful.HiCallback

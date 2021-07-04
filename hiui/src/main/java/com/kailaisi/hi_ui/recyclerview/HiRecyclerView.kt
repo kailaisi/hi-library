@@ -16,7 +16,7 @@ import com.kailaisi.library.log.HiLog
  * <p/>作者：kailaisi
  * <br/>创建时间：2021-05-29:22:38
  */
-class HiRecyclerView @JvmOverloads constructor(
+open class HiRecyclerView @JvmOverloads constructor(
     context: Context,
     attributes: AttributeSet? = null,
     defstyle: Int = 0,

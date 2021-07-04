@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.facade.template.IProvider
-import com.kailaisi.pub_mod.UserProfile
+import com.kailaisi.service_login.UserProfile
 import com.kailaisi.service_login.ILoginService
 
 /**

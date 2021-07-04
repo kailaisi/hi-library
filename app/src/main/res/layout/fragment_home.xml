@@ -6,12 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.kailaisi.hi_ui.title.HiNavigationBar
-        android:id="@+id/title_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/titlebar_height"
-        app:nav_title="搜索你想要的商品搜索你想要的商品搜索你想要的商品搜索你想要的商品" />
-
     <com.kailaisi.hi_ui.icfont.IconFontTextView
         android:id="@+id/search_container"
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@ import com.kailaisi.hiapp.databinding.ActivityMainBinding
 import com.kailaisi.hiapp.ui.login.MainActivityLogic
 import com.kailaisi.library.util.HiStatusBar
 
-@Route(path = "/account/main")
+@Route(path = "/app/main")
 class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     lateinit var logic: MainActivityLogic
     override fun onCreate(savedInstanceState: Bundle?) {

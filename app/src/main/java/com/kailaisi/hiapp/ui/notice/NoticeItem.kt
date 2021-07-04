@@ -8,7 +8,7 @@ import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hi_ui.icfont.IconFontTextView
 import com.kailaisi.hiapp.R
 import com.kailaisi.library.util.HiRes
-import com.kailaisi.pub_mod.NoticeInfo
+import com.kailaisi.service_login.NoticeInfo
 
 class NoticeItem(val item: NoticeInfo) : HiDataItem<NoticeInfo, HiViewHolder>() {
     override fun onBindData(holder: HiViewHolder, position: Int) {

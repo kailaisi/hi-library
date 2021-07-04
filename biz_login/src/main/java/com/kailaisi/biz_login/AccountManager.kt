@@ -13,7 +13,7 @@ import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.AppGlobals
 import com.kailaisi.library.util.SPUtil
-import com.kailaisi.pub_mod.UserProfile
+import com.kailaisi.service_login.UserProfile
 
 /**
  * 描述：用户管理类，将登录、以及用户信息通过该类进行处理

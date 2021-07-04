@@ -3,7 +3,6 @@ package com.kailaisi.service_login
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.kailaisi.pub_mod.UserProfile
 
 /**
  * 描述：登录页面的对外暴漏的接口

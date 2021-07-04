@@ -22,8 +22,8 @@ import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentProfileBinding
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.bindView
-import com.kailaisi.pub_mod.NoticeInfo
-import com.kailaisi.pub_mod.UserProfile
+import com.kailaisi.service_login.NoticeInfo
+import com.kailaisi.service_login.UserProfile
 import com.kailaisi.service_login.LoginServiceProvider
 
 /**

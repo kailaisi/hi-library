@@ -16,10 +16,10 @@ import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.ActivityDetailBinding
 import com.kailaisi.hiapp.model.DetailModel
-import com.kailaisi.hiapp.model.GoodsModel
-import com.kailaisi.hiapp.model.selectPrice
 import com.kailaisi.library.util.HiStatusBar
 import com.kailaisi.library.util.inflate
+import com.kailaisi.pub_mod.GoodsModel
+import com.kailaisi.pub_mod.selectPrice
 
 @Route(path = "/detail/main")
 class DetailActivity : HiBaseActivity() {

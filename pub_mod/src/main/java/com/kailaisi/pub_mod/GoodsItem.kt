@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.ui.fragment.home
+package com.kailaisi.pub_mod
 
 import android.content.Context
 import android.os.Bundle
@@ -16,9 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kailaisi.common.HiRoute
 import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hi_ui.date_item.HiViewHolder
-import com.kailaisi.hiapp.BR
-import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.model.GoodsModel
 import com.kailaisi.library.util.HiDisplayUtils
 
 open class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean = false) :

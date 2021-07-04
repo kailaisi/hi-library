@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.kailaisi.common.HiRoute
 import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.hi_ui.seach.HiSearchView
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout
@@ -42,19 +43,9 @@ class HomePageFragment : HiBaseFragment() {
         viewModel.queryTabList().observe(viewLifecycleOwner, Observer {
             it?.let { updateUI(it) }
         })
-
-        mBinding.titleBar.apply {
-            setNavListener(View.OnClickListener { activity?.finish() })
-            addRightTextButton("搜索", View.generateViewId())
+        mBinding.searchContainer.setOnClickListener {
+            HiRoute.startActivity(context,null,"/search/main")
         }
-        val hiSearchView = HiSearchView(requireContext())
-        hiSearchView.layoutParams = ViewGroup.LayoutParams(-1, HiDisplayUtils.dip2px(40f))
-        hiSearchView.postDelayed(
-            { hiSearchView.setKeyWord("iphone", View.OnClickListener { }) },
-            2000
-        )
-        hiSearchView.setHintText("搜索你想要的商品")
-        mBinding.titleBar.setCenterView(hiSearchView)
     }
 
 

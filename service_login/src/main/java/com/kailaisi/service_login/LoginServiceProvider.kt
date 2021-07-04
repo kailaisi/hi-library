@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
-import com.kailaisi.pub_mod.UserProfile
 
 /**
  * 描述：同一封装，对外暴漏的接口，

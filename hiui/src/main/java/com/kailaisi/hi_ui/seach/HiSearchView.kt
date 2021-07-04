@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.text.InputFilter
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -15,6 +16,7 @@ import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import com.kailaisi.hi_ui.R
 import com.kailaisi.hi_ui.icfont.IconFontTextView
+import com.kailaisi.library.util.MainHandler
 import java.lang.IllegalArgumentException
 
 /**
@@ -30,7 +32,13 @@ class HiSearchView @JvmOverloads constructor(
     companion object {
         const val LEFT = 1
         const val CENTER = 2
+        const val DEBOUNCE_DURATION = 2000L
     }
+
+    /**
+     * 数据变化的监听器
+     */
+    private var textListener: ((String?) -> Unit)? = null
 
     //关键词部分
     private var keywordContainer: LinearLayout? = null
@@ -39,7 +47,7 @@ class HiSearchView @JvmOverloads constructor(
 
     //搜索部分相关控件
     private var clearIcon: IconFontTextView? = null
-    private var editText: EditText? = null
+    var editText: EditText? = null
 
     //搜索图标
     private var searchIcon: IconFontTextView? = null
@@ -58,7 +66,19 @@ class HiSearchView @JvmOverloads constructor(
             val hasCount = it?.length ?: 0 > 0
             clearIcon?.visibility = if (hasCount) View.VISIBLE else View.GONE
             searchIconContainer?.visibility = if (hasCount) View.GONE else View.VISIBLE
+            if (textListener != null) {
+                MainHandler.remove(debounceRunnable)
+                MainHandler.postDelay(DEBOUNCE_DURATION, debounceRunnable)
+            }
         }
+    }
+
+    private val debounceRunnable = Runnable {
+        textListener?.invoke(editText?.text.toString())
+    }
+
+    fun setDebounceTextChangeListener(afterTextChangedListener: ((String?) -> Unit)?) {
+        textListener = afterTextChangedListener
     }
 
     fun setKeyWord(keyword: String?, listener: OnClickListener) {
@@ -205,7 +225,7 @@ class HiSearchView @JvmOverloads constructor(
             setTextColor(viewAttrs.hintTextColor)
             text = viewAttrs.searchIcon
             id = R.id.id_search_icon
-            setPadding(viewAttrs.iconPadding, 0, viewAttrs.iconPadding/2,0)
+            setPadding(viewAttrs.iconPadding, 0, viewAttrs.iconPadding / 2, 0)
         }
 
         //container
@@ -231,7 +251,7 @@ class HiSearchView @JvmOverloads constructor(
     private fun initEditText() {
         editText = EditText(context).apply {
             setTextColor(viewAttrs.searchTextColor)
-            isSingleLine=true
+            isSingleLine = true
             setBackgroundColor(Color.TRANSPARENT)
             setTextSize(TypedValue.COMPLEX_UNIT_PX, viewAttrs.searchTextSize)
             setPadding(viewAttrs.iconPadding, 0, viewAttrs.iconPadding, 0)
@@ -240,5 +260,11 @@ class HiSearchView @JvmOverloads constructor(
         val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         params.addRule(CENTER_VERTICAL)
         addView(editText, params)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        //防止内存泄漏
+        MainHandler.remove(debounceRunnable)
     }
 }
