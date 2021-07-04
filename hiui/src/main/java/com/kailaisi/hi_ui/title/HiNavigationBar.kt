@@ -111,7 +111,7 @@ class HiNavigationBar @JvmOverloads constructor(
         mLeftViewId = view.id
         layoutParams.alignWithParent = true
         mLeftViewList.add(view)
-        addView(view,layoutParams)
+        addView(view, layoutParams)
     }
 
 
@@ -156,20 +156,37 @@ class HiNavigationBar @JvmOverloads constructor(
         mRightViewId = view.id
         layoutParams.alignWithParent = true
         mRightViewList.add(view)
-        addView(view,layoutParams)
+        addView(view, layoutParams)
     }
 
-    fun setTitle(title: String) {
+    fun setTitle(title: String?) {
         ensureTitle()
         titleView?.text = title
         titleView?.visibility = if (title.isNullOrBlank()) View.GONE else View.VISIBLE
     }
 
-    fun setSubtitle(title: String) {
+    fun setSubtitle(title: String?) {
         ensureSubtitle()
         updateTitleViewStyle()
         subTitleView?.text = title
         subTitleView?.visibility = if (title.isNullOrBlank()) View.GONE else View.VISIBLE
+    }
+
+    /**
+     * 支持自定义设置我们的center部分的view
+     */
+    fun setCenterView(view: View) {
+        var params = view.layoutParams
+        if (params == null) {
+            params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        } else if (params !is LayoutParams) {
+            params = LayoutParams(params)
+        }
+        val centerViewParams = params
+        centerViewParams.addRule(RIGHT_OF, mLeftViewId)
+        centerViewParams.addRule(LEFT_OF, mRightViewId)
+        centerViewParams.addRule(CENTER_VERTICAL)
+        addView(view, centerViewParams)
     }
 
     private fun ensureTitle() {

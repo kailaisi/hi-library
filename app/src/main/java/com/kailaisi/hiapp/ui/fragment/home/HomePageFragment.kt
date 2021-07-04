@@ -3,6 +3,7 @@ package com.kailaisi.hiapp.ui.fragment.home
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -12,11 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.kailaisi.common.ui.component.HiBaseFragment
+import com.kailaisi.hi_ui.seach.HiSearchView
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout
 import com.kailaisi.hi_ui.tab.top.HiTabTopInfo
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentHomeBinding
 import com.kailaisi.hiapp.model.TabCategory
+import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.bindView
 
 /**
@@ -39,11 +42,19 @@ class HomePageFragment : HiBaseFragment() {
         viewModel.queryTabList().observe(viewLifecycleOwner, Observer {
             it?.let { updateUI(it) }
         })
+
         mBinding.titleBar.apply {
             setNavListener(View.OnClickListener { activity?.finish() })
-            addRightTextButton("111", View.generateViewId())
-            addRightTextButton("222", View.generateViewId())
+            addRightTextButton("搜索", View.generateViewId())
         }
+        val hiSearchView = HiSearchView(requireContext())
+        hiSearchView.layoutParams = ViewGroup.LayoutParams(-1, HiDisplayUtils.dip2px(40f))
+        hiSearchView.postDelayed(
+            { hiSearchView.setKeyWord("iphone", View.OnClickListener { }) },
+            2000
+        )
+        hiSearchView.setHintText("搜索你想要的商品")
+        mBinding.titleBar.setCenterView(hiSearchView)
     }
 
 
