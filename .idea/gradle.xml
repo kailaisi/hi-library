@@ -13,10 +13,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/biz_detail" />
+            <option value="$PROJECT_DIR$/biz_home" />
+            <option value="$PROJECT_DIR$/biz_login" />
+            <option value="$PROJECT_DIR$/biz_search" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/hi_debugtool" />
             <option value="$PROJECT_DIR$/hilibrary" />
             <option value="$PROJECT_DIR$/hiui" />
+            <option value="$PROJECT_DIR$/pub_mod" />
+            <option value="$PROJECT_DIR$/service_login" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

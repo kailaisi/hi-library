@@ -23,6 +23,7 @@ import com.kailaisi.library.util.HiStatusBar
 @Route(path = "/search/main")
 class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
 
+    private var historyView: HistorySearchView? = null
     private var goodSearchView: GoodsSearchView? = null
     private var quickSearchView: QuickSearchView? = null
     private lateinit var viewModel: SearchViewModel
@@ -44,6 +45,16 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
         initTopBar()
         updateViewStatus(STATUS_EMPTY)
         //查询本地的历史搜索记录
+        queryLocalHistory()
+    }
+
+    private fun queryLocalHistory() {
+        viewModel.queryLocalHistory().observe(this, Observer {
+            if (it != null) {
+                updateViewStatus(STATUS_HISTORY)
+                historyView?.bindData(it)
+            }
+        })
     }
 
     private fun initTopBar() {
@@ -72,7 +83,7 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
                         updateViewStatus(STATUS_EMPTY)
                     } else {
                         updateViewStatus(STATUS_QUICK_SEARCH)
-                        quickSearchView?.bindData(list){
+                        quickSearchView?.bindData(list) {
                             doSearchWord(it)
                         }
                     }
@@ -84,36 +95,45 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
 
     private fun doSearchWord(it: KeyWord) {
         //搜索框高亮，搜索词
-        searchView.setKeyWord(it.keyWord,updateHistoryListener)
+        searchView.setKeyWord(it.keyWord, updateHistoryListener)
         //keyword存储起来
         viewModel.saveHistory(it)
         //发起搜索请求
-        viewModel.goodsSearch(it)
+        viewModel.goodsSearch(it.keyWord, true)
         val kwClearIconView = searchView.findViewById<View>(R.id.id_search_clear_icon)
         //在搜索的过程中，不允许清除keyword
-        kwClearIconView?.isEnabled=false
+        kwClearIconView?.isEnabled = false
         viewModel.goodsSearchLiveData.observe(this, Observer {
-            kwClearIconView?.isEnabled=true
-            if (it==null){
-                if (viewModel.pageIndex==1){
+            kwClearIconView?.isEnabled = true
+            goodSearchView?.loadFinished(it.list.isNullOrEmpty())
+            val loadInit = viewModel.pageIndex == 1
+            if (it == null) {
+                if (loadInit) {
                     updateViewStatus(STATUS_EMPTY)
                 }
-            }else{
+            } else {
                 updateViewStatus(STATUS_GOODS_SEARCH)
-                goodSearchView?.bindData(it.list)
+                goodSearchView?.bindData(it.list,loadInit)
             }
         })
     }
 
     private val updateHistoryListener = View.OnClickListener {
-        updateViewStatus(STATUS_EMPTY)
-    }
-    private val searchClickListener=View.OnClickListener{
-        val keyWord = searchView.editText?.text?.trim().toString()
-        if (keyWord.isNotEmpty()){
-            doSearchWord(KeyWord(null,keyWord))
+        if (viewModel.kewWords.isNullOrEmpty()) {
+            updateViewStatus(STATUS_EMPTY)
+        } else {
+            updateViewStatus(STATUS_HISTORY)
+            historyView?.bindData(viewModel.kewWords!!)
         }
     }
+
+    private val searchClickListener = View.OnClickListener {
+        val keyWord = searchView.editText?.text?.trim().toString()
+        if (keyWord.isNotEmpty()) {
+            doSearchWord(KeyWord(null, keyWord))
+        }
+    }
+
     private fun updateViewStatus(newStatus: Int) {
         if (status == newStatus) return
         status = newStatus
@@ -130,7 +150,17 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
                 showView = emptyView
             }
             STATUS_HISTORY -> {
-
+                if (historyView == null) {
+                    historyView = HistorySearchView(this).apply {
+                        setOnCheckedChangedListener {
+                            doSearchWord(it)
+                        }
+                        setOnHistoryClearListener {
+                            viewModel.clearHistory()
+                            updateViewStatus(STATUS_EMPTY)
+                        }
+                    }
+                }
             }
             STATUS_QUICK_SEARCH -> {
                 if (quickSearchView == null) {
@@ -140,9 +170,16 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
             }
             STATUS_GOODS_SEARCH -> {
                 if (goodSearchView == null) {
-                    goodSearchView = GoodsSearchView(this)
+                    goodSearchView = GoodsSearchView(this).apply {
+                        enableLoadMore({
+                            val keyWord = searchView.getKeyword()
+                            if (keyWord.isNullOrBlank()) return@enableLoadMore
+                            //分页
+                            viewModel.goodsSearch(keyWord, false)
+                        }, 5)
+                    }
+                    showView = quickSearchView
                 }
-                showView = quickSearchView
             }
             else -> {
                 throw IllegalAccessException("不支持的状态")

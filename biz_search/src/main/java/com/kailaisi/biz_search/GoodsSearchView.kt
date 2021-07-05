@@ -2,13 +2,8 @@ package com.kailaisi.biz_search
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kailaisi.hi_ui.date_item.HiAdapter
-import com.kailaisi.hi_ui.date_item.HiDataItem
-import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hi_ui.recyclerview.HiRecyclerView
 import com.kailaisi.pub_mod.GoodsItem
 import com.kailaisi.pub_mod.GoodsModel
@@ -28,9 +23,14 @@ class GoodsSearchView @JvmOverloads constructor(
         R.layout.layout_quick_search_list_item
     }
 
-    fun bindData(list: List<GoodsModel>) {
+    fun bindData(
+        list: List<GoodsModel>,
+        loadInit: Boolean
+    ) {
         val hiAdapter = adapter as HiAdapter
-        hiAdapter.clearItems()
+        if (loadInit) {
+            hiAdapter.clearItems()
+        }
         hiAdapter.addItems(list.map { GoodsItem(it,true) }, false)
     }
 }

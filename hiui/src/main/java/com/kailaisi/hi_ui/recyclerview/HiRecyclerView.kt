@@ -47,7 +47,8 @@ open class HiRecyclerView @JvmOverloads constructor(
             if (lastVisible <= 0) {
                 return
             }
-            var isBottom = lastVisible > itemCount - 1
+            var firstVisible=findLastVisiblePosition(recyclerView)
+            var isBottom = lastVisible > itemCount - 1 && firstVisible>0
             //可以向下滑动，或者已经到最底部了，此时再拖动列表，也是允许分页的
             if (newState === SCROLL_STATE_DRAGGING && (canScrollVertically || isBottom)) {
                 addFooterView()

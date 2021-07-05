@@ -267,4 +267,8 @@ class HiSearchView @JvmOverloads constructor(
         //防止内存泄漏
         MainHandler.remove(debounceRunnable)
     }
+
+    fun getKeyword(): String {
+        return keywordTv?.text.toString()
+    }
 }
