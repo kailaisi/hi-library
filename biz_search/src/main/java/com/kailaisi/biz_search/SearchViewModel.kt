@@ -10,7 +10,7 @@ import com.kailaisi.library.restful.HiResponse
 
 class SearchViewModel : ViewModel() {
 
-    var kewWords: List<KeyWord>? = null
+    var kewWords: MutableList<KeyWord>? = null
     var pageIndex = 1
     val MAX_HISTORY_SIZE = 10
 
@@ -36,13 +36,14 @@ class SearchViewModel : ViewModel() {
 
     fun saveHistory(keyWord: KeyWord?) {
         if (kewWords == null) {
-            kewWords = ArrayList<KeyWord>()
+            kewWords = mutableListOf<KeyWord>()
         }
+
         kewWords?.apply {
-            if (contains(keyWord)) {
+            if (this.contains(keyWord)) {
                 remove(kewWords)
             }
-            add(0, keyWord)
+            add(0, keyWord!!)
             if (this.size > MAX_HISTORY_SIZE) {
                 dropLast(this.size - MAX_HISTORY_SIZE)
             }
@@ -71,7 +72,7 @@ class SearchViewModel : ViewModel() {
     fun queryLocalHistory(): MutableLiveData<List<KeyWord>?> {
         val liveData = MutableLiveData<List<KeyWord>?>()
         HiExecutor.execute(runnable = Runnable {
-            kewWords = HiStorage.getCache<List<KeyWord>>(KEY_SEARCH_HISTORY)
+            kewWords = HiStorage.getCache<List<KeyWord>>(KEY_SEARCH_HISTORY)?.toMutableList()
             liveData.postValue(kewWords)
         })
         return liveData
