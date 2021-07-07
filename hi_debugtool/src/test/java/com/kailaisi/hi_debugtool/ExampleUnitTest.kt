@@ -1,4 +1,4 @@
-package com.tcsl.hi_debugtool
+package com.kailaisi.hi_debugtool
 
 import org.junit.Test
 

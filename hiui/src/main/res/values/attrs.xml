@@ -152,5 +152,41 @@
         <item name="key_word_padding">4dp</item>
     </style>
 
+    <!--数量编辑框-->
+    <style name="AmountStyle">
+        <item name="btn_text_size">@dimen/font_14</item>
+        <item name="btn_color">#999999</item>
+        <item name="btn_size">25dp</item>
+        <item name="btn_background">#eeeeee</item>
+        <item name="btn_margin">5dp</item>
+
+        <item name="amount_text_size">16sp</item>
+        <item name="amount_color">#000000</item>
+        <item name="amount_size">@dimen/dp_30</item>
+        <item name="amount_background">@android:color/white</item>
+
+        <item name="value">1</item>
+        <item name="min_value">1</item>
+        <!--        <item name="max_value">1</item> //不配置，就是Int.max_value-->
+    </style>
+
+    <declare-styleable name="AmountView">
+        <attr name="btn_text_size" format="dimension" />
+        <attr name="btn_color" format="color" />
+        <attr name="btn_size" format="dimension" />
+        <attr name="btn_margin" format="dimension" />
+        <attr name="btn_background" format="color" />
+
+        <attr name="amount_text_size" format="dimension" />
+        <attr name="amount_color" format="color" />
+        <attr name="amount_size" format="dimension" />
+        <attr name="amount_background" format="color" />
+
+        <attr name="value" format="integer" />
+        <attr name="max_value" format="integer" />
+        <attr name="min_value" format="integer" />
+    </declare-styleable>
+
+
 
 </resources>

@@ -1,4 +1,4 @@
-package com.tcsl.hi_debugtool
+package com.kailaisi.hi_debugtool
 
 import android.content.Intent
 import com.kailaisi.library.util.AppGlobals

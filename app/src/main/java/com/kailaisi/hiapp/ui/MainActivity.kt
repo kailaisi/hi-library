@@ -34,7 +34,7 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             if (BuildConfig.DEBUG) {
-                val clazz = Class.forName("com.tcsl.hi_debugtool.DebugToolDialogFragment")
+                val clazz = Class.forName("com.kailaisi.hi_debugtool.DebugToolDialogFragment")
                 val target = clazz.getConstructor().newInstance() as DialogFragment
                 target.show(supportFragmentManager, "DebugToolDialogFragment")
             }

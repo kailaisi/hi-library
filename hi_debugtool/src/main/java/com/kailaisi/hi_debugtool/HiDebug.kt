@@ -1,4 +1,4 @@
-package com.tcsl.hi_debugtool
+package com.kailaisi.hi_debugtool
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)

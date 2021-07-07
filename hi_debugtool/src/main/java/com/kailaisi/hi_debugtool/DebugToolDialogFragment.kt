@@ -1,4 +1,4 @@
-package com.tcsl.hi_debugtool
+package com.kailaisi.hi_debugtool
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kailaisi.common.tab.HiTabViewAdapter
 import com.kailaisi.library.util.HiDisplayUtils
 import java.lang.reflect.Method
 
