@@ -57,6 +57,7 @@ dependencies {
     implementation project(path: ':service_login')
     implementation project(path: ':biz_search')
     implementation project(path: ':biz_login')
+    implementation project(path: ':biz_order')
     implementation project(path: ':pub_mod')
     debugImplementation project(path: ':hi_debugtool')
 

@@ -21,6 +21,7 @@ import com.kailaisi.hi_ui.banner.core.HiBannerMo
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.FragmentProfileBinding
 import com.kailaisi.library.util.HiDisplayUtils
+import com.kailaisi.library.util.HiRes
 import com.kailaisi.library.util.bindView
 import com.kailaisi.service_login.NoticeInfo
 import com.kailaisi.service_login.UserProfile
@@ -129,7 +130,7 @@ class ProfileFragment : HiBaseFragment() {
         val ss = SpannableString(cou)
         /*变色*/
         ss.setSpan(
-            ForegroundColorSpan(resources.getColor(R.color.color_000)),
+            ForegroundColorSpan(HiRes.getColor(R.color.color_000)),
             0,
             ss.length,
             Spannable.SPAN_INCLUSIVE_EXCLUSIVE

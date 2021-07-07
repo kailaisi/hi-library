@@ -11,6 +11,7 @@ import android.view.Gravity
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.kailaisi.library.util.HiRes
 
 /**
  * 自定义View
@@ -71,7 +72,7 @@ class InputItemLayout : LinearLayout {
         val array = context.obtainStyledAttributes(topLineStyleId, R.styleable.lineAppearance)
         val line = Line()
         line.color =
-            array.getColor(R.styleable.lineAppearance_color, resources.getColor(R.color.color_d1d2))
+            array.getColor(R.styleable.lineAppearance_color, HiRes.getColor(R.color.color_d1d2))
         line.enable = array.getBoolean(R.styleable.lineAppearance_enable, false)
         line.height = array.getDimensionPixelSize(R.styleable.lineAppearance_height, 0)
         line.marginLeft = array.getDimensionPixelSize(R.styleable.lineAppearance_leftMargin, 0)
@@ -113,9 +114,9 @@ class InputItemLayout : LinearLayout {
     private fun parseInputStyle(hint: String?, inputType: Int, inputStyleId: Int): EditText {
         val array = context.obtainStyledAttributes(inputStyleId, R.styleable.inputTextAppearance)
         val hintColor = array.getColor(R.styleable.inputTextAppearance_hintColor,
-            resources.getColor(R.color.color_d1d2))
+            HiRes.getColor(R.color.color_d1d2))
         val textColor = array.getColor(R.styleable.inputTextAppearance_inputColor,
-            resources.getColor(R.color.color_565))
+            HiRes.getColor(R.color.color_565))
         val textSize = array.getDimensionPixelSize(R.styleable.inputTextAppearance_textSize,
             applyUnit(TypedValue.COMPLEX_UNIT_SP, 14f))
         val editText = EditText(context)
@@ -151,7 +152,7 @@ class InputItemLayout : LinearLayout {
     private fun parseTitleStyle(title: String?, titleStyleId: Int): TextView {
         val array = context.obtainStyledAttributes(titleStyleId, R.styleable.titleTextAppearance)
         val textColor = array.getColor(R.styleable.titleTextAppearance_titleColor,
-            resources.getColor(R.color.color_565))
+            HiRes.getColor(R.color.color_565))
         val textSize = array.getDimensionPixelSize(R.styleable.titleTextAppearance_titleSize,
             applyUnit(TypedValue.COMPLEX_UNIT_SP, 15f))
         val minWidth = array.getDimensionPixelSize(R.styleable.titleTextAppearance_minWidth, 0)

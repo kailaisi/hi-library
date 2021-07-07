@@ -17,6 +17,7 @@ import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.model.HomeBanner
 import com.kailaisi.library.util.HiDisplayUtils
+import com.kailaisi.library.util.HiRes
 
 class BannerItem(val list: List<HomeBanner>) :
     HiDataItem<List<HomeBanner>, HiViewHolder>(list) {
@@ -64,7 +65,7 @@ class BannerItem(val list: List<HomeBanner>) :
         )
         params.bottomMargin = HiDisplayUtils.dip2px(10f)
         banner.layoutParams = params
-        banner.setBackgroundColor(context.resources.getColor(R.color.color_white))
+        banner.setBackgroundColor(HiRes.getColor(R.color.color_white))
         return banner
     }
 

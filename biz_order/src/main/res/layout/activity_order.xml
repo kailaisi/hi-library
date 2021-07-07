@@ -126,7 +126,7 @@
             tools:background="@color/colorAccent" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/goods_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -140,13 +140,13 @@
             tools:text="小朋友我所想奥维尔两节课双方的纠纷撒的发送到付款是的纠纷阿道夫鸡尾酒阿时刻都怕感染企鹅随风起舞；耳机放弃；俄加入企鹅我" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/goods_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_333"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="@+id/goods_logo"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/goods_title"
             tools:text="1/件" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -171,8 +171,95 @@
             android:layout_weight="1" />
 
         <com.kailaisi.hi_ui.amout.AmountView
+            android:id="@+id/amount_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatCheckedTextView
+        android:id="@+id/channel_wx_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/color_white"
+        android:drawableLeft="@drawable/ic_wx_pay"
+        android:drawableRight="@drawable/selector_payway_checked"
+        android:drawablePadding="@dimen/dp_5"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16"
+        android:text="@string/channel_wx_pay"
+        android:textColor="@color/color_333"
+        android:textSize="@dimen/sp_12" />
+
+    <androidx.appcompat.widget.AppCompatCheckedTextView
+        android:id="@+id/channel_ali_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="1px"
+        android:background="@color/color_white"
+        android:checked="true"
+        android:drawableLeft="@drawable/ic_ali_pay"
+        android:drawableRight="@drawable/selector_payway_checked"
+        android:drawablePadding="@dimen/dp_5"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16"
+        android:text="@string/channel_wx_pay"
+        android:textColor="@color/color_333"
+        android:textSize="@dimen/sp_12" />
+
+
+    <Space
+        android:layout_width="1px"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/total_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="center_vertical"
+            android:text="@string/total_pay"
+            android:textColor="@color/color_333"
+            android:textSize="@dimen/font_14" />
+
+        <TextView
+            android:id="@+id/total_pay_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_dd2"
+            android:textSize="@dimen/font_14"
+            android:textStyle="bold"
+            tools:text="100.0$免运费" />
+
+        <TextView
+            android:id="@+id/order_now"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/color_dd2"
+            android:gravity="center"
+            android:text="@string/pay_now"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/font_14"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

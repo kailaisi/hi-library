@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.setPadding
 
 class AmountView @JvmOverloads constructor(
     context: Context, attr: AttributeSet? = null, defStyleAttr: Int = 0
@@ -57,7 +58,7 @@ class AmountView @JvmOverloads constructor(
 
     private fun generateAmountTextView(): TextView {
         val textView = TextView(context).apply {
-            setPadding(0, 0, 0, 0)
+            setPadding(0)
             textSize = attrs.amountTextSize
             setTextColor(attrs.amountTextColor)
             setBackgroundResource(attrs.amountBackground)
@@ -76,6 +77,7 @@ class AmountView @JvmOverloads constructor(
     private fun generateButton(): Button {
         val button = Button(context).apply {
             includeFontPadding = false
+            setPadding(0)
             setBackgroundResource(0)
             setTextColor(attrs.btnTextColor)
             setTextColor(attrs.btnTextColor)
@@ -88,5 +90,9 @@ class AmountView @JvmOverloads constructor(
 
     fun setAmountValueChangedListener(callback: (Int) -> Unit) {
         this.AmountValueChangedCallback = callback
+    }
+
+    fun gtAmountValue(): Int {
+        return amountValue
     }
 }

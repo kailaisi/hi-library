@@ -1,16 +1,27 @@
-package com.kailaisi.hiapp.ui.fragment;
+package com.kailaisi.hiapp.ui.fragment
 
-import com.kailaisi.common.ui.component.HiBaseFragment;
-import com.kailaisi.hiapp.R;
+import android.os.Bundle
+import android.view.View
+import com.kailaisi.common.HiRoute
+import com.kailaisi.common.ui.component.HiBaseFragment
+import com.kailaisi.hiapp.R
 
 /**
  * 描述：
- * <p/>作者：kailaisi
- * <br/>创建时间：2021-05-15:17:50
+ *
+ * 作者：kailaisi
+ * <br></br>创建时间：2021-05-15:17:50
  */
-public class FavoriteFragment extends HiBaseFragment {
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_favorite;
+class FavoriteFragment : HiBaseFragment() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        layoutView.findViewById<View>(R.id.tv).setOnClickListener {
+            val bundle = Bundle()
+            HiRoute.startActivity(context, bundle,"/order/detail")
+        }
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_favorite
     }
 }
