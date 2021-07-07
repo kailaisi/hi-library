@@ -1,0 +1,5 @@
+<resources>
+    <string name="order_confirm">确认订单</string>
+    <string name="add_order_address">手动添加收货地址</string>
+    <string name="amount_of_order">购买数量</string>
+</resources>
