@@ -8,6 +8,9 @@ plugins {
 }
 //apply from:'../flavor.gradle'
 
+def ext = rootProject.ext
+def dependency = rootProject.ext.dependencies
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"

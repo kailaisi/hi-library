@@ -1,5 +1,6 @@
+import org.gradle.internal.classpath.CachedClasspathTransformer
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply plugin: 'com.alibaba.arouter'
 apply from: 'dependency.gradle'
 buildscript {
     ext.kotlin_version = "1.4.32"
@@ -23,23 +24,23 @@ allprojects {
         google()
         jcenter()
     }
+    Transformer
 }
 
-afterEvaluate{pro->
-    Map<Project,Set<Task>> tasks=pro.getAllTasks(true)
-    tasks.entrySet().forEach{
-        it.value.forEach{
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+afterEvaluate { pro ->
+    Map<Project, Set<Task>> tasks = pro.getAllTasks(true)
+    tasks.entrySet().forEach {
+        it.value.forEach {
             println it.getName()
-            for(Object o:it.getDependsOn()){
-                println "dependsOn-->"+o.toString()
+            for (Object o : it.getDependsOn()) {
+                println "dependsOn-->" + o.toString()
             }
             println "--------------------------------"
         }
 
     }
-}
-
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
