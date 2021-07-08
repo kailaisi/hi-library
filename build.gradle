@@ -24,6 +24,21 @@ allprojects {
     }
 }
 
+afterEvaluate{pro->
+    Map<Project,Set<Task>> tasks=pro.getAllTasks(true)
+    tasks.entrySet().forEach{
+        it.value.forEach{
+            println it.getName()
+            for(Object o:it.getDependsOn()){
+                println "dependsOn-->"+o.toString()
+            }
+            println "--------------------------------"
+        }
+
+    }
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

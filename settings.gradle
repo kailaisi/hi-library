@@ -1,3 +1,32 @@
+gradle.buildStarted{
+    println "setting.gradle 构建开始..."
+}
+gradle.projectsLoaded{
+    println("从setting.gradle解析完成所有的项目")
+}
+
+gradle.beforeProject{pro->
+    println "${pro.name} build.gradle解析开始"
+}
+gradle.afterProject{pro->
+    println "${pro.name} build.gradle解析完成"
+}
+
+gradle.projectsEvaluated{
+    println "所有项目的build.gradle 解析完成"
+}
+
+gradle.getTaskGraph().addTaskExecutionListener(new TaskExecutionListener() {
+    @Override
+    void beforeExecute(Task task) {
+       // println "${task.name} 开始执行了"
+    }
+
+    @Override
+    void afterExecute(Task task, TaskState taskState) {
+     //   println "${task.name} 执行完成了"
+    }
+})
 include ':biz_search'
 include ':service_login'
 include ':pub_mod'
