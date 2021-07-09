@@ -1,0 +1,22 @@
+import jdk.internal.dynalink.linker.LinkerServices
+
+plugins {
+    id 'groovy'
+}
+repositories {
+    google()
+    jcenter()
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.tools.build:gradle:4.1.0'
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation 'org.javassist:javassist:3.27.0-GA'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
