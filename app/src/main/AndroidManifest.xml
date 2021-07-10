@@ -30,7 +30,6 @@
         <activity android:name=".ui.AuthenticationActivity" />
         <activity android:name=".route.DegradeGlobalActivity" />
         <activity android:name=".ui.ProfileDetailActivity" />
-        <activity android:name=".ui.account.RegisterActivity" />
         <activity android:name=".ui.VipActivity" />
         <activity android:name=".ui.notice.NoticeListActivity" />
     </application>

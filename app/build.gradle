@@ -8,9 +8,6 @@ plugins {
 }
 //apply from:'../flavor.gradle'
 
-def ext = rootProject.ext
-def dependency = rootProject.ext.dependencies
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -44,6 +41,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        abortOnError false
+    }
     dataBinding {
         enabled = true
     }
@@ -75,7 +75,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation "com.airbnb.android:lottie:3.7.0"
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    implementation project(path: ':hi_debugtool')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

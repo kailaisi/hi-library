@@ -6,9 +6,12 @@ import com.android.build.api.transform.Transform
 import com.android.build.api.transform.TransformException
 import com.android.build.api.transform.TransformInvocation
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.google.common.io.ByteStreams
 import javassist.ClassPool
 import javassist.CtClass
+import javassist.NotFoundException
 import javassist.bytecode.ClassFile
+import javassist.bytecode.stackmap.BasicBlock
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
@@ -54,7 +57,7 @@ class TinyTransform extends Transform {
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         //1。对input   directory  class 文件进行遍历
-        //2。对input   jar  class 文件进行遍历
+        //2。对input   jarInputs  class 文件进行遍历
         //3。对符合项目包名的activity.class文件进行处理
         def outputProvider = transformInvocation.outputProvider
         transformInvocation.inputs.each { input ->
@@ -66,17 +69,17 @@ class TinyTransform extends Transform {
                 def dest = outputProvider.getContentLocation(dir.name, dir.contentTypes, dir.scopes, Format.DIRECTORY)
                 FileUtils.copyDirectory(dir.file, dest)
             }
-            input.jarInputs.each { jar ->
-                println("jarInput abs file path:" + jar.file.absolutePath)
+            input.jarInputs.each { jarInputs ->
+                //  println("jarInput abs file path:" + jarInputs.file.absolutePath)
                 //对jar包修改完成之后，还会返回一个新的jar文件
-                def srcFile = handleJar(jar.file)
-                def jarName = jar.name
-                def md5 = DigestUtils.md5Hex(jar.file.absolutePath)
-                if (jarName.endsWith(".jar")) {
+                def srcFile = handleJar(jarInputs.file)
+                def jarName = jarInputs.name
+                def md5 = DigestUtils.md5Hex(jarInputs.file.absolutePath)
+                if (jarName.endsWith(".jarInputs")) {
                     jarName = jarName.substring(0, jarName.length() - 4)
                 }
                 //将input.dir.class->dest目标目录中去
-                def dest = outputProvider.getContentLocation(md5 + jarName, jar.contentTypes, jar.scopes, Format.JAR)
+                def dest = outputProvider.getContentLocation(md5 + jarName, jarInputs.contentTypes, jarInputs.scopes, Format.JAR)
                 FileUtils.copyFile(srcFile, dest)
             }
         }
@@ -92,6 +95,7 @@ class TinyTransform extends Transform {
         if (dir.isDirectory()) {
             dir.eachFileRecurse { file ->
                 def filePath = file.absolutePath
+                println("handleDirectory file path:" + filePath)
                 if (shouldModifyClass(filePath)) {
                     def inputStream = new FileInputStream(file)
                     def ctClass = modifyClass(inputStream)
@@ -105,37 +109,40 @@ class TinyTransform extends Transform {
 
     File handleJar(File jarFile) {
         classPool.appendClassPath(jarFile.absolutePath)
+        //ssesWithTinyPngPTransformForDebug
+        //jarInputs abs file path :/Users/timian/Desktop/AndroidArchitect/AndroidArchitect/ASProj/app/build/intermediates/transforms/com.alibaba.arouter/debug/0.jar
         def inputJarFile = new JarFile(jarFile)
-        def entry = inputJarFile.entries()
+        def enumeration = inputJarFile.entries()
         def outputJarFile = new File(jarFile.parentFile, "temp_" + jarFile.name)
-        if (outputJarFile.exists()) {
-            outputJarFile.delete()
-        }
-        def os = new JarOutputStream(new BufferedOutputStream(new FileOutputStream(outputJarFile)))
-        while (entry.hasMoreElements()) {
-            def jarEntry = entry.nextElement()
-            def entryName = jarEntry.name
+        if (outputJarFile.exists()) outputJarFile.delete()
+        def jarOutputStream = new JarOutputStream(new BufferedOutputStream(new FileOutputStream(outputJarFile)))
+        while (enumeration.hasMoreElements()) {
+            def inputJarEntry = enumeration.nextElement()
+            def inputJarEntryName = inputJarEntry.name
 
-            def outJarEntry = new JarEntry(jarEntry)
-            os.putNextEntry(outJarEntry)
-            println("inputJarEntryName:" + entryName)
-            def is = inputJarFile.getInputStream(jarEntry)
-            if (!shouldModifyClass(entryName)) {
-                os.write(IOUtils.toByteArray(is))
-                is.close()
+            def outputJarEntry = new JarEntry(inputJarEntryName)
+            jarOutputStream.putNextEntry(outputJarEntry)
+            //com/leon/channel/helper/BuildConfig.class
+            //    println("inputJarEntryName: " + inputJarEntryName)
+
+            def inputStream = inputJarFile.getInputStream(inputJarEntry)
+            if (!shouldModifyClass(inputJarEntryName)) {
+                ByteStreams.copy(inputStream, jarOutputStream)
+                inputStream.close()
                 continue
             }
-            def ctClass = modifyClass(is)
+            def ctClass = modifyClass(inputStream)
             def byteCode = ctClass.toBytecode()
             ctClass.detach()
-            is.close()
-            os.write(byteCode)
-            os.flush()
+            inputStream.close()
+
+            jarOutputStream.write(byteCode)
+            jarOutputStream.flush()
         }
         inputJarFile.close()
-        os.closeEntry()
-        os.flush()
-        os.close()
+        jarOutputStream.closeEntry()
+        jarOutputStream.flush()
+        jarOutputStream.close()
         return outputJarFile
     }
 
@@ -147,15 +154,22 @@ class TinyTransform extends Transform {
             ctClass.defrost()
         }
         def bundle = classPool.get("android.os.Bundle")
-        CtClass[] params = Arrays.asList(bundle).toArray()
-        def method = ctClass.getDeclaredMethod('onCreate', params)
-        def message = classFile.name
-        method.insertAfter("Toast.makeText(this," + "\"" + message + "\"" + ",Toast.LENGTH_SHORT).show()")
+        try {
+            CtClass[] params = Arrays.asList(bundle).toArray()
+            def method = ctClass.getDeclaredMethod('onCreate', params)
+            def message = classFile.name
+            method.insertAfter("Toast.makeText(this," + "\"" + message + "\"" + ",Toast.LENGTH_SHORT).show();")
+        } catch (NotFoundException e) {
+            println(e.getMessage())
+        }
         return ctClass
     }
 
 
     boolean shouldModifyClass(String filePath) {
+        filePath = filePath.replace("/", ".")
+                .replace("\"", ".")
+                .replace(File.separator, ".")
         return (filePath.contains("com.kailaisi")
                 && filePath.endsWith("Activity.class")
                 && !filePath.contains("R.class")

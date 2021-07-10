@@ -1,6 +1,5 @@
 package com.kailaisi.hiapp.route
 
-import android.accounts.AccountManager
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -9,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
 import com.kailaisi.library.util.MainHandler
+import com.kailaisi.pub_mod.RouterFlag
 import com.kailaisi.service_login.LoginServiceProvider
 import java.lang.RuntimeException
 
