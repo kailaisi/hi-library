@@ -6,8 +6,8 @@ plugins {
     id 'com.alibaba.arouter'
     id 'channel'
 }
-//apply from:'../flavor.gradle'
-
+apply from: '../flavor_channel.gradle'
+apply from: '../jenkins_package.gradle'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
