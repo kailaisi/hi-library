@@ -106,6 +106,10 @@ public class MainActivityLogic {
         outState.putInt(SAVE_INSTANCE_STATE, currentItemIndex);
     }
 
+    public HiBottomLayout getHiTabBottomLayout() {
+        return hiBottomLayout;
+    }
+
     public interface ActivityProvider {
         <T extends View> T findViewById(@IdRes int id);
 

@@ -34,7 +34,7 @@ open class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
     private var refreshLayout: HiRefreshLayout? = null
     private var loadingView: ContentLoadingProgressBar? = null
     private var emptyView: EmptyView? = null
-    private var recyclerView: HiRecyclerView? = null
+    protected var recyclerView: HiRecyclerView? = null
     private lateinit var refreshHeaderView: HiOverView
     override fun getLayoutId(): Int {
         return R.layout.fragment_list

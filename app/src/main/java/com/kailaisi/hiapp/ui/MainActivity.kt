@@ -1,6 +1,7 @@
 package com.kailaisi.hiapp.ui
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
@@ -42,6 +43,11 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
         return super.onKeyDown(keyCode, event)
     }
 
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        logic.hiTabBottomLayout.resizeHiTabBottomLayout()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
