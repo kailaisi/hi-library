@@ -7,7 +7,7 @@ import kotlin.Comparator
 
 abstract class Task @JvmOverloads constructor(
     val id: String,
-    val isAsyncTask: Boolean,
+    val isAsyncTask: Boolean = false,
     val delayMills: Long = 0,
     var priority: Int = 0
 ) : Runnable, Comparable<Task> {
@@ -97,20 +97,28 @@ abstract class Task @JvmOverloads constructor(
     }
 
     //添加一个前置任务
-    fun addDependOn(task: Task) {
+    open fun addDependOn(task: Task) {
         if (task != this) {
-            dependTasks.add(task)
-            dependTaskNames.add(task.id)
+            var readTask = task
+            if (readTask is Project) {
+                readTask = readTask.endTask
+            }
+            dependTasks.add(readTask)
+            dependTaskNames.add(readTask.id)
             //还需要将this设置为task的behindTask
-            if (!task.behindTasks.contains(this)) {
-                task.behindTasks.add(this)
+            if (!readTask.behindTasks.contains(this)) {
+                readTask.behindTasks.add(this)
             }
         }
     }
 
     //移除前置依赖
-    fun removeDependence(task: Task) {
+    open fun removeDependence(dependTask: Task) {
+        var task = dependTask
         if (task != this) {
+            if (task is Project) {
+                task = task.endTask
+            }
             dependTasks.remove(task)
             dependTaskNames.remove(task.id)
             task.behindTasks.remove(this)
@@ -118,8 +126,12 @@ abstract class Task @JvmOverloads constructor(
     }
 
     //添加一个后置以来
-    fun addBehind(task: Task) {
+    open fun addBehind(behindTask: Task) {
+        var task = behindTask
         if (task != this) {
+            if (task is Project) {
+                task = task.startTask
+            }
             behindTasks.add(task)
             if (!behindTasks.contains(this)) {
                 task.addDependOn(this)
@@ -128,8 +140,12 @@ abstract class Task @JvmOverloads constructor(
     }
 
     //移除后置任务
-    fun removeBehind(task: Task) {
+    open fun removeBehind(behindTask: Task) {
+        var task = behindTask
         if (task != this) {
+            if (task is Project) {
+                task = task.startTask
+            }
             behindTasks.remove(task)
             task.removeDependence(this)
         }
