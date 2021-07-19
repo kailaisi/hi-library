@@ -1,6 +1,7 @@
 package com.kailaisi.library.taskflow
 
 import androidx.core.os.TraceCompat
+import com.kailaisi.library.executor.HiExecutor
 import java.lang.RuntimeException
 import java.util.*
 import kotlin.Comparator
@@ -30,11 +31,7 @@ abstract class Task @JvmOverloads constructor(
     private val taskListeners = mutableListOf<TaskListener>(taskRuntimeListener!!)
 
     //用于在运行时log的输出，输出当前task依赖的task的名称
-    private val dependTaskNames = mutableListOf<String>()
-
-    val taskComparator = Comparator { o1: Task, o2: Task ->
-        Utils.compareTask(o1, o2)
-    }
+    val dependTaskNames = mutableListOf<String>()
 
     fun addTaskListener(taskListener: TaskListener) {
         if (!taskListeners.contains(taskListener)) {
@@ -49,11 +46,13 @@ abstract class Task @JvmOverloads constructor(
         toStart()
         executeTime = System.currentTimeMillis()
         //执行当前任务
-        //todo executeTask(this)
+        TaskRuntime.executeTask(this)
     }
+
 
     private fun toStart() {
         state = TaskState.START
+        TaskRuntime.setStateInfo(this)
         for (taskListener in taskListeners) {
             taskListener.onStart(this)
         }
@@ -74,7 +73,7 @@ abstract class Task @JvmOverloads constructor(
     private fun notifyBehind() {
         if (behindTasks.isNotEmpty()) {
             if (behindTasks.size > 1) {
-                Collections.sort(behindTasks, taskComparator)
+                Collections.sort(behindTasks, TaskRuntime.taskComparator)
             }
             //遍历，通知，其一个前置依赖已经执行完成了
             for (behindTask in behindTasks) {
@@ -160,6 +159,7 @@ abstract class Task @JvmOverloads constructor(
 
     private fun toFinish() {
         state = TaskState.FINISHED
+        TaskRuntime.setStateInfo(this)
         for (listener in taskListeners) {
             listener.onFinished(this)
         }
@@ -167,6 +167,9 @@ abstract class Task @JvmOverloads constructor(
 
     private fun toRunning() {
         state = TaskState.RUNNING
+        TaskRuntime.setStateInfo(this)
+        TaskRuntime.setThreadName(this, Thread.currentThread().name)
+        TaskRuntime.removeBlockTask(this.id)
         for (listener in taskListeners) {
             listener.onRunning(this)
         }

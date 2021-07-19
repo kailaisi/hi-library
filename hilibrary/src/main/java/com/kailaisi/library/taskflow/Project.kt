@@ -49,7 +49,7 @@ class Project private constructor(id: String) : Task(id) {
 
         private fun add(task: Task): Builder {
             if (mCurrentShouldDependOnStartTask && mCurrentAddTask != null) {
-                mStartTask.addBehind(task)
+                mStartTask.addBehind(mCurrentAddTask!!)
             }
             mCurrentAddTask = task
             mCurrentShouldDependOnStartTask = true
@@ -102,7 +102,7 @@ class Project private constructor(id: String) : Task(id) {
     }
 
     //用于创建临时的节点信息
-    private class CriticalTask internal constructor(id: String) : Task(id) {
+     class CriticalTask internal constructor(id: String) : Task(id) {
         override fun run(id: String) {
         }
     }
