@@ -47,18 +47,20 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api project(path: ':hiui')
+    api project(path: ':hilibrary')
+    implementation project(path: ':service_login')
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     api 'com.google.android.material:material:1.1.0'
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api 'androidx.lifecycle:lifecycle-runtime:2.2.0'
-    api project(path: ':hiui')
-    api project(path: ':hilibrary')
     implementation 'com.google.code.gson:gson:2.8.6'
+
     api 'com.github.bumptech.glide:glide:4.12.0'
-    implementation project(path: ':service_login')
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
     api 'com.alibaba:arouter-api:1.5.0'
     kapt 'com.alibaba:arouter-compiler:1.5.1'
 }

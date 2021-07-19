@@ -1,4 +1,4 @@
-package com.kailaisi.hiapp.route;
+package com.kailaisi.pub_mod;
 
 /**
  * 描述：跳转需要的字段

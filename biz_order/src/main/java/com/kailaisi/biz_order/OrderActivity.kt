@@ -10,13 +10,14 @@ import com.kailaisi.biz_order.address.Address
 import com.kailaisi.common.HiRoute
 import com.kailaisi.common.ui.view.load
 import com.kailaisi.library.util.HiStatusBar
+import com.kailaisi.pub_mod.RouterFlag
 import kotlinx.android.synthetic.main.activity_order.*
 
 /**
  * 订单页面
  */
 
-@Route(path = "/order/detail")
+@Route(path = "/order/detail",extras = RouterFlag.FLAG_LOGIN)
 class OrderActivity : AppCompatActivity() {
 
     @Autowired

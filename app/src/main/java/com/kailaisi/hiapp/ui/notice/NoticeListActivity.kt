@@ -21,8 +21,8 @@ class NoticeListActivity : HiBaseActivity() {
     private lateinit var adapter: HiAdapter
     val mBinding: ActivityNoticeListBinding by inflate()
     override fun onCreate(savedInstanceState: Bundle?) {
-        HiStatusBar.setStatusBar(this, true, translucent = false)
         super.onCreate(savedInstanceState)
+        HiStatusBar.setStatusBar(this, true, translucent = false)
         setContentView(mBinding.root)
         mBinding.actionBack.setOnClickListener { onBackPressed() }
         initView()

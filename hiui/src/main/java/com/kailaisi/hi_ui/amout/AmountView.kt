@@ -61,7 +61,7 @@ class AmountView @JvmOverloads constructor(
             setPadding(0)
             textSize = attrs.amountTextSize
             setTextColor(attrs.amountTextColor)
-            setBackgroundResource(attrs.amountBackground)
+            setBackgroundColor(attrs.amountBackground)
             includeFontPadding = false
             gravity = Gravity.CENTER
             minWidth = attrs.amountSize

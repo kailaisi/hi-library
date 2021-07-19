@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.kailaisi.hiapp.R;
-import com.kailaisi.hiapp.route.RouterFlag;
+import com.kailaisi.pub_mod.RouterFlag;
 
 /**
  * 描述：用户详情页

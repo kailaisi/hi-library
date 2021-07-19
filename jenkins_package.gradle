@@ -1,0 +1,149 @@
+import com.google.gson.Gson
+import com.sun.xml.bind.v2.TODO
+import okhttp3.FormBody
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import org.json.JSONObject
+
+import java.util.concurrent.TimeUnit
+
+//可以通过jenkins执行这里的命令，来进行jenkins的一些操作，比如说多渠道打包；比如说二维码上传到官网；比如说进行360加固等等
+//导包APK，上传蒲公英，多渠道，加固
+task packageAPK {
+    println("BUILD_TYPE:" + BUILD_TYPE)
+    println "BUILD_PROTECT:" + BUILD_PROTECT
+    println "BUILD_MULTI_FLAVOR" + BUILD_MULTI_FLAVOR
+    File apkFileDir = null
+    if (BUILD_PROTECT && BUILD_MULTI_FLAVOR) {//打包多渠道+多Flavor
+        def reBuildChannel = tasks.findByName("reBuildChannel")
+        //先执行360加固
+       // reBuildChannel.dependsOn("protect360")
+        //再执行reBuildChannel，然后再执行打包
+        dependsOn("reBuildChannel")
+        apkFileDir = new File(project.buildDir, "/output/rebuildChannel/release")
+    } else if (!BUILD_PROTECT && !BUILD_MULTI_FLAVOR) {
+        dependsOn("assemble" + BUILD_TYPE.capitalize())
+        apkFileDir = new File(project.buildDir, "outputs/channel")
+    } else if (!BUILD_PROTECT && BUILD_MULTI_FLAVOR) {
+        dependsOn("channel" + BUILD_TYPE)
+        apkFileDir = new File(project.buildDir, "outputs/channel")
+    } else if (BUILD_PROTECT) {
+        dependsOn("protect360")
+        apkFileDir = new File(project.buildDir, "outputs/packers")
+    }
+    //执行完本任务之后，最后执行
+    doLast {
+        def uploadFile = findApkFile(apkFileDir)
+        println "uploadFile:" + uploadFile.name
+        //apk上传
+        uploadAPK(uploadAPK)
+    }
+
+}
+
+//从apkFile中找到apk文件，通过文件遍历获取
+def findApkFile(File apkFile) {
+    if (apkFile.isDirectory()) {
+        def files = apkFile.listFiles()
+        for (file in files) {
+            def f = findApkFile(file)
+            if (f != null) {
+                return f
+            }
+        }
+    } else if (apkFile.name.endsWith(".apk")) {
+        return apkFile
+    } else return null
+}
+//上传apk到蒲公英，使用的api来自于蒲公英官网:https://www.pgyer.com/doc/view/api
+def uploadAPK(File uploadAPK) {
+    println("uploadAPK:" + uploadAPK.absolutePath + "-->" + uploadAPK.exists())
+    if (uploadAPK == null || !uploadAPK.exists()) {
+        throw new RuntimeException("the apk not exist!")
+    }
+    println "----------start upload--------------"
+    //上传接口：https://www.pgyer.com/apiv2/app/upload
+    def url = new URL("https://www.pgyer.com/apiv2/app/upload")
+    def client = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
+
+    def fileBody = RequestBody.create(MediaType.parse("multipart/form-data"), uploadAPK)
+    def requestBody = new MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("_api_key", "196c1f4417273abe073a01b2bc186693")//蒲公英的key
+            .addFormDataPart("file", uploadAPK.name, fileBody)
+            .addFormDataPart("")
+    def request = new Request.Builder()
+            .url(url)
+            .post(requestBody)
+            .build()
+    def response = client.newCall(request).execute()
+    int code = response.code()
+    if (response == null || code != 200 || response.body() == null) {
+        println "蒲公英上传失败"
+        //todo 可以发送企业微信消息
+        return null
+    } else {
+        def json = response.body().toString()
+        println "蒲公英上传返回结果：" + json
+        def data = new Gson().fromJson(json, Map.class).data
+        println data
+        println "*************** upload finish ***************"
+        sendMsgToQiye(data)
+    }
+}
+//发送消息到企业微信
+def sendMsgToQiye(Map data) {
+    def downloadUrl = "https://www.pgyer.com/" + data.buildShortcutUrl
+    def qrCodeUrl = "![](" + data.buildQRCodeURL + ")"
+    def detailLink = "[项目地址](${BUILD_URL})"
+    def map = new HashMap<String, Object>()
+    map.put("msgtype", "markdown")
+    def markdown = new JSONObject()
+    def _content = new StringBuffer()
+            .append("\n\n### ${JOB_NAME}构建成功")
+            .append("\n\n构建版本:${BRANCH_NAME}")
+            .append("\n\n构建类型:${BUILD_TYPE}")
+            .append("\n\n下载地址:" + downloadUrl)
+            .append("\n\n" + qrCodeUrl)
+            .append("\n\n构建用户:${BUILD_USER}")
+            .append("\n\n构建时间:" + getNowTime())
+            .append("\n\n查看详情:" + detailLink)
+    markdown.put("content", _content.toString())
+    map.put("markdown", markdown)
+    sendMSG(map)
+}
+
+def sendMSG(obj) {
+    def url = new URL("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c7bcdefa-6905-41e4-b404-20e4b2ed2ee3")
+    def client = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
+    def body = RequestBody.create(MediaType.parse("application/json", obj))
+    def request = new Request.Builder()
+            .url(url)
+            .post(body)
+            .build()
+    def response = client.newCall(request).execute()
+    int code = response.code()
+    if (response == null || code != 200 || response.body() == null) {
+        println "蒲公英上传失败"
+        //todo 可以发送企业微信消息
+        return null
+    } else {
+        def json = response.body().toString()
+        println "蒲公英上传返回结果：" + json
+        def data = new Gson().fromJson(json, Map.class).data
+        println data
+        println "*************** upload finish ***************"
+        sendMsgToQiye(data)
+    }
+}

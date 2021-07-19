@@ -199,4 +199,17 @@ public class HiBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBot
     public void setBottomLineColor(String bottomLineColor) {
         this.bottomLineColor = bottomLineColor;
     }
+
+    public void resizeHiTabBottomLayout(){
+        int width = HiDisplayUtils.getScreenWidth() / infoList.size();
+        ViewGroup layout= (ViewGroup) getChildAt(getChildCount()-1);
+        int count = layout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View view = layout.getChildAt(i);
+            FrameLayout.LayoutParams params = (LayoutParams) view.getLayoutParams();
+            params.width=width;
+            params.leftMargin=i*width;
+            view.setLayoutParams(params);
+        }
+    }
 }

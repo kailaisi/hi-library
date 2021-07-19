@@ -1,16 +1,19 @@
 package com.kailaisi.hiapp.ui.fragment.home
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kailaisi.common.ui.component.HiAbsListFragment
 import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hiapp.model.HomeModel
 import com.kailaisi.library.restful.annotion.CacheStrategy
+import com.kailaisi.library.util.FolderableDeviceUtils
 import com.kailaisi.pub_mod.GoodsItem
 
 /**
@@ -39,7 +42,7 @@ class HomeTabFragment : HiAbsListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         categoryId = arguments?.getString("id", DEFAULT_TAB_ID)
         super.onViewCreated(view, savedInstanceState)
-        viewModel=ViewModelProvider(this)[HomePageViewModel::class.java]
+        viewModel = ViewModelProvider(this)[HomePageViewModel::class.java]
         queryTabTCategoryList(CacheStrategy.CACHE_FIRST)
         enableLoadMore {
             queryTabTCategoryList(CacheStrategy.NET_ONLY)
@@ -53,13 +56,14 @@ class HomeTabFragment : HiAbsListFragment() {
     }
 
     private fun queryTabTCategoryList(cacheStrategy: Int) {
-        viewModel.queryTabCategoryList(categoryId,pageIndex,cacheStrategy).observe(viewLifecycleOwner, Observer {
-            if (it!=null){
-                updateUi(it)
-            }else{
-                finishRefresh(null)
-            }
-        })
+        viewModel.queryTabCategoryList(categoryId, pageIndex, cacheStrategy)
+            .observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    updateUi(it)
+                } else {
+                    finishRefresh(null)
+                }
+            })
     }
 
     private fun updateUi(data: HomeModel) {
@@ -74,6 +78,26 @@ class HomeTabFragment : HiAbsListFragment() {
             data.goodsList?.forEachIndexed { index, goodsModel ->
                 dataItems.add(GoodsItem(goodsModel))
             }
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (FolderableDeviceUtils.isFold()) {
+            recyclerView?.layoutManager = LinearLayoutManager(context)
+        } else {
+            val manager = GridLayoutManager(context, 2)
+            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    if (position <= 1) {
+                        return 2
+                    } else {
+                        return 1
+                    }
+                }
+
+            }
+            recyclerView?.layoutManager = manager
         }
     }
 }

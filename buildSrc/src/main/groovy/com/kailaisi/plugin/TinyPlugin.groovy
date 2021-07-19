@@ -14,6 +14,6 @@ class TinyPlugin implements Plugin<Project> {
        /* //找到android中的配置  和下面的效果一样
         def android = project.extensions.findByType(AppExtension.class)
         android.registerTransform(new TinyTransform())*/
-        project.android.registerTransform(new TinyTransform(project))
+        project.android.registerTransform(new ToastTransform(project))
     }
 }

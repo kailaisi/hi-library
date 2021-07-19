@@ -1,31 +1,30 @@
 package com.kailaisi.plugin
 
-import com.android.build.api.transform.Format
-import com.android.build.api.transform.QualifiedContent
-import com.android.build.api.transform.Transform
-import com.android.build.api.transform.TransformException
-import com.android.build.api.transform.TransformInvocation
+import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.google.common.io.ByteStreams
-import javassist.ClassPool
-import javassist.CtClass
-import javassist.NotFoundException
+import javassist.*
 import javassist.bytecode.ClassFile
-import javassist.bytecode.stackmap.BasicBlock
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
-import org.apache.commons.io.IOUtils
 import org.gradle.api.Project
 
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 
-class TinyTransform extends Transform {
+/**
+ * 通过字节码调整，修改ImageView的setImageDrawable方法，里面增加上对应的图片检测的功能
+ * 1.生成一个RunnableImpl类，
+ * 2.在setImageDrawable中调用中的方法，检测图片大小和对应的View的大小是否满足一定的条件。
+ */
+class ToastTransform extends Transform {
+
+    private static final String RunnableImplName = "com.kailaisi.hi_debugtool.RunnableImpl"
 
     private ClassPool classPool = ClassPool.getDefault()
 
-    TinyTransform(Project project) {
+    ToastTransform(Project project) {
         //为了能够查找到android相关的类，需要把android.jar包的路径添加到classPool类搜索路径中
         classPool.appendClassPath(project.android.bootClasspath[0].toString())
         classPool.importPackage("android.os.Bundle")
@@ -64,7 +63,6 @@ class TinyTransform extends Transform {
             input.directoryInputs.each { dir ->
                 println("dirInput abs file path:" + dir.file.absolutePath)
                 handleDirectory(dir.file)
-
                 //将input.dir.class->dest目标目录中去
                 def dest = outputProvider.getContentLocation(dir.name, dir.contentTypes, dir.scopes, Format.DIRECTORY)
                 FileUtils.copyDirectory(dir.file, dest)
@@ -72,15 +70,17 @@ class TinyTransform extends Transform {
             input.jarInputs.each { jarInputs ->
                 //  println("jarInput abs file path:" + jarInputs.file.absolutePath)
                 //对jar包修改完成之后，还会返回一个新的jar文件
-                def srcFile = handleJar(jarInputs.file)
-                def jarName = jarInputs.name
-                def md5 = DigestUtils.md5Hex(jarInputs.file.absolutePath)
-                if (jarName.endsWith(".jarInputs")) {
-                    jarName = jarName.substring(0, jarName.length() - 4)
+                if (jarInputs.file.size() != 0) {
+                    def srcFile = handleJar(jarInputs.file)
+                    def jarName = jarInputs.name
+                    def md5 = DigestUtils.md5Hex(jarInputs.file.absolutePath)
+                    if (jarName.endsWith(".jarInputs")) {
+                        jarName = jarName.substring(0, jarName.length() - 4)
+                    }
+                    //将input.dir.class->dest目标目录中去
+                    def dest = outputProvider.getContentLocation(md5 + jarName, jarInputs.contentTypes, jarInputs.scopes, Format.JAR)
+                    FileUtils.copyFile(srcFile, dest)
                 }
-                //将input.dir.class->dest目标目录中去
-                def dest = outputProvider.getContentLocation(md5 + jarName, jarInputs.contentTypes, jarInputs.scopes, Format.JAR)
-                FileUtils.copyFile(srcFile, dest)
             }
         }
         classPool.clearImportedPackages()
@@ -96,9 +96,9 @@ class TinyTransform extends Transform {
             dir.eachFileRecurse { file ->
                 def filePath = file.absolutePath
                 println("handleDirectory file path:" + filePath)
-                if (shouldModifyClass(filePath)) {
+                if (shouldModifyClass2(filePath)) {
                     def inputStream = new FileInputStream(file)
-                    def ctClass = modifyClass(inputStream)
+                    def ctClass = modifyClass2(inputStream)
                     //写入磁盘
                     ctClass.writeFile(dir.name)
                     ctClass.detach()
@@ -108,6 +108,8 @@ class TinyTransform extends Transform {
     }
 
     File handleJar(File jarFile) {
+        if (jarFile.size() == 0) {
+        }
         classPool.appendClassPath(jarFile.absolutePath)
         //ssesWithTinyPngPTransformForDebug
         //jarInputs abs file path :/Users/timian/Desktop/AndroidArchitect/AndroidArchitect/ASProj/app/build/intermediates/transforms/com.alibaba.arouter/debug/0.jar
@@ -126,12 +128,12 @@ class TinyTransform extends Transform {
             //    println("inputJarEntryName: " + inputJarEntryName)
 
             def inputStream = inputJarFile.getInputStream(inputJarEntry)
-            if (!shouldModifyClass(inputJarEntryName)) {
+            if (!shouldModifyClass2(inputJarEntryName)) {
                 ByteStreams.copy(inputStream, jarOutputStream)
                 inputStream.close()
                 continue
             }
-            def ctClass = modifyClass(inputStream)
+            def ctClass = modifyClass2(inputStream)
             def byteCode = ctClass.toBytecode()
             ctClass.detach()
             inputStream.close()
@@ -165,6 +167,73 @@ class TinyTransform extends Transform {
         return ctClass
     }
 
+    //这个方法是 往appcomimageview -setimagedrawable --插入不合理大图检测的代码段
+    CtClass modifyClass2(InputStream is) {
+        def classFile = new ClassFile(new DataInputStream(new BufferedInputStream(is)))
+        //org.devio.as.proj.main.degrade.DegradeGlobalActivity
+        println("modifyClass name：" + classFile.name)//全类名
+        def ctClass = classPool.get(classFile.name)
+        if (ctClass.isFrozen()) {
+            ctClass.defrost()
+        }
+        def drawable = classPool.get("android.graphics.drawable.Drawable")
+        CtClass[] params = Arrays.asList(drawable).toArray()
+        def setImageDrawableMethod = ctClass.getDeclaredMethod("setImageDrawable", params)
+        def runnableImpl
+        try {
+            runnableImpl = classPool.makeClass(RunnableImplName)
+            if (runnableImpl.isFrozen()) {
+                runnableImpl.defrost()
+            }
+            CtField viewField = new CtField(classPool.get("androidx.appcompat.widget.AppCompatImageView"), "view", runnableImpl)
+            viewField.setModifiers(Modifier.PUBLIC)
+            runnableImpl.addField(viewField)
+
+
+            CtField drawableField = new CtField(classPool.get("android.graphics.drawable.Drawable"), "drawable", runnableImpl)
+            drawableField.setModifiers(Modifier.PUBLIC)
+            runnableImpl.addField(drawableField)
+
+            runnableImpl.addConstructor(CtNewConstructor.make("public RunnableImpl(android.view.View view, android.graphics.drawable.Drawable drawable) {\n" +
+                    "            this.view = view;\n" +
+                    "            this.drawable = drawable;\n" +
+                    "        }", runnableImpl))
+
+            runnableImpl.addInterface(classPool.get("java.lang.Runnable"))
+
+            CtMethod runMethod = new CtMethod(CtClass.voidType, "run", null, runnableImpl)
+            runMethod.setModifiers(Modifier.PUBLIC)
+            runMethod.setBody("{int width = view.getWidth();\n" +
+                    "            int height = view.getHeight();\n" +
+                    "            int drawableWidth = drawable.getIntrinsicWidth();\n" +
+                    "            int drawableHeight = drawable.getIntrinsicHeight();\n" +
+                    "            if (width > 0 && height > 0) {\n" +
+                    "                if (drawableWidth >= 2 * width && drawableHeight >= 2 * height) {\n" +
+                    "                    android.util.Log.e(\"LargeBitmapChecker\", \"bitmap:[\" + drawableWidth + \",\" + drawableHeight + \"],view:[\" + width + \",\" + height + \"],className:\" + view.getContext().getClass().getSimpleName());\n" +
+                    "                }\n" +
+                    "            }\n" +
+                    "            android.util.Log.e(\"LargeBitmapChecker\", \"bitmap:[\" + drawableWidth + \",\" + drawableHeight + \"],view:[\" + width + \",\" + height + \"],className:\" + view.getContext().getClass().getSimpleName());}")
+            runnableImpl.addMethod(runMethod)
+            runnableImpl.writeFile("hi_debugtool/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes")
+            runnableImpl.toClass()
+
+            classPool.insertClassPath(RunnableImplName)
+            setImageDrawableMethod.insertBefore("if(drawable!=null){ post(new RunnableImpl(this, drawable));}")
+        }
+
+        catch (Exception e) {}
+        return ctClass
+    }
+
+
+    boolean shouldModifyClass2(String filePath) {
+        return (filePath.contains("androidx/appcompat/widget/AppCompatImageView")
+                && filePath.endsWith("AppCompatImageView")
+                && !filePath.contains("R.class")
+                && !filePath.contains('$')
+                && !filePath.contains('R$')
+                && !filePath.contains("BuildConfig.class"))
+    }
 
     boolean shouldModifyClass(String filePath) {
         filePath = filePath.replace("/", ".")
@@ -178,4 +247,5 @@ class TinyTransform extends Transform {
                 && !filePath.contains("BuildConfig.class"))
 
     }
+
 }
