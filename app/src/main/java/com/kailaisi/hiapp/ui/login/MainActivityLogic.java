@@ -21,6 +21,7 @@ import com.kailaisi.hiapp.ui.fragment.FavoriteFragment;
 import com.kailaisi.hiapp.ui.fragment.home.HomePageFragment;
 import com.kailaisi.hiapp.ui.fragment.ProfileFragment;
 import com.kailaisi.hiapp.ui.fragment.RecommandFragment;
+import com.kailaisi.library.aspectj.MethodTrace;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,6 +51,7 @@ public class MainActivityLogic {
         initBottom();
     }
 
+    @MethodTrace
     public void initBottom() {
         hiBottomLayout = activityProvider.findViewById(R.id.tab_bottom_layout);
 

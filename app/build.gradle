@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'com.alibaba.arouter'
     id 'channel'
+    id 'android-aspectjx'
 }
 apply from: '../flavor_channel.gradle'
 apply from: '../jenkins_package.gradle'
