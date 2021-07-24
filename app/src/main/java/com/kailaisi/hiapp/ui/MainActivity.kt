@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hi_ui.tab.bottom.HiViewUtil
 import com.kailaisi.hiapp.BuildConfig
-import com.kailaisi.hiapp.databinding.ActivityMainBinding
+import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.ui.login.MainActivityLogic
 import com.kailaisi.library.aspectj.MethodTrace
 import com.kailaisi.library.util.HiStatusBar
@@ -20,8 +20,7 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     lateinit var logic: MainActivityLogic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val mBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        setContentView(R.layout.activity_main)
         logic = MainActivityLogic(this, savedInstanceState)
         HiStatusBar.setStatusBar(this, true)
     }

@@ -6,15 +6,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kailaisi.hi_ui.tab.bottom.HiTabBottomInfo
 import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.databinding.ActivityTabLayoutDemoBinding
 import com.kailaisi.library.util.HiDisplayUtils
+import kotlinx.android.synthetic.main.activity_tab_layout_demo.*
 
 class TabLayoutDemoActivity : AppCompatActivity() {
 
-    val binding by lazy { ActivityTabLayoutDemoBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_tab_layout_demo)
         initTabBottom()
     }
 
@@ -44,7 +43,6 @@ class TabLayoutDemoActivity : AppCompatActivity() {
         list.add(home)
         list.add(cal)
         list.add(set)
-        var layout = binding.layout
         layout.apply {
             setTabAlpha(0.85f)
             inflateInfo(list)

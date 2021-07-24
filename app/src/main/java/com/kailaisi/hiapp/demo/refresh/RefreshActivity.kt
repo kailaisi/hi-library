@@ -3,24 +3,21 @@ package com.kailaisi.hiapp.demo.refresh
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.kailaisi.hi_ui.refresh.HiRefresh
 import com.kailaisi.hi_ui.refresh.HiRefresh.HiRefreshListener
-import com.kailaisi.hi_ui.refresh.HiRefreshLayout
-import com.kailaisi.hi_ui.refresh.HiTextView
-import com.kailaisi.hiapp.databinding.ActivityRefreshBinding
+import com.kailaisi.hiapp.R
+import kotlinx.android.synthetic.main.activity_refresh.*
 
 class RefreshActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityRefreshBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_refresh)
         val overView = HiLottieOverView(this)
-        binding.refresh.apply {
+        refresh.apply {
             setRefreshOverView(overView)
             setRefreshListener(object : HiRefreshListener {
                 override fun onRefresh() {
                     Handler().postDelayed({
-                        binding.refresh.refreshFinished()
+                        refresh.refreshFinished()
                     }, 1000)
                 }
 

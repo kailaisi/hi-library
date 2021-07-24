@@ -5,13 +5,13 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.hi_ui.date_item.HiAdapter
-import com.kailaisi.hiapp.databinding.ActivityNoticeListBinding
+import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.http.api.NoticeApi
 import com.kailaisi.hiapp.model.CourseNotice
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiStatusBar
-import com.kailaisi.library.util.inflate
+import kotlinx.android.synthetic.main.activity_notice_list.*
 
 /**
  * 通知列表
@@ -19,12 +19,11 @@ import com.kailaisi.library.util.inflate
 @Route(path = "/notice/list")
 class NoticeListActivity : HiBaseActivity() {
     private lateinit var adapter: HiAdapter
-    val mBinding: ActivityNoticeListBinding by inflate()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HiStatusBar.setStatusBar(this, true, translucent = false)
-        setContentView(mBinding.root)
-        mBinding.actionBack.setOnClickListener { onBackPressed() }
+        setContentView(R.layout.activity_notice_list)
+        action_back.setOnClickListener { onBackPressed() }
         initView()
     }
 
@@ -53,7 +52,6 @@ class NoticeListActivity : HiBaseActivity() {
 
     private fun initView() {
         adapter = HiAdapter(this)
-        mBinding.rvItem.adapter = adapter
-
+        rv_item.adapter = adapter
     }
 }

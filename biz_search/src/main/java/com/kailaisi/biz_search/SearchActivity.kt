@@ -1,5 +1,6 @@
 package com.kailaisi.biz_search
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -7,13 +8,13 @@ import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.kailaisi.biz_search.databinding.ActivitySearchBinding
-import com.kailaisi.common.ui.component.BaseBindingActivity
+import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.common.ui.view.EmptyView
 import com.kailaisi.hi_ui.seach.HiSearchView
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.HiRes
 import com.kailaisi.library.util.HiStatusBar
+import kotlinx.android.synthetic.main.activity_search.*
 
 /**
  * 描述：搜索页面
@@ -21,7 +22,7 @@ import com.kailaisi.library.util.HiStatusBar
  * <br/>创建时间：2021-07-04:11:05
  */
 @Route(path = "/search/main")
-class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
+class SearchActivity : HiBaseActivity() {
 
     private var historyView: HistorySearchView? = null
     private var goodSearchView: GoodsSearchView? = null
@@ -39,8 +40,10 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
         const val STATUS_GOODS_SEARCH = 3
     }
 
-    override fun initView() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         HiStatusBar.setStatusBar(this, true, translucent = false)
+        setContentView(R.layout.activity_search)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         initTopBar()
         updateViewStatus(STATUS_EMPTY)
@@ -58,7 +61,7 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
     }
 
     private fun initTopBar() {
-        mBinding.navBar.apply {
+        nav_bar.apply {
             setNavListener(View.OnClickListener {
                 onBackPressed()
             })
@@ -90,7 +93,7 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
                 })
             }
         }
-        mBinding.navBar.setCenterView(searchView)
+        nav_bar.setCenterView(searchView)
     }
 
     private fun doSearchWord(it: KeyWord) {
@@ -189,11 +192,11 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
         if (showView != null) {
             if (showView.parent != null) {
                 //如果没有添加过，则添加到父布局
-                mBinding.container.addView(showView)
+                container.addView(showView)
             }
-            val childCount = mBinding.container.childCount
+            val childCount = container.childCount
             for (index in 0 until childCount) {
-                val child = mBinding.container.getChildAt(index)
+                val child = container.getChildAt(index)
                 if (child != showView) {
                     child.visibility = View.GONE
                 } else {
@@ -201,9 +204,5 @@ class SearchActivity : BaseBindingActivity<ActivitySearchBinding>() {
                 }
             }
         }
-    }
-
-    override fun getBinding(): ActivitySearchBinding {
-        return ActivitySearchBinding.inflate(layoutInflater)
     }
 }

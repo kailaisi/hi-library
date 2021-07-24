@@ -18,10 +18,8 @@ import com.kailaisi.hi_ui.seach.HiSearchView
 import com.kailaisi.hi_ui.tab.common.IHiTabLayout
 import com.kailaisi.hi_ui.tab.top.HiTabTopInfo
 import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.databinding.FragmentHomeBinding
 import com.kailaisi.hiapp.model.TabCategory
-import com.kailaisi.library.util.HiDisplayUtils
-import com.kailaisi.library.util.bindView
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * 描述：
@@ -31,7 +29,6 @@ import com.kailaisi.library.util.bindView
  */
 class HomePageFragment : HiBaseFragment() {
     private var selectTabIndex: Int = 0
-    val mBinding by bindView<FragmentHomeBinding>()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
@@ -43,7 +40,7 @@ class HomePageFragment : HiBaseFragment() {
         viewModel.queryTabList().observe(viewLifecycleOwner, Observer {
             it?.let { updateUI(it) }
         })
-        mBinding.searchContainer.setOnClickListener {
+        search_container.setOnClickListener {
             HiRoute.startActivity(context,null,"/search/main")
         }
     }
@@ -51,8 +48,8 @@ class HomePageFragment : HiBaseFragment() {
 
     private val onTabSelectedListener =
         IHiTabLayout.OnTabSelectedListener<HiTabTopInfo<*>> { index, _, _ ->
-            if (mBinding.viewpager.currentItem != index) {
-                mBinding.viewpager.setCurrentItem(index, false)
+            if (viewpager.currentItem != index) {
+                viewpager.setCurrentItem(index, false)
             }
             selectTabIndex = index
         }
@@ -65,10 +62,9 @@ class HomePageFragment : HiBaseFragment() {
             val list = data.map {
                 HiTabTopInfo(it.categoryName, defaultColor, selectColor)
             }
-            mBinding.tabTopLayout.inflateInfo(list)
-            mBinding.tabTopLayout.defaultSelected(list[selectTabIndex])
-            val viewpager = mBinding.viewpager
-            mBinding.tabTopLayout.addTabSelectedChangedListener(onTabSelectedListener)
+            tab_top_layout.inflateInfo(list)
+            tab_top_layout.defaultSelected(list[selectTabIndex])
+            tab_top_layout.addTabSelectedChangedListener(onTabSelectedListener)
             if (viewpager.adapter == null) {
                 viewpager.adapter = HomePageAdapter(
                     childFragmentManager,
@@ -80,7 +76,7 @@ class HomePageFragment : HiBaseFragment() {
                 override fun onPageSelected(position: Int) {
                     //区分两种情况，1。顶部点击切换，2。滑动切换
                     if (position != selectTabIndex) {
-                        mBinding.tabTopLayout.defaultSelected(list[position])
+                        tab_top_layout.defaultSelected(list[position])
                         selectTabIndex = position
                     }
                 }

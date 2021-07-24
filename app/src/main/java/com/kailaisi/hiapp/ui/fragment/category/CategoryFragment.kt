@@ -15,7 +15,6 @@ import com.kailaisi.common.ui.component.HiBaseFragment
 import com.kailaisi.common.ui.view.EmptyView
 import com.kailaisi.common.ui.view.load
 import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.databinding.FragmentCategoryBinding
 import com.kailaisi.hiapp.http.api.CategoryApi
 import com.kailaisi.hiapp.model.Subcategory
 import com.kailaisi.hiapp.model.TabCategory
@@ -23,6 +22,7 @@ import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
 import com.kailaisi.library.util.HiRes
 import com.kailaisi.library.util.bindView
+import kotlinx.android.synthetic.main.fragment_category.*
 
 /**
  * 描述：
@@ -32,7 +32,6 @@ import com.kailaisi.library.util.bindView
  */
 class CategoryFragment : HiBaseFragment() {
     private val SPAN_COUNT: Int = 3
-    val mBinding: FragmentCategoryBinding by bindView()
     var emptyView: EmptyView? = null
     val subCategoryCache= mutableMapOf<String,List<Subcategory>>()
 
@@ -66,7 +65,7 @@ class CategoryFragment : HiBaseFragment() {
     private fun onQueryCategoryListSuccess(data: List<TabCategory>) {
         if (isAlive) {
             emptyView?.visibility = View.GONE
-            mBinding.slideView.apply {
+            slide_view.apply {
                 visibility = View.VISIBLE
                 bindMenuView(itemCount = data.size, onBindView = { holder, position ->
                     val tabCategory = data[position]
@@ -160,7 +159,7 @@ class CategoryFragment : HiBaseFragment() {
                 layoutManager.spanSizeLookup = spanSizeLookup
             }
 
-            mBinding.slideView.apply {
+            slide_view.apply {
                 visibility = View.VISIBLE
                 bindContentView(
                     itemDecoration = decoration,
@@ -196,7 +195,7 @@ class CategoryFragment : HiBaseFragment() {
                 }
             }
         }
-        mBinding.slideView.visibility = View.GONE
+        slide_view.visibility = View.GONE
         emptyView?.visibility = View.VISIBLE
     }
 }

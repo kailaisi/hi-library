@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/color_eee"
+    android:id="@+id/root"
     tools:context=".ui.fragment.detail.DetailActivity"
     tools:ignore="MissingDefaultResource">
 

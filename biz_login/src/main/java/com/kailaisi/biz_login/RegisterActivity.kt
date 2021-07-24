@@ -1,19 +1,16 @@
 package com.kailaisi.biz_login
 
 import android.graphics.Color
+import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.kailaisi.biz_login.databinding.ActivityRegisterBinding
-import com.kailaisi.common.ui.component.BaseBindingActivity
-import com.kailaisi.library.util.HiRes
+import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.library.util.HiStatusBar
 
 @Route(path = "/account/register")
-class RegisterActivity : BaseBindingActivity<ActivityRegisterBinding>() {
-    override fun initView() {
-        HiStatusBar.setStatusBar(this,true, HiRes.getColor(R.color.white))
-    }
-
-    override fun getBinding(): ActivityRegisterBinding {
-        return ActivityRegisterBinding.inflate(layoutInflater)
+class RegisterActivity : HiBaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        HiStatusBar.setStatusBar(this, true, Color.WHITE)
+        setContentView(R.layout.activity_register)
     }
 }
