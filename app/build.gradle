@@ -5,10 +5,10 @@ plugins {
     id 'kotlin-android-extensions'
     id 'com.alibaba.arouter'
     id 'channel'
-    id 'android-aspectjx'
+//    id 'android-aspectjx'
 }
 apply from: '../flavor_channel.gradle'
-apply from: '../jenkins_package.gradle'
+//apply from: '../jenkins_package.gradle'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -48,10 +48,6 @@ android {
     dataBinding {
         enabled = true
     }
-    viewBinding {
-        enabled = true
-    }
-
 }
 
 dependencies {

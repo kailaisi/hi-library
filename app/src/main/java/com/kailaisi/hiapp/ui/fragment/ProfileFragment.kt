@@ -19,13 +19,12 @@ import com.kailaisi.common.ui.view.loadCircle
 import com.kailaisi.common.ui.view.loadCorner
 import com.kailaisi.hi_ui.banner.core.HiBannerMo
 import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.databinding.FragmentProfileBinding
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.HiRes
-import com.kailaisi.library.util.bindView
+import com.kailaisi.service_login.LoginServiceProvider
 import com.kailaisi.service_login.NoticeInfo
 import com.kailaisi.service_login.UserProfile
-import com.kailaisi.service_login.LoginServiceProvider
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 /**
  * 描述：
@@ -35,7 +34,6 @@ import com.kailaisi.service_login.LoginServiceProvider
  */
 class ProfileFragment : HiBaseFragment() {
     private val REQUEST_LOGIN = 1
-    private val mBinding: FragmentProfileBinding by bindView()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile
@@ -43,15 +41,15 @@ class ProfileFragment : HiBaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.notifyTitle.text = getString(R.string.item_notify)
+        notify_title.text = getString(R.string.item_notify)
 
-        mBinding.notifyCollection.text = getString(R.string.item_collection)
+        notify_collection.text = getString(R.string.item_collection)
 
-        mBinding.notifyHistory.text = getString(R.string.item_history)
+        notify_history.text = getString(R.string.item_history)
 
-        mBinding.notifyLocation.text = getString(R.string.item_location)
+        notify_location.text = getString(R.string.item_location)
 
-        mBinding.llNotify.setOnClickListener {
+        ll_notify.setOnClickListener {
             ARouter.getInstance().build("/notice/list").navigation(context)
         }
         queryCourseNotice()
@@ -79,22 +77,22 @@ class ProfileFragment : HiBaseFragment() {
     }
 
     private fun updateUI(data: UserProfile) {
-        mBinding.userName.text =
+        user_name.text =
             if (data.isLogin) data.userName else getString(R.string.profile_not_login)
-        mBinding.tvLoginDes.text =
+        tv_login_des.text =
             if (data.isLogin) getString(R.string.profile_login_desc_welcome_back) else getString(R.string.profile_login_desc)
-        mBinding.tabItemCollection.text =
+        tab_item_collection.text =
             spannableItem(data.favoriteCount, getString(R.string.profile_tab_item_collection))
-        mBinding.tabItemHistory.text =
+        tab_item_history.text =
             spannableItem(data.brrowseCount, getString(R.string.profile_tab_item_history))
-        mBinding.tabItemLearn.text =
+        tab_item_learn.text =
             spannableItem(data.learnMinutes, getString(R.string.profile_tab_item_history))
 
         if (data.isLogin) {
-            mBinding.ivUser.loadCircle(data.avatar)
+            iv_user.loadCircle(data.avatar)
         } else {
-            mBinding.ivUser.setImageResource(R.mipmap.ic_launcher)
-            mBinding.ivUser.setOnClickListener {
+            iv_user.setImageResource(R.mipmap.ic_launcher)
+            iv_user.setOnClickListener {
                 LoginServiceProvider.login(context, Observer {
                     queryUserDetail()
                 })
@@ -110,7 +108,7 @@ class ProfileFragment : HiBaseFragment() {
             mo.url = it.cover
             mo
         }
-        mBinding.banner.apply {
+        banner.apply {
             setBannerData(R.layout.item_profile_banner_item, models)
             setBindAdapter { holder, mo, pos ->
                 if (holder == null || mo == null) return@setBindAdapter

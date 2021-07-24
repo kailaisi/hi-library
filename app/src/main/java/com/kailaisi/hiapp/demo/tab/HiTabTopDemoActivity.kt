@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import com.kailaisi.hi_ui.tab.top.HiTabTopInfo
 import com.kailaisi.hiapp.R
-import com.kailaisi.hiapp.databinding.ActivityHiTabTopDemoBinding
 import com.kailaisi.library.util.HiRes
+import kotlinx.android.synthetic.main.activity_hi_tab_top_demo.*
 
 class HiTabTopDemoActivity : AppCompatActivity() {
     val title = listOf("汽车", "关注", "百货", "家居", "装修", "运动", "科技", "企业","汽车", "关注", "百货", "家居", "装修", "运动", "科技", "企业")
-    val binding by lazy { ActivityHiTabTopDemoBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_hi_tab_top_demo)
         initTabBottom()
     }
 
@@ -23,8 +22,7 @@ class HiTabTopDemoActivity : AppCompatActivity() {
         val list = title.map {
             HiTabTopInfo(it, defaultColor, tintColor)
         }
-        var layout = binding.tabTopLayout
-        layout.apply {
+        tab_top_layout.apply {
             inflateInfo(list)
             addTabSelectedChangedListener { index, preInfo, nextInfo ->
                 Toast.makeText(this@HiTabTopDemoActivity, nextInfo.name, Toast.LENGTH_SHORT).show()

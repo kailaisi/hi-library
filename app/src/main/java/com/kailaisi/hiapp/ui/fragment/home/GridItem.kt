@@ -5,17 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kailaisi.common.HiRoute
-import com.kailaisi.common.ui.view.load
 import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hi_ui.date_item.HiViewHolder
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.LayoutHomeOpGridItemBinding
-import com.kailaisi.hiapp.databinding.LayoutItemBannerBinding
 import com.kailaisi.hiapp.model.Subcategory
 import com.kailaisi.library.util.HiDisplayUtils
 import com.kailaisi.library.util.HiRes
@@ -42,12 +38,13 @@ class GridItem(val list: List<Subcategory>) :
     }
 
 
-    inner class GridAdapter(val context: Context, val list: List<Subcategory>) : RecyclerView.Adapter<GridAdapter.GridItemViewHolder>() {
+    inner class GridAdapter(val context: Context, val list: List<Subcategory>) :
+        RecyclerView.Adapter<GridAdapter.GridItemViewHolder>() {
         private var inflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):GridItemViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridItemViewHolder {
             val binding = LayoutHomeOpGridItemBinding.inflate(inflater)
-            return GridItemViewHolder(binding.root,binding)
+            return GridItemViewHolder(binding.root, binding)
         }
 
         override fun getItemCount(): Int {
@@ -56,7 +53,7 @@ class GridItem(val list: List<Subcategory>) :
 
         override fun onBindViewHolder(holder: GridItemViewHolder, position: Int) {
             val subcategory = list[position]
-            holder.binding.model=subcategory
+            holder.binding.model = subcategory
             holder.itemView.setOnClickListener {
                 //会跳转到子分类列表上面去，是一个单独的页面
                 val bundle = Bundle()
@@ -67,7 +64,8 @@ class GridItem(val list: List<Subcategory>) :
             }
         }
 
-        inner class  GridItemViewHolder(view:View,var binding:LayoutHomeOpGridItemBinding):HiViewHolder(view){
+        inner class GridItemViewHolder(view: View, var binding: LayoutHomeOpGridItemBinding) :
+            HiViewHolder(view) {
 
         }
     }
