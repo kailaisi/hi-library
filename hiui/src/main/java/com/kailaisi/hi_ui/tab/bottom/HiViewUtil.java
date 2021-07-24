@@ -3,11 +3,14 @@ package com.kailaisi.hi_ui.tab.bottom;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+
+import com.kailaisi.library.util.AppGlobals;
 
 import java.util.ArrayDeque;
 
@@ -58,6 +61,11 @@ public class HiViewUtil {
             return findActivity(((ContextWrapper) context).getBaseContext());
         }
         return null;
+    }
+
+    public static boolean lightMode() {
+        int mode = AppGlobals.INSTANCE.get().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return mode == Configuration.UI_MODE_NIGHT_NO;
     }
 
 }

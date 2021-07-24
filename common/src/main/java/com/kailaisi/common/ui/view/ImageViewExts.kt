@@ -14,7 +14,9 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.kailaisi.common.R
 import com.kailaisi.hi_ui.tab.bottom.HiViewUtil
+import com.kailaisi.library.util.HiRes
 import java.security.MessageDigest
 
 fun ImageView.load(url: String?) {
@@ -45,7 +47,7 @@ fun ImageView.loadCorner(url: String, corner: Int) {
 fun ImageView.loadCircleBorder(
     url: String,
     borderWidth: Float = 0f,
-    borderColor: Int = Color.WHITE,
+    borderColor: Int = HiRes.getColor(R.color.white),
 ) {
     Glide.with(this)
         .load(url)

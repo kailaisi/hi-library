@@ -21,6 +21,7 @@ import com.kailaisi.hiapp.model.Subcategory
 import com.kailaisi.hiapp.model.TabCategory
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
+import com.kailaisi.library.util.HiRes
 import com.kailaisi.library.util.bindView
 
 /**
@@ -190,7 +191,7 @@ class CategoryFragment : HiBaseFragment() {
                     setButton(getString(R.string.list_empty_action), View.OnClickListener {
                         queryCategoryList()
                     })
-                    setBackgroundColor(Color.WHITE)
+                    setBackgroundColor(HiRes.getColor(R.color.white))
                     layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
                 }
             }

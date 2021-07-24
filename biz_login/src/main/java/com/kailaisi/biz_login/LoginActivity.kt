@@ -11,6 +11,7 @@ import com.kailaisi.common.http.ApiFactory
 import com.kailaisi.common.ui.component.HiBaseActivity
 import com.kailaisi.library.restful.HiCallback
 import com.kailaisi.library.restful.HiResponse
+import com.kailaisi.library.util.HiRes
 import com.kailaisi.library.util.HiStatusBar
 import com.kailaisi.library.util.inflate
 
@@ -49,7 +50,7 @@ class LoginActivity : HiBaseActivity() {
                     }
                 })
         }
-        HiStatusBar.setStatusBar(this, true, Color.WHITE)
+        HiStatusBar.setStatusBar(this, true,HiRes.getColor(R.color.white))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

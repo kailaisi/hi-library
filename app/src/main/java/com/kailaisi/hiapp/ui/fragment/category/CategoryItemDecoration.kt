@@ -6,7 +6,9 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.kailaisi.hiapp.R
 import com.kailaisi.library.util.HiDisplayUtils
+import com.kailaisi.library.util.HiRes
 
 /*
 * 通过Decortion实现表头功能
@@ -19,7 +21,7 @@ class CategoryItemDecoration(val callback: (Int) -> String, val spanCount: Int =
 
     init {
         paint.style = Paint.Style.STROKE
-        paint.color = Color.BLACK
+        paint.color = HiRes.getColor(R.color.black)
         paint.textSize = HiDisplayUtils.dip2px(14f).toFloat()
     }
 

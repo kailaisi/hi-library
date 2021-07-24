@@ -1,6 +1,8 @@
 package com.kailaisi.hi_debugtool
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatDelegate
+import com.kailaisi.hi_ui.tab.bottom.HiViewUtil
 import com.kailaisi.library.util.AppGlobals
 import com.kailaisi.library.util.SPUtil
 
@@ -35,5 +37,19 @@ class DebugTools {
         /*杀掉当前进程*/
         android.os.Process.killProcess(android.os.Process.myPid());
         return
+    }
+
+    @HiDebug(name = "打开/关闭fps", desc = "打开后可以实时关闭fps")
+    fun toggleFps() {
+        //todo 需要整理
+    }
+
+    @HiDebug(name = "打开/关闭暗黑模式", desc = "可以调整暗黑模式")
+    fun toggleTheme() {
+        if (HiViewUtil.lightMode()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 }

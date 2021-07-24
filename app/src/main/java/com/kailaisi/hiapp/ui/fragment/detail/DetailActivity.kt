@@ -16,6 +16,7 @@ import com.kailaisi.hi_ui.date_item.HiDataItem
 import com.kailaisi.hiapp.R
 import com.kailaisi.hiapp.databinding.ActivityDetailBinding
 import com.kailaisi.hiapp.model.DetailModel
+import com.kailaisi.library.util.HiRes
 import com.kailaisi.library.util.HiStatusBar
 import com.kailaisi.library.util.inflate
 import com.kailaisi.pub_mod.GoodsModel
@@ -90,7 +91,7 @@ class DetailActivity : HiBaseActivity() {
                 setIcon(R.string.if_empty3)
                 setDesc(getString(R.string.list_empty_desc))
                 layoutParams = ConstraintLayout.LayoutParams(-1, -1)
-                setBackgroundColor(Color.WHITE)
+                setBackgroundColor(HiRes.getColor(R.color.white))
                 setButton(getString(R.string.list_empty_action), View.OnClickListener {
                     viewModel.queryDetailData()
                 })

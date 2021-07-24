@@ -8,6 +8,7 @@ import androidx.core.os.TraceCompat
 import androidx.fragment.app.DialogFragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.kailaisi.common.ui.component.HiBaseActivity
+import com.kailaisi.hi_ui.tab.bottom.HiViewUtil
 import com.kailaisi.hiapp.BuildConfig
 import com.kailaisi.hiapp.databinding.ActivityMainBinding
 import com.kailaisi.hiapp.ui.login.MainActivityLogic
@@ -55,6 +56,11 @@ class MainActivity : HiBaseActivity(), MainActivityLogic.ActivityProvider {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         logic.hiTabBottomLayout.resizeHiTabBottomLayout()
+        if (HiViewUtil.lightMode()) {
+            recreate()
+        } else {
+            recreate()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
